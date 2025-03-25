@@ -4,25 +4,99 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Utilisateurs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
-<body>
-    <h2>Liste des Utilisateurs</h2>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Nom</th>
-            <th>Email</th>
-            <th>Rôle</th>
-        </tr>
-        @foreach($users as $user)
-        <tr>
-            <td>{{ $user->id }}</td>
-            <td>{{ $user->name }}</td>
-            <td>{{ $user->email }}</td>
-            <td>{{ $user->role }}</td>
-        </tr>
-        @endforeach
-    </table>
-    <a href="/dashboard">Retour</a>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto px-4 py-8">
+        <div class="bg-white shadow-md rounded-lg overflow-hidden">
+            <div class="bg-blue-600 text-white px-6 py-4 flex items-center justify-between">
+                <h2 class="text-2xl font-bold flex items-center">
+                    <i class="fas fa-users mr-3"></i>
+                    Liste des Utilisateurs
+                </h2>
+                <div class="flex items-center space-x-3">
+                    <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md flex items-center">
+                        <i class="fas fa-plus mr-2"></i>
+                        Ajouter Utilisateur
+                    </button>
+                    <button class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md flex items-center">
+                        <i class="fas fa-filter mr-2"></i>
+                        Filtrer
+                    </button>
+                </div>
+            </div>
+
+            <div class="p-6">
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                                <th class="py-3 px-6 text-left">ID</th>
+                                <th class="py-3 px-6 text-left">Nom</th>
+                                <th class="py-3 px-6 text-left">Email</th>
+                                <th class="py-3 px-6 text-center">Rôle</th>
+                                <th class="py-3 px-6 text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-600 text-sm font-light">
+                            @foreach($users as $user)
+                            <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                <td class="py-3 px-6 text-left whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <span class="font-medium">{{ $user->id }}</span>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-6 text-left">
+                                    <div class="flex items-center">
+                                        <span>{{ $user->name }}</span>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-6 text-left">
+                                    <div class="flex items-center">
+                                        <span>{{ $user->email }}</span>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-6 text-center">
+                                    @php
+                                        $roleColors = [
+                                            'admin' => 'bg-red-200 text-red-600',
+                                            'user' => 'bg-green-200 text-green-600',
+                                            'moderator' => 'bg-blue-200 text-blue-600'
+                                        ];
+                                        $colorClass = $roleColors[$user->role] ?? 'bg-gray-200 text-gray-600';
+                                    @endphp
+                                    <span class="{{ $colorClass }} py-1 px-3 rounded-full text-xs">
+                                        {{ $user->role }}
+                                    </span>
+                                </td>
+                                <td class="py-3 px-6 text-center">
+                                    <div class="flex item-center justify-center">
+                                        <button class="w-4 mr-2 transform hover:text-blue-500 hover:scale-110">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="w-4 mr-2 transform hover:text-red-500 hover:scale-110">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 px-6 py-4 flex justify-between items-center">
+                <a href="/dashboard" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md flex items-center">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Retour au Tableau de Bord
+                </a>
+                <div class="text-gray-600">
+                    Total Utilisateurs: {{ count($users) }}
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
