@@ -79,3 +79,6 @@ class EventController extends Controller
         return redirect()->route('events.index')->with('success', 'Événement supprimé.');
     }
 }
+
+
+//event
