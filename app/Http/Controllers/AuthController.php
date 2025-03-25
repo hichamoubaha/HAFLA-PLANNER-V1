@@ -16,7 +16,7 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    // Traitement de l'inscription
+    // Traitement de l'inscription.
     public function register(Request $request)
 {
     $request->validate([
