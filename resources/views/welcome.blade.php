@@ -313,7 +313,7 @@
     <div class="container">
         <header>
             <div class="logo">
-            <img src="{{ asset('images/hafla_logo.png') }}" alt="Event logo">
+                <img src="{{ asset('images/hafla_logo.png') }}" alt="Event logo">
             </div>
             <nav>
                 <ul>
@@ -327,7 +327,7 @@
             <a href="#" class="plan-btn">Plan Your Event</a>
         </header>
         
-        <div class="hero" style="background-image: url('/api/placeholder/1200/400');">
+        <div class="hero" style="background-image: url('{{ asset('images/party.png') }}');">
             <div class="hero-content">
                 <a href="#" class="hero-btn primary-btn">Get Ticket</a>
                 <a href="#" class="hero-btn secondary-btn">Learn More</a>
@@ -336,22 +336,22 @@
         
         <h2 class="section-title">Our <span>Category</span></h2>
         <div class="category-grid">
-            <div class="category-card" style="background-image: url('/api/placeholder/400/160');">
+            <div class="category-card" style="background-image: url('{{ asset('images/hafla_logo.png') }}');">
                 <div class="category-name">Weddings</div>
             </div>
-            <div class="category-card" style="background-image: url('/api/placeholder/400/160');">
+            <div class="category-card" style="background-image: url('{{ asset('images/hafla_logo.png') }}');">
                 <div class="category-name">Birthdays</div>
             </div>
-            <div class="category-card" style="background-image: url('/api/placeholder/400/160');">
+            <div class="category-card" style="background-image: url('{{ asset('images/hafla_logo.png') }}');">
                 <div class="category-name">Get Together</div>
             </div>
-            <div class="category-card" style="background-image: url('/api/placeholder/400/160');">
+            <div class="category-card" style="background-image: url('{{ asset('images/hafla_logo.png') }}');">
                 <div class="category-name">Promotion</div>
             </div>
-            <div class="category-card" style="background-image: url('/api/placeholder/400/160');">
+            <div class="category-card" style="background-image: url('{{ asset('images/hafla_logo.png') }}');">
                 <div class="category-name">Graduation Party</div>
             </div>
-            <div class="category-card" style="background-image: url('/api/placeholder/400/160');">
+            <div class="category-card" style="background-image: url('{{ asset('images/hafla_logo.png') }}');">
                 <div class="category-name">Anniversary</div>
             </div>
         </div>
@@ -360,10 +360,10 @@
             <h2>Follow us</h2>
             <p>Don't miss out on our updates - Stay in the loop with all our latest news and updates by following us on social media!</p>
             <div class="social-icons">
-                <img src="/api/placeholder/120/40" alt="Instagram">
-                <img src="/api/placeholder/120/40" alt="YouTube">
-                <img src="/api/placeholder/120/40" alt="Facebook">
-                <img src="/api/placeholder/120/40" alt="LinkedIn">
+                <img src="{{ asset('images/hafla_logo.png') }}" alt="Instagram">
+                <img src="{{ asset('images/hafla_logo.png') }}" alt="YouTube">
+                <img src="{{ asset('images/hafla_logo.png') }}" alt="Facebook">
+                <img src="{{ asset('images/hafla_logo.png') }}" alt="LinkedIn">
             </div>
         </div>
         
@@ -373,19 +373,19 @@
         </div>
         <div class="packages-grid">
             <div class="package-card">
-                <div class="package-img" style="background-image: url('/api/placeholder/400/200');">
+                <div class="package-img" style="background-image: url('{{ asset('images/hafla_logo.png') }}');">
                     <div class="package-badge">Premium</div>
                 </div>
                 <div class="package-name">Birthday Parties</div>
             </div>
             <div class="package-card">
-                <div class="package-img" style="background-image: url('/api/placeholder/400/200');">
+                <div class="package-img" style="background-image: url('{{ asset('images/hafla_logo.png') }}');">
                     <div class="package-badge">Premium</div>
                 </div>
                 <div class="package-name">Birthday Parties</div>
             </div>
             <div class="package-card">
-                <div class="package-img" style="background-image: url('/api/placeholder/400/200');">
+                <div class="package-img" style="background-image: url('{{ asset('images/hafla_logo.png') }}');">
                     <div class="package-badge">Premium</div>
                 </div>
                 <div class="package-name">Birthday Parties</div>
@@ -397,7 +397,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <img src="/api/placeholder/120/40" alt="Footer Logo">
+                    <img src="{{ asset('images/hafla_logo.png') }}" alt="Event logo">
                 </div>
                 
                 <div class="subscribe">
