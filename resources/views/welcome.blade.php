@@ -313,7 +313,7 @@
     <div class="container">
         <header>
             <div class="logo">
-                <img src="/api/placeholder/50/50" alt="Event Planning Logo">
+            <img src="{{ asset('images/hafla_logo.png') }}" alt="Event logo">
             </div>
             <nav>
                 <ul>
