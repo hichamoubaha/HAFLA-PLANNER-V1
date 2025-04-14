@@ -336,22 +336,22 @@
         
         <h2 class="section-title">Our <span>Category</span></h2>
         <div class="category-grid">
-            <div class="category-card" style="background-image: url('{{ asset('images/hafla_logo.png') }}');">
+            <div class="category-card" style="background-image: url('{{ asset('images/wedding.png') }}');">
                 <div class="category-name">Weddings</div>
             </div>
-            <div class="category-card" style="background-image: url('{{ asset('images/hafla_logo.png') }}');">
+            <div class="category-card" style="background-image: url('{{ asset('images/birthday.png') }}');">
                 <div class="category-name">Birthdays</div>
             </div>
-            <div class="category-card" style="background-image: url('{{ asset('images/hafla_logo.png') }}');">
+            <div class="category-card" style="background-image: url('{{ asset('images/together.png') }}');">
                 <div class="category-name">Get Together</div>
             </div>
-            <div class="category-card" style="background-image: url('{{ asset('images/hafla_logo.png') }}');">
+            <div class="category-card" style="background-image: url('{{ asset('images/promotion.png') }}');">
                 <div class="category-name">Promotion</div>
             </div>
-            <div class="category-card" style="background-image: url('{{ asset('images/hafla_logo.png') }}');">
+            <div class="category-card" style="background-image: url('{{ asset('images/graduation.png') }}');">
                 <div class="category-name">Graduation Party</div>
             </div>
-            <div class="category-card" style="background-image: url('{{ asset('images/hafla_logo.png') }}');">
+            <div class="category-card" style="background-image: url('{{ asset('images/anniv.png') }}');">
                 <div class="category-name">Anniversary</div>
             </div>
         </div>
