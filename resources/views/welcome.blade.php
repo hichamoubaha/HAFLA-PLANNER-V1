@@ -373,19 +373,19 @@
         </div>
         <div class="packages-grid">
             <div class="package-card">
-                <div class="package-img" style="background-image: url('{{ asset('images/hafla_logo.png') }}');">
+                <div class="package-img" style="background-image: url('{{ asset('images/b-card.png') }}');">
                     <div class="package-badge">Premium</div>
                 </div>
                 <div class="package-name">Birthday Parties</div>
             </div>
             <div class="package-card">
-                <div class="package-img" style="background-image: url('{{ asset('images/hafla_logo.png') }}');">
+                <div class="package-img" style="background-image: url('{{ asset('images/b-card-2.png') }}');">
                     <div class="package-badge">Premium</div>
                 </div>
                 <div class="package-name">Birthday Parties</div>
             </div>
             <div class="package-card">
-                <div class="package-img" style="background-image: url('{{ asset('images/hafla_logo.png') }}');">
+                <div class="package-img" style="background-image: url('{{ asset('images/b-card-3.png') }}');">
                     <div class="package-badge">Premium</div>
                 </div>
                 <div class="package-name">Birthday Parties</div>
