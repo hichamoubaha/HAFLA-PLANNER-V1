@@ -360,10 +360,10 @@
             <h2>Follow us</h2>
             <p>Don't miss out on our updates - Stay in the loop with all our latest news and updates by following us on social media!</p>
             <div class="social-icons">
-                <img src="{{ asset('images/hafla_logo.png') }}" alt="Instagram">
-                <img src="{{ asset('images/hafla_logo.png') }}" alt="YouTube">
-                <img src="{{ asset('images/hafla_logo.png') }}" alt="Facebook">
-                <img src="{{ asset('images/hafla_logo.png') }}" alt="LinkedIn">
+                <img src="{{ asset('images/instagram_2.png') }}" alt="Instagram">
+                <img src="{{ asset('images/youtube_2.png') }}" alt="YouTube">
+                <img src="{{ asset('images/facebook_2.png') }}" alt="Facebook">
+                <img src="{{ asset('images/linkdin_2.png') }}" alt="LinkedIn">
             </div>
         </div>
         
