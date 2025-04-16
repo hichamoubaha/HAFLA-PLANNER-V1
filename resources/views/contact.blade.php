@@ -379,7 +379,7 @@
         </div>
     </header>
     
-    <div class="hero" style="background-image: url('{{ asset('images/hafla_logo.png') }}');">
+    <div class="hero" style="background-image: url('{{ asset('images/contact-1.png') }}');">
         <div class="hero-content">
             <h1>About Us</h1>
             <p>Hafla planner is not just about planning events; it's about creating experiences that leave a lasting impact. We believe that every event should tell a story - your story.</p>
