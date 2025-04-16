@@ -396,7 +396,7 @@
             </p>
             
             <div>
-                <img src="{{ asset('images/hafla_logo.png') }}" alt="Decorative flower" class="flower-img">
+                <img src="{{ asset('images/flower.png') }}" alt="Decorative flower" class="flower-img">
                 
                 <div class="section-header">Our Mission</div>
                 <p class="mission-text">
@@ -441,7 +441,7 @@
             
             <div class="contact-container">
                 <div class="contact-image">
-                    <img src="{{ asset('images/hafla_logo.png') }}" alt="Contact illustration">
+                    <img src="{{ asset('images/dance.png') }}" alt="Contact illustration">
                 </div>
                 
                 <div class="contact-form">
@@ -500,8 +500,8 @@
                 </div>
                 
                 <div class="copyright">
-                    <div>Copyright © 2024 | Powered by Bygroup</div>
-                    <div>Privacy Policy</div>
+                    <div>Copyright © 2024 | hicham oubaha</div>
+                   
                 </div>
             </div>
         </div>
