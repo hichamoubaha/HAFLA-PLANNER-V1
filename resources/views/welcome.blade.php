@@ -412,7 +412,7 @@
                 </div>
                 
                 <div class="copyright">
-                    Non Copyrighted © 2023 Upbold by habuma sahabpa
+                    Non Copyrighted © 2023 Upbold by hicham oubaha
                 </div>
             </div>
         </div>

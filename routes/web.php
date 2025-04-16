@@ -40,6 +40,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/', [HomeController::class, 'index']);
 
+Route::get('/contact', function () {
+    return view('contact');
+});
 
 /*
 |--------------------------------------------------------------------------
