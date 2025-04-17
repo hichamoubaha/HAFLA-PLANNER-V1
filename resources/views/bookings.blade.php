@@ -165,6 +165,103 @@
     .logout svg {
       margin-right: 12px;
     }
+     /* Footer */
+     footer {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo img {
+            height: 40px;
+        }
+        
+        .subscribe {
+            margin: 20px 0 40px;
+            display: flex;
+            max-width: 400px;
+            width: 100%;
+        }
+        
+        .subscribe input {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+        }
+        
+        .subscribe button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+        
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .footer-nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .footer-social a {
+            color: #ff6b6b;
+            background: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .chat-bubble {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #6c5ce7;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
   </style>
 </head>
 <body>
