@@ -52,6 +52,9 @@ Route::get('/package', function () {
     return view('package'); 
 });
 
+Route::get('/bookings', function (){
+    return view('bookings');
+});
 
 /*
 |--------------------------------------------------------------------------
