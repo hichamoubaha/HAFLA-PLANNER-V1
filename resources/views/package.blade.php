@@ -10,6 +10,46 @@
       margin: 0;
       padding: 20px;
     }
+     /* Header */
+     header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .plan-btn {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+        }
     h1 {
       font-size: 24px;
       margin-bottom: 20px;
@@ -138,6 +178,22 @@
   </style>
 </head>
 <body>
+
+<header>
+            <div class="logo">
+                <img src="{{ asset('images/hafla_logo.png') }}" alt="Event logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Register</a></li>
+                </ul>
+            </nav>
+            <a href="#" class="plan-btn">Plan Your Event</a>
+        </header>
   <h1>Add New Package</h1>
   
   <div class="form-container">
