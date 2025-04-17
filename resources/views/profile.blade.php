@@ -132,6 +132,16 @@
       border-radius: 50%;
       object-fit: cover;
       margin-right: 20px;
+      background-color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    
+    .avatar-placeholder {
+      color: #9ca3af;
+      font-size: 24px;
     }
 
     .profile-name {
@@ -247,7 +257,11 @@
     <div class="main-content">
       <div class="profile-card">
         <div class="profile-info">
-          <img src="/api/placeholder/80/80" alt="Profile picture" class="profile-avatar">
+          <div class="profile-avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+            </svg>
+          </div>
           <h2 class="profile-name">Hicham Oubaha</h2>
         </div>
         <button class="edit-button">Edit Profile</button>
