@@ -48,6 +48,10 @@ Route::get('/profile', function () {
     return view('profile'); 
 });
 
+Route::get('/package', function () {
+    return view('package'); 
+});
+
 
 /*
 |--------------------------------------------------------------------------
