@@ -194,7 +194,7 @@
     <div class="form-row">
       <div class="form-group">
         <label for="price">Price</label>
-        <input type="text" id="price" value="Rs.1000.00">
+        <input type="text" id="price">
       </div>
     </div>
     
@@ -217,7 +217,7 @@
     <div class="form-row">
       <div class="form-group">
         <label for="description">Description</label>
-        <textarea id="description">We offer an hourly rate and are adaptable to your needs. We truly value the importance of creating a warm atmosphere, especially for intimate cozy weddings!</textarea>
+        <textarea id="description"></textarea>
       </div>
     </div>
     
@@ -225,7 +225,7 @@
       <div class="form-group">
         <label for="extras">Extras</label>
         <div style="display: flex; align-items: flex-start;">
-          <textarea id="extras" style="flex: 1;">We offer an hourly rate and are adaptable to your needs.</textarea>
+          <textarea id="extras" style="flex: 1;"></textarea>
           <div class="plus-btn">+</div>
         </div>
       </div>
