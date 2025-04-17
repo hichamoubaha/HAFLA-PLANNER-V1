@@ -362,5 +362,29 @@
     <button class="cancel-btn">Cancel</button>
     <button class="save-btn">Save</button>
   </div>
+  <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="{{ asset('images/hafla_logo.png') }}" alt="Event logo">
+                </div>
+                
+                <div class="subscribe">
+                    <input type="email" placeholder="Enter your mail">
+                    <button>Subscribe</button>
+                </div>
+                
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+                
+                <div class="copyright">
+                    Non Copyrighted © 2023 Upbold by hicham oubaha
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
