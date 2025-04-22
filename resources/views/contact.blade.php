@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Hafla Event Planner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -25,16 +27,18 @@
         
         /* Header */
         header {
+            background-color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
-            background-color: white;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
         }
         
         .logo img {
@@ -43,22 +47,35 @@
         
         .auth-buttons {
             display: flex;
-            gap: 10px;
+            gap: 1rem;
+            align-items: center;
         }
         
         .login-btn {
-            text-decoration: none;
             color: #333;
+            text-decoration: none;
             font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            transition: background-color 0.3s;
+        }
+        
+        .login-btn:hover {
+            background-color: #f3f4f6;
         }
         
         .signup-btn {
             background-color: #ff6b6b;
             color: white;
-            padding: 8px 20px;
-            border-radius: 5px;
             text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.375rem;
             font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .signup-btn:hover {
+            background-color: #ff5252;
         }
         
         /* Hero Section */
@@ -271,83 +288,48 @@
         footer {
             background-color: #ff6b6b;
             color: white;
-            padding: 40px 0 20px;
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
         }
         
         .footer-content {
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
-        
-        .footer-logo {
-            margin-bottom: 20px;
+            gap: 2rem;
         }
         
         .footer-logo img {
             height: 40px;
         }
         
-        .subscribe {
-            margin: 20px 0 40px;
-            display: flex;
-            max-width: 400px;
-            width: 100%;
-        }
-        
-        .subscribe input {
-            flex: 1;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px 0 0 5px;
-        }
-        
-        .subscribe button {
-            background-color: #333;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 0 5px 5px 0;
-            cursor: pointer;
-        }
-        
-        .footer-nav {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-        }
-        
-        .footer-nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-        }
-        
         .footer-social {
             display: flex;
-            gap: 15px;
-            margin: 15px 0;
+            gap: 1rem;
         }
         
-        .footer-social a {
+        .social-icon {
+            background-color: white;
             color: #ff6b6b;
-            background: white;
-            width: 30px;
-            height: 30px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
+            transition: transform 0.3s;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-2px);
         }
         
         .copyright {
             text-align: center;
-            margin-top: 20px;
-            padding-top: 20px;
+            padding-top: 1.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            justify-content: space-between;
+            margin-top: 1.5rem;
         }
         
         .chat-bubble {
@@ -368,13 +350,15 @@
 </head>
 <body>
     <header>
-        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="header-container">
             <div class="logo">
-                <img src="{{ asset('images/hafla_logo.png') }}" alt="Hafla logo">
+                <a href="/">
+                    <img src="{{ asset('images/hafla_logo.png') }}" alt="Hafla logo">
+                </a>
             </div>
             <div class="auth-buttons">
-                <a href="#" class="login-btn">Login</a>
-                <a href="#" class="signup-btn">Sign up</a>
+                <a href="{{ route('login') }}" class="login-btn">Login</a>
+                <a href="{{ url('/register') }}" class="signup-btn">Sign up</a>
             </div>
         </div>
     </header>
@@ -445,9 +429,9 @@
                 </div>
                 
                 <div class="contact-form">
-                    <h2 class="contact-heading">Lets Get in <span>Touch!</span></h2>
+                    <h2 class="contact-heading">Let's Get in <span>Touch!</span></h2>
                     <p class="contact-intro">
-                        Have a question or need assistance? Reach out to us via email, phone, or the contact form below. We're eager to assist you.
+                        Have a question or need assistance? Reach out to us via email, phone, or the contact form below.
                     </p>
                     
                     <form>
@@ -480,28 +464,23 @@
                     <img src="{{ asset('images/hafla_logo.png') }}" alt="Hafla logo">
                 </div>
                 
-                <div class="subscribe">
-                    <input type="email" placeholder="Enter your mail">
-                    <button>Subscribe</button>
-                </div>
-                
-                <div class="footer-nav">
-                    <a href="#">Home</a>
-                    <a href="#">About</a>
-                    <a href="#">Pricing</a>
-                    <a href="#">Blog</a>
-                    <a href="#">Contact us</a>
-                </div>
-                
                 <div class="footer-social">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
                 </div>
                 
                 <div class="copyright">
-                    <div>Copyright © 2024 | hicham oubaha</div>
-                   
+                    Copyright © 2024 | Hafla Event Planner by Hicham Oubaha
                 </div>
             </div>
         </div>
