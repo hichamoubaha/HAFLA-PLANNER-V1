@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Schema;
 
 class ProfileController extends Controller
 {
@@ -21,16 +22,30 @@ class ProfileController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
+            'last_name' => 'nullable|string|max:255',
+            'username' => 'nullable|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:255',
+            'zip_code' => 'nullable|string|max:20',
             'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'current_password' => 'nullable|required_with:new_password',
-            'new_password' => 'nullable|min:8|confirmed',
         ]);
 
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
+        
+        // Update additional fields if they exist in the users table
+        if (Schema::hasColumn('users', 'address')) {
+            $user->address = $request->address;
+        }
+        if (Schema::hasColumn('users', 'city')) {
+            $user->city = $request->city;
+        }
+        if (Schema::hasColumn('users', 'zip_code')) {
+            $user->zip_code = $request->zip_code;
+        }
 
         if ($request->hasFile('profile_picture')) {
             // Delete old profile picture if exists
@@ -50,15 +65,8 @@ class ProfileController extends Controller
             }
         }
 
-        if ($request->filled('current_password')) {
-            if (!Hash::check($request->current_password, $user->password)) {
-                return back()->withErrors(['current_password' => 'Le mot de passe actuel est incorrect.']);
-            }
-            $user->password = Hash::make($request->new_password);
-        }
-
         $user->save();
 
-        return redirect()->route('profile')->with('success', 'Profil mis à jour avec succès.');
+        return redirect()->route('profile')->with('success', 'Profile updated successfully.');
     }
 } 
