@@ -35,7 +35,7 @@
             <i class="fas fa-cog mr-3"></i>
             Settings
           </a>
-          <a href="#" class="flex items-center text-gray-600 py-2">
+          <a href="{{ url('/contact') }}" class="flex items-center text-gray-600 py-2">
             <i class="fas fa-envelope mr-3"></i>
             Contact us
           </a>
