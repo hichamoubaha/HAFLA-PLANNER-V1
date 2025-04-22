@@ -19,7 +19,7 @@
             <nav class="p-4">
                 <ul class="space-y-2">
                     <li>
-                        <a href="#" class="flex items-center p-3 text-gray-700 hover:bg-blue-50 rounded-lg">
+                        <a href="{{ route('profile') }}" class="flex items-center p-3 text-gray-700 hover:bg-blue-50 rounded-lg">
                             <i class="fas fa-tachometer-alt mr-3"></i>
                             Tableau de bord
                         </a>
