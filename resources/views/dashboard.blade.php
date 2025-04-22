@@ -108,6 +108,19 @@
                     </div>
                 </div>
 
+                @if(Auth::user()->role === 'admin')
+                <!-- Admin Actions -->
+                <div class="mt-8 bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-bold mb-4">Actions Administrateur</h3>
+                    <div class="flex space-x-4">
+                        <a href="{{ route('admin.users') }}" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg flex items-center transition duration-300">
+                            <i class="fas fa-users-cog mr-2"></i>
+                            Gérer les Utilisateurs
+                        </a>
+                    </div>
+                </div>
+                @endif
+
                 <!-- Recent Activity -->
                 <div class="mt-8 bg-white rounded-lg shadow-md p-6">
                     <h3 class="text-xl font-bold mb-4">Activité Récente</h3>
