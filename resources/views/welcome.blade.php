@@ -86,12 +86,33 @@
         
         .hero-content {
             position: absolute;
-            bottom: 40px;
+            top: 50%;
             left: 0;
             width: 100%;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
             gap: 20px;
+            transform: translateY(-50%);
+        }
+        
+        .hero-title {
+            color: white;
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-description {
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            max-width: 600px;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            line-height: 1.5;
         }
         
         .hero-btn {
@@ -329,8 +350,12 @@
         
         <div class="hero" style="background-image: url('{{ asset('images/party.png') }}');">
             <div class="hero-content">
-                <a href="#" class="hero-btn primary-btn">Get Ticket</a>
-                <a href="#" class="hero-btn secondary-btn">Learn More</a>
+                <h1 class="hero-title">Welcome to Hafla Planner</h1>
+                <p class="hero-description">Your ultimate event management platform for creating unforgettable moments. From weddings to corporate events, we help you plan, organize, and execute perfect events with ease.</p>
+                <div style="display: flex; gap: 20px;">
+                    <a href="#" class="hero-btn primary-btn">Get Ticket</a>
+                    <a href="#" class="hero-btn secondary-btn">Learn More</a>
+                </div>
             </div>
         </div>
         

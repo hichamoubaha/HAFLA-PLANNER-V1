@@ -12,6 +12,7 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
     
+    
     body {
       background-color: #f0f0f0;
       display: flex;
@@ -510,5 +511,6 @@
       </tbody>
     </table>
   </div>
+  
 </body>
 </html>
