@@ -25,7 +25,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center p-3 text-gray-700 hover:bg-blue-50 rounded-lg">
+                        <a href="{{ route('events.index') }}" class="flex items-center p-3 text-gray-700 hover:bg-blue-50 rounded-lg">
                             <i class="fas fa-calendar mr-3"></i>
                             Événements
                         </a>
