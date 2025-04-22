@@ -10,6 +10,8 @@ use App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\EventController;
 
+use App\Http\Controllers\ProfileController;
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
@@ -17,6 +19,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
     Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
     Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 
@@ -34,7 +38,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware('auth');
+})->middleware('auth')->name('dashboard');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -43,10 +47,6 @@ Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/contact', function () {
     return view('contact');
-});
-
-Route::get('/profile', function () {
-    return view('profile'); 
 });
 
 Route::get('/package', function () {
