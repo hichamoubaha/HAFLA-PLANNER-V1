@@ -9,6 +9,18 @@
 </head>
 <body class="bg-gray-100 font-sans">
     <div class="container mx-auto px-4 py-8">
+        @if(session('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                <span class="block sm:inline">{{ session('success') }}</span>
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                <span class="block sm:inline">{{ session('error') }}</span>
+            </div>
+        @endif
+
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
             <div class="bg-blue-600 text-white px-6 py-4 flex items-center justify-between">
                 <h2 class="text-2xl font-bold flex items-center">
@@ -75,9 +87,13 @@
                                         <button class="w-4 mr-2 transform hover:text-blue-500 hover:scale-110">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <button class="w-4 mr-2 transform hover:text-red-500 hover:scale-110">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
+                                        <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="w-4 mr-2 transform hover:text-red-500 hover:scale-110" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
