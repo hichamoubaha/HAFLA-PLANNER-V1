@@ -12,6 +12,17 @@ class AdminController extends Controller
         $users = User::all();
         return view('admin.users', compact('users'));
     }
+
+    public function destroy(User $user)
+    {
+        // Prevent admin from deleting themselves
+        if ($user->id === auth()->id()) {
+            return redirect()->route('admin.users')->with('error', 'Vous ne pouvez pas supprimer votre propre compte.');
+        }
+
+        $user->delete();
+        return redirect()->route('admin.users')->with('success', 'Utilisateur supprimé avec succès.');
+    }
 }
 
 //admin
