@@ -39,8 +39,24 @@
         </div>
       @endif
 
+      <!-- Profile Picture Section -->
+      <div class="flex flex-col items-center mb-8">
+        <div class="relative">
+          @if($user->profile_picture)
+            <img src="{{ Storage::url($user->profile_picture) }}" alt="Profile Picture" 
+              class="w-40 h-40 rounded-full object-cover border-4 border-white shadow-lg">
+          @else
+            <div class="w-40 h-40 rounded-full bg-gray-200 flex items-center justify-center border-4 border-white shadow-lg">
+              <i class="fas fa-user text-6xl text-gray-400"></i>
+            </div>
+          @endif
+        </div>
+        <h2 class="mt-4 text-2xl font-bold text-gray-800">{{ $user->name }}</h2>
+        <p class="text-gray-600">{{ $user->email }}</p>
+      </div>
+
       <div class="bg-white rounded-lg shadow-md p-6">
-        <form action="{{ route('profile.update') }}" method="POST" class="space-y-6">
+        <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
           @csrf
           @method('PUT')
 
@@ -57,6 +73,35 @@
               <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
               <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}"
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+            </div>
+
+            <!-- Phone -->
+            <div>
+              <label for="phone" class="block text-sm font-medium text-gray-700">Numéro de téléphone</label>
+              <input type="tel" name="phone" id="phone" value="{{ old('phone', $user->phone) }}"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+            </div>
+
+            <!-- Profile Picture -->
+            <div>
+              <label for="profile_picture" class="block text-sm font-medium text-gray-700">Photo de profil</label>
+              <div class="mt-2 flex items-center space-x-4">
+                <div class="flex-shrink-0">
+                  @if($user->profile_picture)
+                    <img src="{{ Storage::url($user->profile_picture) }}" alt="Current Profile Picture" 
+                      class="w-20 h-20 rounded-full object-cover">
+                  @else
+                    <div class="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center">
+                      <i class="fas fa-user text-3xl text-gray-400"></i>
+                    </div>
+                  @endif
+                </div>
+                <div class="flex-1">
+                  <input type="file" name="profile_picture" id="profile_picture" accept="image/*"
+                    class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                  <p class="mt-1 text-sm text-gray-500">PNG, JPG ou GIF jusqu'à 2MB</p>
+                </div>
+              </div>
             </div>
 
             <!-- Current Password -->
