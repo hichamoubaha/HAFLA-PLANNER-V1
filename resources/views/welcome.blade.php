@@ -372,13 +372,13 @@
         
         <h2 class="section-title">Our <span>Category</span></h2>
         <div class="category-grid">
-            <div class="category-card" style="background-image: url('{{ asset('images/wedding.png') }}');">
+            <div class="category-card" style="background-image: url('{{ asset('images/wedd.png') }}');">
                 <div class="category-name">Weddings</div>
             </div>
-            <div class="category-card" style="background-image: url('{{ asset('images/birthday.png') }}');">
+            <div class="category-card" style="background-image: url('{{ asset('images/birth.png') }}');">
                 <div class="category-name">Birthdays</div>
             </div>
-            <div class="category-card" style="background-image: url('{{ asset('images/together.png') }}');">
+            <div class="category-card" style="background-image: url('{{ asset('images/toghe.png') }}');">
                 <div class="category-name">Get Together</div>
             </div>
             <div class="category-card" style="background-image: url('{{ asset('images/promotion.png') }}');">
