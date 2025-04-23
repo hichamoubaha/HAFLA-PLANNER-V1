@@ -36,7 +36,7 @@ class ProfileController extends Controller
         $user->email = $request->email;
         $user->phone = $request->phone;
         
-        // Update additional fields if they exist in the users table
+        
         if (Schema::hasColumn('users', 'address')) {
             $user->address = $request->address;
         }
@@ -48,12 +48,12 @@ class ProfileController extends Controller
         }
 
         if ($request->hasFile('profile_picture')) {
-            // Delete old profile picture if exists
+            
             if ($user->profile_picture) {
                 Storage::disk('public')->delete($user->profile_picture);
             }
             
-            // Store new profile picture
+            
             $file = $request->file('profile_picture');
             $filename = time() . '_' . $file->getClientOriginalName();
             $path = $file->storeAs('profile-pictures', $filename, 'public');

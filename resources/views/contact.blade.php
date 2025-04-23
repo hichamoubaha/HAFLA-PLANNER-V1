@@ -284,7 +284,7 @@
             margin-top: 10px;
         }
         
-        /* Footer */
+        
         footer {
             background-color: #ff6b6b;
             color: white;
@@ -480,7 +480,7 @@
                 </div>
                 
                 <div class="copyright">
-                    Copyright © 2024 | Hafla Event Planner by Hicham Oubaha
+                    Copyright © 2025 | Hafla Event Planner by Hicham Oubaha
                 </div>
             </div>
         </div>

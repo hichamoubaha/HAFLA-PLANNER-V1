@@ -76,7 +76,7 @@
             <!-- Dashboard Content -->
             <main class="p-8">
                 <div class="grid grid-cols-3 gap-6">
-                    <!-- Quick Stats Cards -->
+                    
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <div class="flex justify-between items-center">
                             <div>
@@ -121,7 +121,7 @@
                 </div>
                 @endif
 
-                <!-- Recent Activity -->
+                
                 <div class="mt-8 bg-white rounded-lg shadow-md p-6">
                     <h3 class="text-xl font-bold mb-4">Activité Récente</h3>
                     <table class="w-full">

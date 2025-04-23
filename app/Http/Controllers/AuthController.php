@@ -29,7 +29,7 @@ class AuthController extends Controller
         'name' => $request->name,
         'email' => $request->email,
         'password' => Hash::make($request->password),
-        'role' => 'user', // Tous les nouveaux utilisateurs sont "user" par défaut
+        'role' => 'user', 
     ]);
 
     return redirect('/login')->with('success', 'Inscription réussie. Connectez-vous !');

@@ -166,7 +166,7 @@
     .logout svg {
       margin-right: 12px;
     }
-     /* Footer */
+     
      footer {
             background-color: #ff6b6b;
             color: white;
