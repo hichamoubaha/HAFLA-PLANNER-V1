@@ -353,7 +353,7 @@
                     <li><a href="#">About us</a></li>
                     <li><a href="#">Contact Us</a></li>
                     <li><a href="{{ url('/login') }}">Login</a></li>
-                    <li><a href="#">Register</a></li>
+                    <li><a href="{{ url('/register') }}">Register</a></li>
                 </ul>
             </nav>
             <a href="#" class="plan-btn">Plan Your Event</a>
