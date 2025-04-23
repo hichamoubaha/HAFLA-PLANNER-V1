@@ -350,8 +350,8 @@
             <nav>
                 <ul>
                     <li><a href="#">Home</a></li>
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    
+                    <li><a href="{{ url('/contact') }}">Contact Us</a></li>
                     <li><a href="{{ url('/login') }}">Login</a></li>
                     <li><a href="{{ url('/register') }}">Register</a></li>
                 </ul>
