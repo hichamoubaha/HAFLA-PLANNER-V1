@@ -18,23 +18,22 @@ class AuthController extends Controller
 
     // Traitement de l'inscription.
     public function register(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:users',
-        'password' => 'required|min:6|confirmed',
-    ]);
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6|confirmed',
+        ]);
 
-    $user = User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-        'role' => 'user', 
-    ]);
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => 'user', // Tous les nouveaux utilisateurs sont "user" par défaut
+        ]);
 
-    return redirect('/login')->with('success', 'Inscription réussie. Connectez-vous !');
-}
-
+        return redirect('/login')->with('success', 'Inscription réussie. Connectez-vous !');
+    }
 
     // Afficher le formulaire de connexion
     public function showLoginForm()
@@ -51,6 +50,9 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
+            if (Auth::user()->role === 'user') {
+                return redirect('/profile')->with('success', 'Connexion réussie.');
+            }
             return redirect('/dashboard')->with('success', 'Connexion réussie.');
         }
 
