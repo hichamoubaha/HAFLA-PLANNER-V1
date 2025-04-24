@@ -48,6 +48,7 @@
     </div>
 
     <div class="container">
+        @if(Auth::user()->role === 'admin')
         <div class="row mb-4">
             <div class="col-12 text-end">
                 <a href="{{ route('events.create') }}" class="btn btn-primary btn-create">
@@ -55,6 +56,19 @@
                 </a>
             </div>
         </div>
+        @endif
+
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
 
         <div class="row">
             @foreach($events as $event)
@@ -72,7 +86,7 @@
                             </p>
                         </div>
                         <div class="card-footer bg-white">
-                            @if(Auth::id() === $event->user_id)
+                            @if(Auth::user()->role === 'admin' && Auth::id() === $event->user_id)
                                 <div class="action-buttons">
                                     <a href="{{ route('events.edit', $event) }}" class="btn btn-outline-primary">
                                         <i class="fas fa-edit me-1"></i>Modifier
@@ -85,6 +99,32 @@
                                         </button>
                                     </form>
                                 </div>
+                            @elseif(Auth::user()->role === 'user')
+                                @php
+                                    $booking = $event->bookings()->where('user_id', Auth::id())->first();
+                                @endphp
+                                @if($booking)
+                                    <div class="action-buttons">
+                                        <span class="badge bg-{{ $booking->status === 'confirmed' ? 'success' : ($booking->status === 'cancelled' ? 'danger' : 'warning') }}">
+                                            {{ ucfirst($booking->status) }}
+                                        </span>
+                                        @if($booking->status !== 'cancelled')
+                                            <form action="{{ route('bookings.cancel', $booking) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-outline-danger">
+                                                    <i class="fas fa-times me-1"></i>Annuler
+                                                </button>
+                                            </form>
+                                        @endif
+                                    </div>
+                                @else
+                                    <form action="{{ route('bookings.store', $event) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-calendar-check me-1"></i>Réserver
+                                        </button>
+                                    </form>
+                                @endif
                             @endif
                         </div>
                     </div>
@@ -93,7 +133,6 @@
         </div>
     </div>
 
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
