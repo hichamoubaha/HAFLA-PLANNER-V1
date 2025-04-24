@@ -12,6 +12,8 @@ use App\Http\Controllers\EventController;
 
 use App\Http\Controllers\ProfileController;
 
+use App\Http\Controllers\BookingController;
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
@@ -21,6 +23,11 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    
+    // Booking routes
+    Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
+    Route::post('/events/{event}/book', [BookingController::class, 'store'])->name('bookings.store');
+    Route::post('/bookings/{booking}/cancel', [BookingController::class, 'cancel'])->name('bookings.cancel');
 });
 
 
