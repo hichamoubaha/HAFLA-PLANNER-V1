@@ -1,3 +1,10 @@
+@extends('layouts.app')
+
+@php
+use Carbon\Carbon;
+@endphp
+
+@section('content')
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -38,7 +45,7 @@
                     </li>
                     @if(Auth::user()->role === 'organisateur')
                     <li>
-                        <a href="{{ route('events.index') }}" class="flex items-center p-3 text-gray-700 hover:bg-blue-50 rounded-lg">
+                        <a href="{{ route('bookings.index') }}" class="flex items-center p-3 text-gray-700 hover:bg-blue-50 rounded-lg">
                             <i class="fas fa-ticket-alt mr-3"></i>
                             Gérer les réservations
                         </a>
@@ -89,7 +96,7 @@
                         <div class="flex justify-between items-center">
                             <div>
                                 <h3 class="text-gray-500 uppercase text-sm">Total Événements</h3>
-                                <p class="text-3xl font-bold text-blue-600">24</p>
+                                <p class="text-3xl font-bold text-blue-600">{{ $totalEvents }}</p>
                             </div>
                             <i class="fas fa-calendar-alt text-3xl text-blue-300"></i>
                         </div>
@@ -99,7 +106,7 @@
                         <div class="flex justify-between items-center">
                             <div>
                                 <h3 class="text-gray-500 uppercase text-sm">Participants</h3>
-                                <p class="text-3xl font-bold text-green-600">1,245</p>
+                                <p class="text-3xl font-bold text-green-600">{{ $totalParticipants }}</p>
                             </div>
                             <i class="fas fa-users text-3xl text-green-300"></i>
                         </div>
@@ -108,10 +115,10 @@
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <div class="flex justify-between items-center">
                             <div>
-                                <h3 class="text-gray-500 uppercase text-sm">Revenus</h3>
-                                <p class="text-3xl font-bold text-purple-600">€45,678</p>
+                                <h3 class="text-gray-500 uppercase text-sm">Réservations</h3>
+                                <p class="text-3xl font-bold text-purple-600">{{ $totalBookings }}</p>
                             </div>
-                            <i class="fas fa-euro-sign text-3xl text-purple-300"></i>
+                            <i class="fas fa-ticket-alt text-3xl text-purple-300"></i>
                         </div>
                     </div>
                 </div>
@@ -141,27 +148,34 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="border-b">
-                                <td class="p-3">Conférence Tech 2025</td>
-                                <td class="p-3">15 Mars 2025</td>
-                                <td class="p-3">
-                                    <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full">Terminé</span>
-                                </td>
-                            </tr>
-                            <tr class="border-b">
-                                <td class="p-3">Séminaire Marketing</td>
-                                <td class="p-3">22 Avril 2025</td>
-                                <td class="p-3">
-                                    <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full">En cours</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="p-3">Workshop Innovation</td>
-                                <td class="p-3">05 Mai 2025</td>
-                                <td class="p-3">
-                                    <span class="bg-yellow-100 text-yellow-600 px-3 py-1 rounded-full">À venir</span>
-                                </td>
-                            </tr>
+                            @forelse($recentEvents as $event)
+                                <tr class="border-b">
+                                    <td class="p-3">{{ $event->title }}</td>
+                                    <td class="p-3">{{ $event->date->format('d/m/Y') }}</td>
+                                    <td class="p-3">
+                                        @php
+                                            $now = Carbon::now();
+                                            $eventDate = Carbon::parse($event->date);
+                                            
+                                            if ($eventDate->isPast()) {
+                                                $status = 'Terminé';
+                                                $class = 'bg-secondary';
+                                            } elseif ($eventDate->isToday()) {
+                                                $status = 'En cours';
+                                                $class = 'bg-success';
+                                            } else {
+                                                $status = 'À venir';
+                                                $class = 'bg-primary';
+                                            }
+                                        @endphp
+                                        <span class="badge {{ $class }}">{{ $status }}</span>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="3" class="p-3 text-center">Aucun événement trouvé</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -170,3 +184,4 @@
     </div>
 </body>
 </html>
+@endsection
