@@ -48,7 +48,7 @@
     </div>
 
     <div class="container">
-        @if(Auth::user()->role === 'admin')
+        @if(Auth::user()->role === 'admin' || Auth::user()->role === 'organisateur')
         <div class="row mb-4">
             <div class="col-12 text-end">
                 <a href="{{ route('events.create') }}" class="btn btn-primary btn-create">
@@ -98,6 +98,15 @@
                                             <i class="fas fa-trash-alt me-1"></i>Supprimer
                                         </button>
                                     </form>
+                                </div>
+                            @elseif(Auth::user()->role === 'organisateur' && Auth::id() === $event->user_id)
+                                <div class="action-buttons">
+                                    <a href="{{ route('events.edit', $event) }}" class="btn btn-outline-primary">
+                                        <i class="fas fa-edit me-1"></i>Modifier
+                                    </a>
+                                    <a href="{{ route('bookings.event', $event) }}" class="btn btn-outline-success">
+                                        <i class="fas fa-users me-1"></i>Gérer les réservations
+                                    </a>
                                 </div>
                             @elseif(Auth::user()->role === 'user')
                                 @php

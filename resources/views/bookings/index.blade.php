@@ -31,8 +31,8 @@
 <body>
     <div class="page-header text-center">
         <div class="container">
-            <h1 class="display-4">Mes Réservations</h1>
-            <p class="lead">Gérez vos réservations d'événements</p>
+            <h1 class="display-4">{{ Auth::user()->role === 'organisateur' ? 'Gestion des Réservations' : 'Mes Réservations' }}</h1>
+            <p class="lead">{{ Auth::user()->role === 'organisateur' ? 'Gérez les réservations pour vos événements' : 'Gérez vos réservations d\'événements' }}</p>
         </div>
     </div>
 
@@ -49,6 +49,14 @@
             </div>
         @endif
 
+        <div class="row mb-4">
+            <div class="col-12">
+                <a href="{{ route('events.index') }}" class="btn btn-outline-primary">
+                    <i class="fas fa-arrow-left me-2"></i>Retour aux événements
+                </a>
+            </div>
+        </div>
+
         <div class="row">
             @forelse($bookings as $booking)
                 <div class="col-md-6 col-lg-4">
@@ -63,11 +71,40 @@
                                 <br>
                                 <i class="fas fa-map-marker-alt me-2"></i>{{ $booking->event->location }}
                             </p>
+                            
+                            @if(Auth::user()->role === 'organisateur')
+                                <p class="text-muted">
+                                    <i class="fas fa-user me-2"></i>{{ $booking->user->name }}
+                                    <br>
+                                    <i class="fas fa-envelope me-2"></i>{{ $booking->user->email }}
+                                    @if($booking->user->phone)
+                                        <br><i class="fas fa-phone me-2"></i>{{ $booking->user->phone }}
+                                    @endif
+                                </p>
+                            @endif
+                            
                             <div class="d-flex justify-content-between align-items-center">
-                                <span class="badge status-badge bg-{{ $booking->status === 'confirmed' ? 'success' : ($booking->status === 'cancelled' ? 'danger' : 'warning') }}">
+                                <span class="badge status-badge bg-{{ $booking->status === 'confirmed' ? 'success' : ($booking->status === 'cancelled' ? 'danger' : ($booking->status === 'rejected' ? 'secondary' : 'warning')) }}">
                                     {{ ucfirst($booking->status) }}
                                 </span>
-                                @if($booking->status !== 'cancelled')
+                                
+                                @if(Auth::user()->role === 'organisateur')
+                                    <form action="{{ route('bookings.updateStatus', $booking) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="input-group">
+                                            <select name="status" class="form-select form-select-sm">
+                                                <option value="pending" {{ $booking->status === 'pending' ? 'selected' : '' }}>En attente</option>
+                                                <option value="confirmed" {{ $booking->status === 'confirmed' ? 'selected' : '' }}>Confirmé</option>
+                                                <option value="rejected" {{ $booking->status === 'rejected' ? 'selected' : '' }}>Rejeté</option>
+                                                <option value="cancelled" {{ $booking->status === 'cancelled' ? 'selected' : '' }}>Annulé</option>
+                                            </select>
+                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                <i class="fas fa-save"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                @elseif($booking->status !== 'cancelled')
                                     <form action="{{ route('bookings.cancel', $booking) }}" method="POST">
                                         @csrf
                                         <button type="submit" class="btn btn-outline-danger btn-sm">
