@@ -14,6 +14,11 @@ class EventController extends Controller
         return view('events.index', compact('events'));
     }
 
+    public function show(Event $event)
+    {
+        return view('events.show', compact('event'));
+    }
+
     public function create()
     {
         // Allow both admin and organisateur roles to create events
