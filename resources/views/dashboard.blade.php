@@ -20,7 +20,7 @@ use Carbon\Carbon;
         <div class="w-64 bg-white shadow-md">
             <div class="p-6 border-b">
             <img src="{{ asset('images/hafla_logo.png') }}" alt="Logo" class="mx-auto h-20 w-20 rounded-full">
-                <h1 class="text-center text-xl font-bold mt-4">Event Hive</h1>
+                <h1 class="text-center text-xl font-bold mt-4">Hafla Planner</h1>
             </div>
             
             <nav class="p-4">
