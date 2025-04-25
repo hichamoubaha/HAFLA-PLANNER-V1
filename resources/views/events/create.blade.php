@@ -119,6 +119,74 @@
             text-align: center;
             border-radius: 5px;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .media-upload:hover {
+            border-color: #ff6b6b;
+            background-color: #fff5f5;
+        }
+
+        .media-upload.dragover {
+            border-color: #4ecdc4;
+            background-color: #f0f9f8;
+        }
+
+        .image-preview-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .image-preview {
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .image-preview img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .remove-image {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255, 107, 107, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .upload-icon {
+            font-size: 24px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .upload-text {
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .upload-hint {
+            font-size: 12px;
+            color: #999;
         }
 
         .budget-inputs {
@@ -197,13 +265,22 @@
         <!-- Media Section -->
         <div class="form-section">
             <h3>Médias</h3>
-            <div class="media-upload">
+            <div class="media-upload" id="image-upload-container">
                 <input type="file" name="event_images[]" multiple accept="image/*" style="display: none;" id="image-upload">
-                <p>Glissez vos images ici ou cliquez pour sélectionner</p>
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <p class="upload-text">Glissez vos images ici ou cliquez pour sélectionner</p>
+                <p class="upload-hint">Formats acceptés: JPG, PNG, GIF (Max 5MB par image)</p>
+                <div class="image-preview-container" id="image-preview-container"></div>
             </div>
-            <div class="media-upload">
+            <div class="media-upload" id="video-upload-container">
                 <input type="file" name="event_videos[]" multiple accept="video/*" style="display: none;" id="video-upload">
-                <p>Glissez vos vidéos ici ou cliquez pour sélectionner</p>
+                <div class="upload-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <p class="upload-text">Glissez vos vidéos ici ou cliquez pour sélectionner</p>
+                <p class="upload-hint">Formats acceptés: MP4, MOV (Max 50MB par vidéo)</p>
             </div>
         </div>
 
@@ -254,11 +331,72 @@
             });
         });
 
-        // Media upload
-        document.querySelectorAll('.media-upload').forEach(upload => {
-            upload.addEventListener('click', function() {
-                this.querySelector('input[type="file"]').click();
-            });
+        // Enhanced Media upload
+        const imageUpload = document.getElementById('image-upload');
+        const imageContainer = document.getElementById('image-upload-container');
+        const imagePreviewContainer = document.getElementById('image-preview-container');
+
+        // Handle drag and drop
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            imageContainer.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            imageContainer.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            imageContainer.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight(e) {
+            imageContainer.classList.add('dragover');
+        }
+
+        function unhighlight(e) {
+            imageContainer.classList.remove('dragover');
+        }
+
+        imageContainer.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFiles(files);
+        }
+
+        imageUpload.addEventListener('change', function() {
+            handleFiles(this.files);
+        });
+
+        function handleFiles(files) {
+            [...files].forEach(previewFile);
+        }
+
+        function previewFile(file) {
+            if (!file.type.startsWith('image/')) return;
+            
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = function() {
+                const preview = document.createElement('div');
+                preview.className = 'image-preview';
+                preview.innerHTML = `
+                    <img src="${reader.result}" alt="Preview">
+                    <button type="button" class="remove-image" onclick="this.parentElement.remove()">×</button>
+                `;
+                imagePreviewContainer.appendChild(preview);
+            }
+        }
+
+        // Click to upload
+        imageContainer.addEventListener('click', function() {
+            imageUpload.click();
         });
     </script>
 </body>
