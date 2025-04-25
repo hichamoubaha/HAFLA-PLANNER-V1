@@ -91,7 +91,7 @@ use Carbon\Carbon;
             <!-- Dashboard Content -->
             <main class="p-8">
                 <div class="grid grid-cols-3 gap-6">
-                    <!-- Quick Stats Cards -->
+                    
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <div class="flex justify-between items-center">
                             <div>
