@@ -16,6 +16,11 @@ class EventController extends Controller
 
     public function create()
     {
+        // Allow both admin and organisateur roles to create events
+        if (Auth::user()->role !== 'admin' && Auth::user()->role !== 'organisateur') {
+            return redirect()->route('events.index')->with('error', 'Accès refusé.');
+        }
+        
         return view('events.create');
     }
 
