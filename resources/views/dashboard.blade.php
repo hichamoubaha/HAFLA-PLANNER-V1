@@ -13,7 +13,7 @@
         <div class="w-64 bg-white shadow-md">
             <div class="p-6 border-b">
             <img src="{{ asset('images/hafla_logo.png') }}" alt="Logo" class="mx-auto h-20 w-20 rounded-full">
-                <h1 class="text-center text-xl font-bold mt-4">Hafla planner</h1>
+                <h1 class="text-center text-xl font-bold mt-4">Event Hive</h1>
             </div>
             
             <nav class="p-4">
@@ -36,6 +36,14 @@
                             Participants
                         </a>
                     </li>
+                    @if(Auth::user()->role === 'organisateur')
+                    <li>
+                        <a href="{{ route('events.index') }}" class="flex items-center p-3 text-gray-700 hover:bg-blue-50 rounded-lg">
+                            <i class="fas fa-ticket-alt mr-3"></i>
+                            Gérer les réservations
+                        </a>
+                    </li>
+                    @endif
                     @if(Auth::user()->role === 'admin')
                     <li>
                         <a href="{{ route('admin.users') }}" class="flex items-center p-3 text-gray-700 hover:bg-blue-50 rounded-lg">
@@ -76,7 +84,7 @@
             <!-- Dashboard Content -->
             <main class="p-8">
                 <div class="grid grid-cols-3 gap-6">
-                    
+                    <!-- Quick Stats Cards -->
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <div class="flex justify-between items-center">
                             <div>
@@ -121,7 +129,7 @@
                 </div>
                 @endif
 
-                
+                <!-- Recent Activity -->
                 <div class="mt-8 bg-white rounded-lg shadow-md p-6">
                     <h3 class="text-xl font-bold mb-4">Activité Récente</h3>
                     <table class="w-full">
