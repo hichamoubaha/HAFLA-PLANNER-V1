@@ -14,6 +14,8 @@ use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\BookingController;
 
+use App\Http\Controllers\ParticipantController;
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
@@ -32,6 +34,10 @@ Route::middleware(['auth'])->group(function () {
     // Organiser booking management
     Route::get('/events/{event}/bookings', [BookingController::class, 'eventBookings'])->name('bookings.event');
     Route::put('/bookings/{booking}/status', [BookingController::class, 'updateStatus'])->name('bookings.updateStatus');
+    
+    // Participant management
+    Route::get('/participants', [ParticipantController::class, 'index'])->name('participants.index');
+    Route::get('/participants/{user}', [ParticipantController::class, 'show'])->name('participants.show');
 });
 
 
