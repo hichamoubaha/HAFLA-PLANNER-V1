@@ -28,6 +28,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
     Route::post('/events/{event}/book', [BookingController::class, 'store'])->name('bookings.store');
     Route::post('/bookings/{booking}/cancel', [BookingController::class, 'cancel'])->name('bookings.cancel');
+    
+    // Organiser booking management
+    Route::get('/events/{event}/bookings', [BookingController::class, 'eventBookings'])->name('bookings.event');
+    Route::put('/bookings/{booking}/status', [BookingController::class, 'updateStatus'])->name('bookings.updateStatus');
 });
 
 
@@ -58,10 +62,6 @@ Route::get('/contact', function () {
 
 Route::get('/package', function () {
     return view('package'); 
-});
-
-Route::get('/bookings', function (){
-    return view('bookings');
 });
 
 /*
