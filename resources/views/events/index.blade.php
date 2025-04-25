@@ -47,9 +47,124 @@
             background-color: #45b7d1;
             color: white;
         }
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: #333;
+        }
+        .nav-link {
+            color: #666;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #4ecdc4;
+        }
+        .nav-link.active {
+            color: #4ecdc4;
+            font-weight: 500;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #4ecdc4;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .dropdown-item {
+            padding: 0.5rem 1rem;
+            color: #666;
+        }
+        .dropdown-item:hover {
+            background-color: #f8f9fa;
+            color: #4ecdc4;
+        }
+        .dropdown-divider {
+            margin: 0.5rem 0;
+        }
     </style>
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="{{ route('dashboard') }}">
+                <i class="fas fa-calendar-check me-2"></i>Event Hive
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('dashboard') }}">
+                            <i class="fas fa-tachometer-alt me-1"></i>Tableau de bord
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ route('events.index') }}">
+                            <i class="fas fa-calendar me-1"></i>Événements
+                        </a>
+                    </li>
+                    @if(Auth::user()->role === 'organisateur')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('bookings.index') }}">
+                            <i class="fas fa-ticket-alt me-1"></i>Réservations
+                        </a>
+                    </li>
+                    @endif
+                    @if(Auth::user()->role === 'admin')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.users') }}">
+                            <i class="fas fa-users-cog me-1"></i>Utilisateurs
+                        </a>
+                    </li>
+                    @endif
+                </ul>
+                <div class="user-info">
+                    <div class="user-avatar">
+                        {{ substr(Auth::user()->name, 0, 1) }}
+                    </div>
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            {{ Auth::user()->name }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="{{ route('profile') }}">
+                                <i class="fas fa-user me-2"></i>Profil
+                            </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item text-danger">
+                                        <i class="fas fa-sign-out-alt me-2"></i>Déconnexion
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
     <div class="page-header text-center">
         <div class="container">
             <h1 class="display-4">Événements à venir</h1>
