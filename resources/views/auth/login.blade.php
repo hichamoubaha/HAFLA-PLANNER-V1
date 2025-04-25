@@ -5,190 +5,203 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion - Event Hive</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        display: flex;
+        height: 100vh;
+        max-height: 100vh;
+        overflow: auto; /* was hidden */
+    }
+
+    .image-section {
+        width: 50%;
+        background-color: #0f4c75;
+        position: relative;
+        overflow: hidden;
+        min-height: 100vh;
+    }
+
+    .image-section img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.7);
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    .overlay h2 {
+        font-size: 32px; /* slightly smaller */
+        margin-bottom: 15px;
+    }
+
+    .overlay p {
+        font-size: 15px;
+        margin-bottom: 20px;
+        max-width: 80%;
+    }
+
+    .signin-button {
+        padding: 10px 25px;
+        background-color: rgba(255, 255, 255, 0.3);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
+    .login-section {
+        width: 50%;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .logo {
+        width: 90px;
+        height: auto;
+        margin-bottom: -10px;
+    }
+
+    .form-container {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    h1 {
+        font-size: 26px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 18px;
+    }
+
+    label {
+        display: block;
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #333;
+        text-transform: uppercase;
+    }
+
+    input {
+        width: 100%;
+        padding: 11px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    .forgot-password {
+        text-align: right;
+        font-size: 13px;
+        margin: 8px 0 25px;
+    }
+
+    .forgot-password a {
+        color: #666;
+        text-decoration: none;
+    }
+
+    .button-primary {
+        width: 100%;
+        padding: 11px;
+        background-color: #ff5a5f;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 15px;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+
+    .or-divider {
+        text-align: center;
+        margin: 5px 0;
+        color: #666;
+    }
+
+    .google-button {
+        width: 100%;
+        padding: 10px;
+        background-color: white;
+        color: #333;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 15px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .google-button img {
+        width: 20px;
+        margin-right: 10px;
+    }
+
+    .register-link {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 13px;
+    }
+
+    .register-link a {
+        color: #666;
+        text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
         body {
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
+            flex-direction: column;
         }
-        
+
+        .image-section, .login-section {
+            width: 100%;
+        }
+
         .image-section {
-            width: 50%;
-            background-color: #0f4c75;
-            position: relative;
-            overflow: hidden;
+            height: 250px;
+            min-height: auto;
         }
-        
-        .image-section img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.7);
-        }
-        
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-align: center;
-            padding: 0 20px;
-        }
-        
-        .overlay h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-        
-        .overlay p {
-            font-size: 16px;
-            margin-bottom: 30px;
-            max-width: 80%;
-        }
-        
-        .signin-button {
-            padding: 10px 30px;
-            background-color: rgba(255, 255, 255, 0.3);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        
+
         .login-section {
-            width: 50%;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            padding: 20px;
         }
-        
-        .logo {
-            width: 100px;
-            height: auto;
-            margin-bottom: -10px;
-        }
-        
+
         .form-container {
-            width: 100%;
-            max-width: 450px;
+            max-width: 100%;
         }
-        
-        h1 {
-            font-size: 30px;
-            font-weight: bold;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        label {
-            display: block;
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #333;
-            text-transform: uppercase;
-        }
-        
-        input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-        
-        .forgot-password {
-            text-align: right;
-            font-size: 14px;
-            margin: 10px 0 30px;
-        }
-        
-        .forgot-password a {
-            color: #666;
-            text-decoration: none;
-        }
-        
-        .button-primary {
-            width: 100%;
-            padding: 12px;
-            background-color: #ff5a5f;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-bottom: 20px;
-        }
-        
-        .or-divider {
-            text-align: center;
-            margin: 20px 0;
-            color: #666;
-        }
-        
-        .google-button {
-            width: 100%;
-            padding: 12px;
-            background-color: white;
-            color: #333;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .google-button img {
-            width: 20px;
-            margin-right: 10px;
-        }
-        
-        .register-link {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-        }
-        
-        .register-link a {
-            color: #666;
-            text-decoration: none;
-        }
-        
-        @media (max-width: 768px) {
-            body {
-                flex-direction: column;
-            }
-            
-            .image-section, .login-section {
-                width: 100%;
-            }
-            
-            .image-section {
-                height: 300px;
-            }
-        }
-    </style>
+    }
+</style>
+
 </head>
 <body>
     <div class="image-section">
@@ -203,7 +216,7 @@
         <img class="logo" src="{{ asset('images/hafla_logo.png') }}" alt="Event Hive Logo">
         
         <div class="form-container">
-            <h1>Sign In to Event Hive</h1>
+            <h1>Sign In to Hafla Planner</h1>
             
             @if(session('success'))
                 <p style="color:green;">{{ session('success') }}</p>
