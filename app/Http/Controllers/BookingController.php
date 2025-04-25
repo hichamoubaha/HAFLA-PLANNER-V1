@@ -11,9 +11,19 @@ class BookingController extends Controller
 {
     public function index()
     {
-        $bookings = Booking::with('event')
-            ->where('user_id', Auth::id())
-            ->get();
+        // If the user is an organiser, show all bookings for their events
+        if (Auth::user()->role === 'organisateur') {
+            $events = Event::where('user_id', Auth::id())->pluck('id');
+            $bookings = Booking::with(['event', 'user'])
+                ->whereIn('event_id', $events)
+                ->get();
+        } else {
+            // For regular users, show only their bookings
+            $bookings = Booking::with('event')
+                ->where('user_id', Auth::id())
+                ->get();
+        }
+        
         return view('bookings.index', compact('bookings'));
     }
 
@@ -46,5 +56,35 @@ class BookingController extends Controller
 
         $booking->update(['status' => 'cancelled']);
         return back()->with('success', 'Booking cancelled successfully.');
+    }
+    
+    public function eventBookings(Event $event)
+    {
+        // Check if the user is the organiser of this event
+        if (Auth::id() !== $event->user_id || Auth::user()->role !== 'organisateur') {
+            return back()->with('error', 'Unauthorized action.');
+        }
+        
+        $bookings = Booking::with('user')
+            ->where('event_id', $event->id)
+            ->get();
+            
+        return view('bookings.event', compact('event', 'bookings'));
+    }
+    
+    public function updateStatus(Request $request, Booking $booking)
+    {
+        // Check if the user is the organiser of the event
+        if (Auth::id() !== $booking->event->user_id || Auth::user()->role !== 'organisateur') {
+            return back()->with('error', 'Unauthorized action.');
+        }
+        
+        $request->validate([
+            'status' => 'required|in:confirmed,rejected,cancelled'
+        ]);
+        
+        $booking->update(['status' => $request->status]);
+        
+        return back()->with('success', 'Booking status updated successfully.');
     }
 } 
