@@ -231,13 +231,13 @@
     </form>
 
     <script>
-        // Color selection
+        
         document.querySelectorAll('.color-option').forEach(option => {
             option.addEventListener('click', function() {
                 document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
                 this.classList.add('selected');
                 
-                // Get current colors or initialize empty array
+                
                 let colors = [];
                 const themeColorsInput = document.querySelector('input[name="theme_colors"]');
                 if (themeColorsInput.value) {
@@ -248,15 +248,15 @@
                     }
                 }
                 
-                // Add the new color
+                
                 colors.push(this.dataset.color);
                 
-                // Update the input
+                
                 themeColorsInput.value = JSON.stringify(colors);
             });
         });
 
-        // File upload preview
+        
         document.querySelector('input[name="logo"]').addEventListener('change', function(e) {
             if (e.target.files && e.target.files[0]) {
                 const reader = new FileReader();
