@@ -16,6 +16,10 @@ use App\Http\Controllers\BookingController;
 
 use App\Http\Controllers\ParticipantController;
 
+use App\Http\Controllers\ServiceProviderController;
+
+use App\Http\Controllers\ReviewController;
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
@@ -39,6 +43,20 @@ Route::middleware(['auth'])->group(function () {
     // Participant management
     Route::get('/participants', [ParticipantController::class, 'index'])->name('participants.index');
     Route::get('/participants/{user}', [ParticipantController::class, 'show'])->name('participants.show');
+
+    // Service Provider Routes
+    Route::get('/service-providers', [ServiceProviderController::class, 'index'])->name('service-providers.index');
+    Route::get('/service-providers/create', [ServiceProviderController::class, 'create'])->name('service-providers.create');
+    Route::post('/service-providers', [ServiceProviderController::class, 'store'])->name('service-providers.store');
+    Route::get('/service-providers/{provider}', [ServiceProviderController::class, 'show'])->name('service-providers.show');
+    Route::get('/service-providers/{provider}/edit', [ServiceProviderController::class, 'edit'])->name('service-providers.edit');
+    Route::put('/service-providers/{provider}', [ServiceProviderController::class, 'update'])->name('service-providers.update');
+    Route::delete('/service-providers/{provider}', [ServiceProviderController::class, 'destroy'])->name('service-providers.destroy');
+
+    // Review Routes
+    Route::post('/service-providers/{provider}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::put('/reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
+    Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
 });
 
 
