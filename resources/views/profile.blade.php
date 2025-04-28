@@ -94,13 +94,16 @@
         <div class="mb-8 flex justify-between items-center">
           <div>
             <h1 class="text-3xl font-bold text-gray-800">My Profile</h1>
-            <p class="text-gray-500 mt-1">Manage your personal information and account settings</p>
+            <p class="text-gray-500 mt-1">View your personal information and account settings</p>
           </div>
           <div class="flex items-center space-x-2">
             <span class="text-sm text-gray-500">Last updated: Today</span>
             <div class="h-6 w-6 bg-green-400 rounded-full flex items-center justify-center">
               <i class="fas fa-check text-white text-xs"></i>
             </div>
+            <button id="editProfileBtn" onclick="toggleEditMode()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg shadow transition-colors">
+              <i class="fas fa-edit mr-2"></i> Edit Profile
+            </button>
           </div>
         </div>
 
@@ -172,9 +175,12 @@
               </button>
             </div>
 
-            <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" id="profileForm" onsubmit="console.log('Form submitted');">
               @csrf
               @method('PUT')
+              
+              <!-- Hidden file input for profile picture -->
+              <input type="file" id="profile_picture" name="profile_picture" class="hidden" accept="image/*">
 
               <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                 <!-- Personal Information Section -->
@@ -186,136 +192,109 @@
                 </div>
 
                 <!-- First Name -->
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-                  <div class="relative">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
-                      <i class="fas fa-user"></i>
-                    </span>
-                    <input type="text" name="name" value="{{ old('name', $user->name) }}" 
-                      class="w-full pl-10 px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <p class="text-sm font-medium text-gray-500 mb-1">First Name</p>
+                  <div class="flex items-center">
+                    <i class="fas fa-user text-indigo-500 mr-2"></i>
+                    <div class="view-mode">
+                      <p class="text-gray-800 font-medium">{{ $user->name }}</p>
+                    </div>
+                    <div class="edit-mode hidden">
+                      <input type="text" name="name" value="{{ $user->name }}" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
                   </div>
                 </div>
 
                 <!-- Last Name -->
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
-                  <div class="relative">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
-                      <i class="fas fa-user"></i>
-                    </span>
-                    <input type="text" name="last_name" value="{{ old('last_name', '') }}" 
-                      class="w-full pl-10 px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
-                  </div>
-                </div>
-
-                <!-- Username -->
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Username</label>
-                  <div class="relative">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
-                      <i class="fas fa-at"></i>
-                    </span>
-                    <input type="text" name="username" value="{{ old('username', $user->email) }}" 
-                      class="w-full pl-10 px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <p class="text-sm font-medium text-gray-500 mb-1">Last Name</p>
+                  <div class="flex items-center">
+                    <i class="fas fa-user text-indigo-500 mr-2"></i>
+                    <div class="view-mode">
+                      <p class="text-gray-800 font-medium">{{ $user->last_name ?? 'Not provided' }}</p>
+                    </div>
+                    <div class="edit-mode hidden">
+                      <input type="text" name="last_name" value="{{ $user->last_name }}" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
                   </div>
                 </div>
 
                 <!-- Email -->
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Billing Email</label>
-                  <div class="relative">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
-                      <i class="fas fa-envelope"></i>
-                    </span>
-                    <input type="email" name="email" value="{{ old('email', $user->email) }}" 
-                      class="w-full pl-10 px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <p class="text-sm font-medium text-gray-500 mb-1">Email</p>
+                  <div class="flex items-center">
+                    <i class="fas fa-envelope text-indigo-500 mr-2"></i>
+                    <div class="view-mode">
+                      <p class="text-gray-800 font-medium">{{ $user->email }}</p>
+                    </div>
+                    <div class="edit-mode hidden">
+                      <input type="email" name="email" value="{{ $user->email }}" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
                   </div>
-                </div>
-
-                <!-- Contact Information Section -->
-                <div class="md:col-span-2 mt-6">
-                  <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
-                    <i class="fas fa-address-card mr-2 text-indigo-600"></i>
-                    Contact Information
-                  </h3>
                 </div>
 
                 <!-- Phone -->
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                  <div class="relative">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
-                      <i class="fas fa-phone"></i>
-                    </span>
-                    <input type="tel" name="phone" value="{{ old('phone', $user->phone) }}" 
-                      class="w-full pl-10 px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <p class="text-sm font-medium text-gray-500 mb-1">Phone Number</p>
+                  <div class="flex items-center">
+                    <i class="fas fa-phone text-indigo-500 mr-2"></i>
+                    <div class="view-mode">
+                      <p class="text-gray-800 font-medium">{{ $user->phone ?: 'Not provided' }}</p>
+                    </div>
+                    <div class="edit-mode hidden">
+                      <input type="text" name="phone" value="{{ $user->phone }}" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
                   </div>
-                </div>
-
-                <!-- Status -->
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Account Status</label>
-                  <div class="relative">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
-                      <i class="fas fa-check-circle"></i>
-                    </span>
-                    <input type="text" value="Active" disabled 
-                      class="w-full pl-10 px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-500">
-                  </div>
-                </div>
-
-                <!-- Address Section -->
-                <div class="md:col-span-2 mt-6">
-                  <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
-                    <i class="fas fa-map-marker-alt mr-2 text-indigo-600"></i>
-                    Address Information
-                  </h3>
                 </div>
 
                 <!-- Address -->
-                <div class="md:col-span-2">
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Street Address</label>
-                  <div class="relative">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
-                      <i class="fas fa-home"></i>
-                    </span>
-                    <input type="text" name="address" value="{{ old('address', '') }}" 
-                      class="w-full pl-10 px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <p class="text-sm font-medium text-gray-500 mb-1">Address</p>
+                  <div class="flex items-center">
+                    <i class="fas fa-map-marker-alt text-indigo-500 mr-2"></i>
+                    <div class="view-mode">
+                      <p class="text-gray-800 font-medium">{{ $user->address ?: 'Not provided' }}</p>
+                    </div>
+                    <div class="edit-mode hidden">
+                      <input type="text" name="address" value="{{ $user->address }}" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
                   </div>
                 </div>
 
                 <!-- City -->
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">City</label>
-                  <div class="relative">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
-                      <i class="fas fa-city"></i>
-                    </span>
-                    <input type="text" name="city" value="{{ old('city', '') }}" 
-                      class="w-full pl-10 px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <p class="text-sm font-medium text-gray-500 mb-1">City</p>
+                  <div class="flex items-center">
+                    <i class="fas fa-city text-indigo-500 mr-2"></i>
+                    <div class="view-mode">
+                      <p class="text-gray-800 font-medium">{{ $user->city ?: 'Not provided' }}</p>
+                    </div>
+                    <div class="edit-mode hidden">
+                      <input type="text" name="city" value="{{ $user->city }}" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
                   </div>
                 </div>
 
                 <!-- Zip Code -->
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Zip Code</label>
-                  <div class="relative">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
-                      <i class="fas fa-map-pin"></i>
-                    </span>
-                    <input type="text" name="zip_code" value="{{ old('zip_code', '') }}" 
-                      class="w-full pl-10 px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <p class="text-sm font-medium text-gray-500 mb-1">Zip Code</p>
+                  <div class="flex items-center">
+                    <i class="fas fa-map-pin text-indigo-500 mr-2"></i>
+                    <div class="view-mode">
+                      <p class="text-gray-800 font-medium">{{ $user->zip_code ?: 'Not provided' }}</p>
+                    </div>
+                    <div class="edit-mode hidden">
+                      <input type="text" name="zip_code" value="{{ $user->zip_code }}" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
                   </div>
                 </div>
-
-                <!-- Hidden file input -->
-                <input type="file" id="profile_picture" name="profile_picture" class="hidden" accept="image/*" 
-                  onchange="this.form.submit()">
               </div>
 
-              <div class="mt-10 flex justify-end">
-                <button type="submit" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg shadow transition-colors">
+              <div class="mt-8 flex justify-end space-x-4">
+                <button type="button" id="cancelEditBtn" onclick="toggleEditMode()" class="px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg shadow transition-colors hidden">
+                  Cancel
+                </button>
+                <button type="submit" id="saveProfileBtn" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg shadow transition-colors hidden">
                   <i class="fas fa-save mr-2"></i> Save Changes
                 </button>
               </div>
@@ -370,6 +349,22 @@
       </div>
     </div>
   </div>
+
+  <script>
+  function toggleEditMode() {
+    const viewModeElements = document.querySelectorAll('.view-mode');
+    const editModeElements = document.querySelectorAll('.edit-mode');
+    const editProfileBtn = document.getElementById('editProfileBtn');
+    const cancelEditBtn = document.getElementById('cancelEditBtn');
+    const saveProfileBtn = document.getElementById('saveProfileBtn');
+
+    viewModeElements.forEach(el => el.classList.toggle('hidden'));
+    editModeElements.forEach(el => el.classList.toggle('hidden'));
+    editProfileBtn.classList.toggle('hidden');
+    cancelEditBtn.classList.toggle('hidden');
+    saveProfileBtn.classList.toggle('hidden');
+  }
+  </script>
 </body>
 
 </html>
