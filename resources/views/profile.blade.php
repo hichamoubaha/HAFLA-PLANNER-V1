@@ -31,6 +31,12 @@
             <i class="fas fa-calendar mr-3"></i>
             Bookings
           </a>
+          @if($user->role === 'user' || $user->role === 'organisateur')
+          <a href="{{ route('service-providers.index') }}" class="flex items-center text-gray-600 py-2">
+            <i class="fas fa-users-cog mr-3"></i>
+            Service Providers
+          </a>
+          @endif
           <a href="#" class="flex items-center text-gray-600 py-2">
             <i class="fas fa-cog mr-3"></i>
             Settings
@@ -53,10 +59,10 @@
       </div>
     </div>
 
-    
+    <!-- Main Content -->
     <div class="ml-64 p-8">
       <div class="max-w-4xl mx-auto">
-        
+        <!-- Header -->
         <div class="mb-8">
           <h1 class="text-2xl font-bold">Settings</h1>
         </div>
@@ -77,7 +83,7 @@
           </div>
         @endif
 
-        
+        <!-- Profile Card -->
         <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
           <div class="flex items-center justify-between mb-6">
             <div class="flex items-center space-x-4">
@@ -102,70 +108,70 @@
             @method('PUT')
 
             <div class="grid grid-cols-2 gap-6">
-              
+              <!-- First Name -->
               <div>
                 <label class="block text-sm text-gray-500 mb-1">First Name</label>
                 <input type="text" name="name" value="{{ old('name', $user->name) }}" 
                   class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
               </div>
 
-              
+              <!-- Last Name -->
               <div>
                 <label class="block text-sm text-gray-500 mb-1">Last Name</label>
                 <input type="text" name="last_name" value="{{ old('last_name', '') }}" 
                   class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
               </div>
 
-              
+              <!-- Username -->
               <div class="col-span-2">
                 <label class="block text-sm text-gray-500 mb-1">Username</label>
                 <input type="text" name="username" value="{{ old('username', $user->email) }}" 
                   class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
               </div>
 
-              
+              <!-- Email -->
               <div>
                 <label class="block text-sm text-gray-500 mb-1">Billing Email</label>
                 <input type="email" name="email" value="{{ old('email', $user->email) }}" 
                   class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
               </div>
 
-              
+              <!-- Status -->
               <div>
                 <label class="block text-sm text-gray-500 mb-1">Status</label>
                 <input type="text" value="Active" disabled 
                   class="w-full px-4 py-2 rounded-lg border border-gray-300 bg-gray-50">
               </div>
 
-              
+              <!-- Zip Code -->
               <div>
                 <label class="block text-sm text-gray-500 mb-1">Zip code</label>
                 <input type="text" name="zip_code" value="{{ old('zip_code', '') }}" 
                   class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
               </div>
 
-              
+              <!-- Phone -->
               <div>
                 <label class="block text-sm text-gray-500 mb-1">Contact</label>
                 <input type="tel" name="phone" value="{{ old('phone', $user->phone) }}" 
                   class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
               </div>
 
-              
+              <!-- Address -->
               <div>
                 <label class="block text-sm text-gray-500 mb-1">Address</label>
                 <input type="text" name="address" value="{{ old('address', '') }}" 
                   class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
               </div>
 
-              
+              <!-- City -->
               <div>
                 <label class="block text-sm text-gray-500 mb-1">City</label>
                 <input type="text" name="city" value="{{ old('city', '') }}" 
                   class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
               </div>
 
-              
+              <!-- Hidden file input -->
               <input type="file" id="profile_picture" name="profile_picture" class="hidden" accept="image/*" 
                 onchange="this.form.submit()">
             </div>
