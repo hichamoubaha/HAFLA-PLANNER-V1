@@ -12,10 +12,57 @@
         .event-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             margin-bottom: 20px;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
         }
         .event-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .event-logo-container {
+            height: 200px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .event-logo {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .event-card .card-body {
+            padding: 1.5rem;
+        }
+        .event-card .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        .event-card .card-text {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        .event-date, .event-location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+        .event-date i, .event-location i {
+            color: #4ecdc4;
+        }
+        .card-footer {
+            background: white;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            padding: 1rem;
         }
         .btn-create {
             margin-bottom: 30px;
@@ -199,16 +246,26 @@
             @foreach($events as $event)
                 <div class="col-md-6 col-lg-4">
                     <div class="card event-card h-100">
+                        <div class="event-logo-container">
+                            @if($event->logo_path)
+                                <img src="{{ asset('storage/' . $event->logo_path) }}" alt="Logo de l'événement" class="event-logo">
+                            @else
+                                <i class="fas fa-calendar-alt fa-4x text-white"></i>
+                            @endif
+                        </div>
                         <div class="card-body">
                             <h3 class="card-title">{{ $event->title }}</h3>
                             <p class="card-text">{{ Str::limit($event->description, 100) }}</p>
-                            <p class="event-date">
-                                <i class="far fa-calendar-alt me-2"></i>{{ $event->date }} 
-                                <i class="far fa-clock ms-3 me-2"></i>{{ $event->time }}
-                            </p>
-                            <p class="event-location">
-                                <i class="fas fa-map-marker-alt me-2"></i>{{ $event->location }}
-                            </p>
+                            <div class="event-date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>{{ $event->date }}</span>
+                                <i class="far fa-clock ms-3"></i>
+                                <span>{{ $event->time }}</span>
+                            </div>
+                            <div class="event-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>{{ $event->location }}</span>
+                            </div>
                         </div>
                         <div class="card-footer bg-white">
                             <div class="action-buttons">
