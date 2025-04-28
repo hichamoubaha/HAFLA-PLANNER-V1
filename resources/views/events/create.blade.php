@@ -105,11 +105,48 @@
             margin: 10px 0;
         }
 
-        .media-preview img {
+        .media-preview img, .media-preview video {
             width: 100%;
             height: 150px;
             object-fit: cover;
             border-radius: 5px;
+        }
+
+        .media-item {
+            position: relative;
+        }
+
+        .remove-media {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .remove-media:hover {
+            background: rgba(255, 0, 0, 0.9);
+        }
+
+        .media-error {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .file-upload.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         .color-picker {
@@ -191,9 +228,12 @@
         <!-- Media Gallery Section -->
         <div class="form-section">
             <h3>Galerie média</h3>
+            <p class="text-muted mb-2">Ajoutez jusqu'à 5 photos ou vidéos</p>
             <div class="file-upload">
-                <input type="file" name="media_gallery[]" multiple accept="image/*">
+                <input type="file" name="media_gallery[]" multiple accept="image/*,video/*" id="media-gallery-input">
+                <div class="media-error" id="media-error"></div>
             </div>
+            <div class="media-preview" id="media-preview"></div>
         </div>
 
         <!-- Budget Section -->
@@ -231,13 +271,13 @@
     </form>
 
     <script>
-        
+        // Color selection
         document.querySelectorAll('.color-option').forEach(option => {
             option.addEventListener('click', function() {
                 document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
                 this.classList.add('selected');
                 
-                
+                // Get current colors or initialize empty array
                 let colors = [];
                 const themeColorsInput = document.querySelector('input[name="theme_colors"]');
                 if (themeColorsInput.value) {
@@ -248,15 +288,15 @@
                     }
                 }
                 
-                
+                // Add the new color
                 colors.push(this.dataset.color);
                 
-                
+                // Update the input
                 themeColorsInput.value = JSON.stringify(colors);
             });
         });
 
-        
+        // File upload preview
         document.querySelector('input[name="logo"]').addEventListener('change', function(e) {
             if (e.target.files && e.target.files[0]) {
                 const reader = new FileReader();
@@ -274,6 +314,88 @@
                 reader.readAsDataURL(e.target.files[0]);
             }
         });
+
+        // Media gallery handling
+        const mediaInput = document.getElementById('media-gallery-input');
+        const mediaPreview = document.getElementById('media-preview');
+        const mediaError = document.getElementById('media-error');
+        const maxFiles = 5;
+        let currentFiles = [];
+
+        mediaInput.addEventListener('change', function(e) {
+            const files = Array.from(e.target.files);
+            
+            // Check if adding these files would exceed the limit
+            if (currentFiles.length + files.length > maxFiles) {
+                mediaError.textContent = `Vous ne pouvez pas ajouter plus de ${maxFiles} fichiers au total.`;
+                mediaError.style.display = 'block';
+                return;
+            }
+
+            // Validate file types and sizes
+            const invalidFiles = files.filter(file => {
+                const isImage = file.type.startsWith('image/');
+                const isVideo = file.type.startsWith('video/');
+                const isUnderSize = file.size <= 10 * 1024 * 1024; // 10MB limit
+                return !(isImage || isVideo) || !isUnderSize;
+            });
+
+            if (invalidFiles.length > 0) {
+                mediaError.textContent = 'Seuls les fichiers image et vidéo de moins de 10MB sont acceptés.';
+                mediaError.style.display = 'block';
+                return;
+            }
+
+            mediaError.style.display = 'none';
+            currentFiles = [...currentFiles, ...files];
+            updateMediaPreview();
+        });
+
+        function updateMediaPreview() {
+            mediaPreview.innerHTML = '';
+            currentFiles.forEach((file, index) => {
+                const mediaItem = document.createElement('div');
+                mediaItem.className = 'media-item';
+                
+                const removeBtn = document.createElement('button');
+                removeBtn.className = 'remove-media';
+                removeBtn.innerHTML = '×';
+                removeBtn.onclick = () => removeFile(index);
+
+                if (file.type.startsWith('image/')) {
+                    const img = document.createElement('img');
+                    img.src = URL.createObjectURL(file);
+                    mediaItem.appendChild(img);
+                } else if (file.type.startsWith('video/')) {
+                    const video = document.createElement('video');
+                    video.src = URL.createObjectURL(file);
+                    video.controls = true;
+                    mediaItem.appendChild(video);
+                }
+
+                mediaItem.appendChild(removeBtn);
+                mediaPreview.appendChild(mediaItem);
+            });
+
+            // Update file input
+            const dataTransfer = new DataTransfer();
+            currentFiles.forEach(file => dataTransfer.items.add(file));
+            mediaInput.files = dataTransfer.files;
+
+            // Disable/enable file input based on current count
+            if (currentFiles.length >= maxFiles) {
+                mediaInput.parentElement.classList.add('disabled');
+                mediaInput.disabled = true;
+            } else {
+                mediaInput.parentElement.classList.remove('disabled');
+                mediaInput.disabled = false;
+            }
+        }
+
+        function removeFile(index) {
+            currentFiles.splice(index, 1);
+            updateMediaPreview();
+        }
     </script>
 </body>
 </html>
