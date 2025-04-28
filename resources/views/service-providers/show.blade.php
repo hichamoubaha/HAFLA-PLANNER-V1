@@ -580,6 +580,30 @@ textarea.form-control:focus {
 .logout-btn i {
     margin-right: 0.5rem;
 }
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.btn-dashboard {
+    background-color: #f3f4f6;
+    color: #4b5563;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.btn-dashboard:hover {
+    background-color: #e5e7eb;
+    color: #1f2937;
+}
 </style>
 
 <div class="profile-container">
@@ -725,9 +749,14 @@ textarea.form-control:focus {
                                 <textarea name="comment" rows="4" required class="form-control">{{ old('comment') }}</textarea>
                             </div>
 
-                            <button type="submit" class="btn-submit">
-                                Publier l'avis
-                            </button>
+                            <div class="form-actions">
+                                <button type="submit" class="btn-submit">
+                                    Publier l'avis
+                                </button>
+                                <a href="{{ route('dashboard') }}" class="btn-dashboard">
+                                    <i class="fas fa-arrow-left mr-2"></i>Retour au tableau de bord
+                                </a>
+                            </div>
                         </form>
                     </div>
                 @endif
