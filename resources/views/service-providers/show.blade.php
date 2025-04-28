@@ -29,6 +29,45 @@
   align-items: flex-start;
 }
 
+.profile-image-container {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid white;
+  margin-right: 1.5rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3f4f6;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.profile-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3f4f6;
+}
+
+.profile-image-placeholder i {
+  font-size: 3rem;
+  color: #9ca3af;
+}
+
+.profile-details {
+  flex: 1;
+}
+
 .business-name {
   font-size: 2.25rem;
   font-weight: 700;
@@ -332,18 +371,31 @@ textarea.form-control:focus {
         <!-- Profile Header -->
         <div class="profile-header">
             <div class="profile-info">
-                <div>
-                    <h1 class="business-name">{{ $provider->business_name }}</h1>
-                    <div class="location-badge">
-                        <i class="fas fa-map-marker-alt mr-2"></i>
-                        <span>{{ $provider->location }}</span>
+                <div class="flex items-center">
+                    <div class="profile-image-container">
+                        @if($provider->profile_picture)
+                            <img src="{{ asset('storage/' . $provider->profile_picture) }}" 
+                                alt="{{ $provider->business_name }}" 
+                                class="profile-image">
+                        @else
+                            <div class="profile-image-placeholder">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        @endif
                     </div>
-                    <div class="rating-display">
-                        @for($i = 1; $i <= 5; $i++)
-                            <i class="fas fa-star {{ $i <= $provider->rating ? 'star-gold' : 'star-gray' }} mr-1"></i>
-                        @endfor
-                        <span class="font-medium ml-2">{{ number_format($provider->rating, 1) }}</span>
-                        <span class="ml-1">({{ $provider->total_reviews }} avis)</span>
+                    <div class="profile-details">
+                        <h1 class="business-name">{{ $provider->business_name }}</h1>
+                        <div class="location-badge">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span>{{ $provider->location }}</span>
+                        </div>
+                        <div class="rating-display">
+                            @for($i = 1; $i <= 5; $i++)
+                                <i class="fas fa-star {{ $i <= $provider->rating ? 'star-gold' : 'star-gray' }} mr-1"></i>
+                            @endfor
+                            <span class="font-medium ml-2">{{ number_format($provider->rating, 1) }}</span>
+                            <span class="ml-1">({{ $provider->total_reviews }} avis)</span>
+                        </div>
                     </div>
                 </div>
                 @if(auth()->id() === $provider->user_id)
