@@ -18,8 +18,11 @@ class User extends Authenticatable
         'profile_picture'
     ];
 
-
     protected $hidden = ['password'];
+
+    public const ROLE_USER = 'user';
+    public const ROLE_PRESTATAIRE = 'prestataire';
+    public const ROLE_ORGANISATEUR = 'organisateur';
 
     public function bookings()
     {
@@ -34,5 +37,20 @@ class User extends Authenticatable
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    public function isUser()
+    {
+        return $this->role === self::ROLE_USER;
+    }
+
+    public function isPrestataire()
+    {
+        return $this->role === self::ROLE_PRESTATAIRE;
+    }
+
+    public function isOrganisateur()
+    {
+        return $this->role === self::ROLE_ORGANISATEUR;
     }
 }
