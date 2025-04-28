@@ -233,9 +233,53 @@
             justify-content: center;
         }
     }
+
+    /* Add new styles for the top navigation */
+    .top-nav {
+        background-color: white;
+        padding: 1rem 2rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .logout-btn {
+        background-color: transparent;
+        color: #4b5563;
+        border: 1px solid #e5e7eb;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        transition: all 0.2s ease;
+    }
+
+    .logout-btn:hover {
+        background-color: #f3f4f6;
+        color: #1f2937;
+    }
+
+    .logout-btn i {
+        margin-right: 0.5rem;
+    }
 </style>
 
 <div class="form-container">
+    @if(auth()->check())
+    <div class="top-nav">
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                Déconnexion
+            </button>
+        </form>
+    </div>
+    @endif
+
     <div class="form-card">
         <!-- Header -->
         <div class="form-header">
@@ -388,7 +432,7 @@
 
                 <!-- Form actions -->
                 <div class="form-buttons">
-                    <a href="{{ route('service-providers.index') }}" class="btn btn-cancel">
+                    <a href="{{ isset($provider) ? route('service-providers.show', $provider) : route('service-providers.index') }}" class="btn btn-cancel">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
                         </svg>

@@ -129,6 +129,15 @@
   background-color: #dc2626;
 }
 
+.btn-secondary {
+  background-color: #6b7280;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #4b5563;
+}
+
 .section {
   padding: 2rem;
   border-bottom: 1px solid #e5e7eb;
@@ -539,9 +548,53 @@ textarea.form-control:focus {
     font-size: 0.875rem;
     color: #6b7280;
 }
+
+/* Add new styles for the top navigation */
+.top-nav {
+    background-color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.logout-btn {
+    background-color: transparent;
+    color: #4b5563;
+    border: 1px solid #e5e7eb;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+    background-color: #f3f4f6;
+    color: #1f2937;
+}
+
+.logout-btn i {
+    margin-right: 0.5rem;
+}
 </style>
 
 <div class="profile-container">
+    @if(auth()->id() === $provider->user_id)
+    <div class="top-nav">
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                Déconnexion
+            </button>
+        </form>
+    </div>
+    @endif
+
     <div class="profile-card">
         <!-- Profile Header -->
         <div class="profile-header">
