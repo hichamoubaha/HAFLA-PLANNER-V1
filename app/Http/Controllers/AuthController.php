@@ -23,13 +23,14 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6|confirmed',
+            'role' => 'required|in:user,prestataire,organisateur',
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'user', // Tous les nouveaux utilisateurs sont "user" par défaut
+            'role' => $request->role,
         ]);
 
         return redirect('/login')->with('success', 'Inscription réussie. Connectez-vous !');
@@ -50,9 +51,23 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            if (Auth::user()->role === 'user') {
+            $user = Auth::user();
+            
+            if ($user->role === 'prestataire') {
+                if ($user->serviceProvider) {
+                    return redirect()->route('service-providers.show', $user->serviceProvider)
+                        ->with('success', 'Connexion réussie. Bienvenue sur votre profil.');
+                } else {
+                    return redirect()->route('service-providers.create')
+                        ->with('info', 'Bienvenue ! Veuillez créer votre profil de prestataire.');
+                }
+            } else if ($user->role === 'organisateur') {
+                return redirect()->route('events.index')
+                    ->with('success', 'Connexion réussie. Bienvenue sur votre tableau de bord organisateur.');
+            } else if ($user->role === 'user') {
                 return redirect('/profile')->with('success', 'Connexion réussie.');
             }
+            
             return redirect('/dashboard')->with('success', 'Connexion réussie.');
         }
 
