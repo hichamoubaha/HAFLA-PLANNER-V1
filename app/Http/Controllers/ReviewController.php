@@ -57,7 +57,8 @@ class ReviewController extends Controller
         $review->delete();
 
         // Update provider's average rating
-        $provider->rating = $provider->reviews()->avg('rating');
+        $avgRating = $provider->reviews()->avg('rating');
+        $provider->rating = $avgRating ?? 0; // Set to 0 if NULL
         $provider->total_reviews = $provider->reviews()->count();
         $provider->save();
 
