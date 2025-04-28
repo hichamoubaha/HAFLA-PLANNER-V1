@@ -180,16 +180,50 @@
     
     .provider-header {
         display: flex;
-        justify-content: space-between;
         align-items: center;
         margin-bottom: 1rem;
+    }
+    
+    .provider-image-container {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 1rem;
+        flex-shrink: 0;
+        border: 2px solid #e2e8f0;
+    }
+    
+    .provider-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+    
+    .provider-image-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f1f5f9;
+    }
+    
+    .provider-image-placeholder i {
+        font-size: 1.5rem;
+        color: #94a3b8;
+    }
+    
+    .provider-info-container {
+        flex: 1;
     }
     
     .provider-name {
         font-size: 1.25rem;
         font-weight: 600;
         color: #1e293b;
-        margin: 0;
+        margin: 0 0 0.25rem 0;
     }
     
     .provider-rating {
@@ -198,6 +232,7 @@
         background-color: #fffbeb;
         padding: 0.25rem 0.5rem;
         border-radius: 0.5rem;
+        width: fit-content;
     }
     
     .rating-star {
@@ -352,11 +387,24 @@
                         <div class="provider-tag">{{ ucfirst($provider->service_type) }}</div>
                         <div class="provider-content">
                             <div class="provider-header">
-                                <h2 class="provider-name">{{ $provider->business_name }}</h2>
-                                <div class="provider-rating">
-                                    <i class="fas fa-star rating-star"></i>
-                                    <span class="rating-value">{{ number_format($provider->rating, 1) }}</span>
-                                    <span class="rating-count">({{ $provider->total_reviews }})</span>
+                                <div class="provider-image-container">
+                                    @if($provider->profile_picture)
+                                        <img src="{{ asset('storage/' . $provider->profile_picture) }}" 
+                                            alt="{{ $provider->business_name }}" 
+                                            class="provider-image">
+                                    @else
+                                        <div class="provider-image-placeholder">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="provider-info-container">
+                                    <h2 class="provider-name">{{ $provider->business_name }}</h2>
+                                    <div class="provider-rating">
+                                        <i class="fas fa-star rating-star"></i>
+                                        <span class="rating-value">{{ number_format($provider->rating, 1) }}</span>
+                                        <span class="rating-count">({{ $provider->total_reviews }})</span>
+                                    </div>
                                 </div>
                             </div>
                             
