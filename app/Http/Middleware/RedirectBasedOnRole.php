@@ -20,6 +20,8 @@ class RedirectBasedOnRole
                 } else {
                     return redirect()->route('service-providers.create');
                 }
+            } else if ($user->role === 'organisateur') {
+                return redirect()->route('events.index');
             }
         }
 
