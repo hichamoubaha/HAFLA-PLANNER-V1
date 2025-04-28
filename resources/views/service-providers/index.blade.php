@@ -23,6 +23,33 @@
         margin: 0;
     }
     
+    .back-button {
+        background: #f1f5f9;
+        color: #475569;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        transition: all 0.2s ease;
+        margin-right: 1rem;
+    }
+    
+    .back-button:hover {
+        background: #e2e8f0;
+        color: #1e293b;
+    }
+    
+    .back-button i {
+        margin-right: 0.5rem;
+    }
+    
+    .header-actions {
+        display: flex;
+        align-items: center;
+    }
+    
     .add-button {
         background: linear-gradient(to right, #3b82f6, #2563eb);
         color: white;
@@ -327,7 +354,13 @@
     <div class="container mx-auto">
         <!-- Page Header -->
         <div class="page-header">
-            <h1 class="page-title">Catalogue des Prestataires</h1>
+            <div class="header-actions">
+                <a href="{{ url()->previous() }}" class="back-button">
+                    <i class="fas fa-arrow-left"></i>
+                    Back
+                </a>
+                <h1 class="page-title">Catalogue des Prestataires</h1>
+            </div>
             @if(auth()->user()->role === 'prestataire')
                 <a href="{{ route('service-providers.create') }}" class="add-button">
                     <i class="fas fa-plus"></i>Ajouter mon profil
