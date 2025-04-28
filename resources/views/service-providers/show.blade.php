@@ -364,6 +364,181 @@ textarea.form-control:focus {
   margin-bottom: 1rem;
   display: block;
 }
+
+/* Additional styles for tabs and analytics */
+.tabs-container {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.tabs-header {
+    display: flex;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 1rem;
+}
+
+.tab-button {
+    padding: 1rem 1.5rem;
+    font-weight: 500;
+    color: #6b7280;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+}
+
+.tab-button i {
+    margin-right: 0.5rem;
+}
+
+.tab-button:hover {
+    color: #4f6ef7;
+}
+
+.tab-button.active {
+    color: #4f6ef7;
+    border-bottom-color: #4f6ef7;
+}
+
+.tab-content {
+    display: none;
+    padding: 1rem 0;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.reviews-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.reviews-filter {
+    display: flex;
+    gap: 1rem;
+}
+
+.filter-select {
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    background-color: white;
+    font-size: 0.875rem;
+}
+
+.avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.analytics-container {
+    padding: 1rem 0;
+}
+
+.analytics-card {
+    background-color: #f9fafb;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    border: 1px solid #e5e7eb;
+}
+
+.analytics-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #2d3748;
+}
+
+.rating-summary {
+    display: flex;
+    gap: 2rem;
+}
+
+.overall-rating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
+}
+
+.rating-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #4f6ef7;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.rating-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.rating-max {
+    font-size: 0.875rem;
+    opacity: 0.8;
+}
+
+.rating-stars {
+    margin-bottom: 0.5rem;
+}
+
+.rating-count {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.rating-bars {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.rating-bar-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.rating-label {
+    width: 80px;
+    font-size: 0.875rem;
+    color: #4b5563;
+}
+
+.rating-bar-container {
+    flex: 1;
+    height: 8px;
+    background-color: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.rating-bar {
+    height: 100%;
+    background-color: #4f6ef7;
+    border-radius: 4px;
+}
+
+.rating-count {
+    width: 40px;
+    text-align: right;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
 </style>
 
 <div class="profile-container">
@@ -434,85 +609,172 @@ textarea.form-control:focus {
             </div>
         </div>
 
-        <!-- Reviews Section -->
-        <div class="section">
-            <h2 class="section-title">
-                <i class="fas fa-comment"></i> Avis 
-                <span class="review-badge">{{ $provider->total_reviews }}</span>
-            </h2>
+        <!-- Tabs Navigation -->
+        <div class="tabs-container">
+            <div class="tabs-header">
+                <button class="tab-button active" data-tab="reviews">
+                    <i class="fas fa-comment"></i> Avis ({{ $provider->total_reviews }})
+                </button>
+                @if(auth()->id() === $provider->user_id)
+                <button class="tab-button" data-tab="analytics">
+                    <i class="fas fa-chart-bar"></i> Statistiques
+                </button>
+                @endif
+            </div>
+            
+            <!-- Reviews Tab Content -->
+            <div class="tab-content active" id="reviews-tab">
+                <div class="reviews-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-comment"></i> Avis 
+                        <span class="review-badge">{{ $provider->total_reviews }}</span>
+                    </h2>
+                    
+                    @if(auth()->id() === $provider->user_id)
+                    <div class="reviews-filter">
+                        <select id="rating-filter" class="filter-select">
+                            <option value="all">Tous les avis</option>
+                            <option value="5">5 étoiles</option>
+                            <option value="4">4 étoiles</option>
+                            <option value="3">3 étoiles</option>
+                            <option value="2">2 étoiles</option>
+                            <option value="1">1 étoile</option>
+                        </select>
+                        <select id="sort-filter" class="filter-select">
+                            <option value="newest">Plus récents</option>
+                            <option value="oldest">Plus anciens</option>
+                            <option value="highest">Note la plus haute</option>
+                            <option value="lowest">Note la plus basse</option>
+                        </select>
+                    </div>
+                    @endif
+                </div>
 
-            @if(auth()->check() && auth()->id() !== $provider->user_id)
-                <div class="review-form">
-                    <h3 class="form-title">Laisser un avis</h3>
-                    <form action="{{ route('reviews.store', $provider) }}" method="POST">
-                        @csrf
-                        <div class="form-group">
-                            <label class="form-label">Note</label>
-                            <div class="star-rating">
-                                @for($i = 1; $i <= 5; $i++)
-                                    <label>
-                                        <input type="radio" name="rating" value="{{ $i }}" class="hidden" required>
-                                        <i class="fas fa-star {{ $i <= old('rating', 0) ? 'star-gold' : 'star-gray' }}"></i>
-                                    </label>
+                @if(auth()->check() && auth()->id() !== $provider->user_id)
+                    <div class="review-form">
+                        <h3 class="form-title">Laisser un avis</h3>
+                        <form action="{{ route('reviews.store', $provider) }}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <label class="form-label">Note</label>
+                                <div class="star-rating">
+                                    @for($i = 1; $i <= 5; $i++)
+                                        <label>
+                                            <input type="radio" name="rating" value="{{ $i }}" class="hidden" required>
+                                            <i class="fas fa-star {{ $i <= old('rating', 0) ? 'star-gold' : 'star-gray' }}"></i>
+                                        </label>
+                                    @endfor
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Commentaire</label>
+                                <textarea name="comment" rows="4" required class="form-control">{{ old('comment') }}</textarea>
+                            </div>
+
+                            <button type="submit" class="btn-submit">
+                                Publier l'avis
+                            </button>
+                        </form>
+                    </div>
+                @endif
+
+                <div class="review-list" id="reviews-container">
+                    @forelse($provider->reviews as $review)
+                        <div class="review-item" data-rating="{{ $review->rating }}">
+                            <div class="review-header">
+                                <div class="reviewer-info">
+                                    <div class="avatar">
+                                        @if($review->user->profile_picture)
+                                            <img src="{{ asset('storage/' . $review->user->profile_picture) }}" 
+                                                alt="{{ $review->user->name }}" 
+                                                class="avatar-image">
+                                        @else
+                                            <i class="fas fa-user"></i>
+                                        @endif
+                                    </div>
+                                    <div>
+                                        <div class="reviewer-name">{{ $review->user->name }}</div>
+                                        <div class="review-rating">
+                                            @for($i = 1; $i <= 5; $i++)
+                                                <i class="fas fa-star {{ $i <= $review->rating ? 'star-gold' : 'star-gray' }}"></i>
+                                            @endfor
+                                            <span class="review-date">{{ $review->created_at->format('d/m/Y') }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                @if(auth()->id() === $review->user_id)
+                                    <div class="review-actions">
+                                        <button onclick="editReview({{ $review->id }})" class="btn-icon edit">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <form action="{{ route('reviews.destroy', $review) }}" method="POST" class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn-icon delete"
+                                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                @endif
+                            </div>
+                            <p class="review-content">{{ $review->comment }}</p>
+                        </div>
+                    @empty
+                        <div class="empty-reviews">
+                            <i class="fas fa-comment-slash"></i>
+                            <p>Aucun avis pour le moment. Soyez le premier à partager votre expérience!</p>
+                        </div>
+                    @endforelse
+                </div>
+            </div>
+            
+            <!-- Analytics Tab Content (for service provider only) -->
+            @if(auth()->id() === $provider->user_id)
+            <div class="tab-content" id="analytics-tab">
+                <div class="analytics-container">
+                    <div class="analytics-card">
+                        <h3 class="analytics-title">Résumé des avis</h3>
+                        <div class="rating-summary">
+                            <div class="overall-rating">
+                                <div class="rating-circle">
+                                    <span class="rating-value">{{ number_format($provider->rating, 1) }}</span>
+                                    <span class="rating-max">/5</span>
+                                </div>
+                                <div class="rating-stars">
+                                    @for($i = 1; $i <= 5; $i++)
+                                        <i class="fas fa-star {{ $i <= round($provider->rating) ? 'star-gold' : 'star-gray' }}"></i>
+                                    @endfor
+                                </div>
+                                <div class="rating-count">{{ $provider->total_reviews }} avis</div>
+                            </div>
+                            
+                            <div class="rating-bars">
+                                @php
+                                    $ratingCounts = $provider->reviews->groupBy('rating')->map->count();
+                                    $maxCount = $ratingCounts->max() ?: 1;
+                                @endphp
+                                
+                                @for($i = 5; $i >= 1; $i--)
+                                    @php
+                                        $count = $ratingCounts[$i] ?? 0;
+                                        $percentage = $provider->total_reviews > 0 ? ($count / $provider->total_reviews) * 100 : 0;
+                                    @endphp
+                                    <div class="rating-bar-item">
+                                        <div class="rating-label">{{ $i }} étoiles</div>
+                                        <div class="rating-bar-container">
+                                            <div class="rating-bar" style="width: {{ $percentage }}%"></div>
+                                        </div>
+                                        <div class="rating-count">{{ $count }}</div>
+                                    </div>
                                 @endfor
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Commentaire</label>
-                            <textarea name="comment" rows="4" required class="form-control">{{ old('comment') }}</textarea>
-                        </div>
-
-                        <button type="submit" class="btn-submit">
-                            Publier l'avis
-                        </button>
-                    </form>
+                    </div>
                 </div>
-            @endif
-
-            <div class="review-list">
-                @forelse($provider->reviews as $review)
-                    <div class="review-item">
-                        <div class="review-header">
-                            <div class="reviewer-info">
-                                <div class="avatar">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <div>
-                                    <div class="reviewer-name">{{ $review->user->name }}</div>
-                                    <div class="review-rating">
-                                        @for($i = 1; $i <= 5; $i++)
-                                            <i class="fas fa-star {{ $i <= $review->rating ? 'star-gold' : 'star-gray' }}"></i>
-                                        @endfor
-                                        <span class="review-date">{{ $review->created_at->format('d/m/Y') }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            @if(auth()->id() === $review->user_id)
-                                <div class="review-actions">
-                                    <button onclick="editReview({{ $review->id }})" class="btn-icon edit">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <form action="{{ route('reviews.destroy', $review) }}" method="POST" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn-icon delete"
-                                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            @endif
-                        </div>
-                        <p class="review-content">{{ $review->comment }}</p>
-                    </div>
-                @empty
-                    <div class="empty-reviews">
-                        <i class="fas fa-comment-slash"></i>
-                        <p>Aucun avis pour le moment. Soyez le premier à partager votre expérience!</p>
-                    </div>
-                @endforelse
             </div>
+            @endif
         </div>
     </div>
 </div>
@@ -535,6 +797,96 @@ textarea.form-control:focus {
             });
         });
     });
+    
+    // Tab switching functionality
+    document.querySelectorAll('.tab-button').forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Add active class to clicked tab
+            this.classList.add('active');
+            
+            // Show corresponding content
+            const tabId = this.getAttribute('data-tab');
+            document.getElementById(`${tabId}-tab`).classList.add('active');
+        });
+    });
+    
+    // Rating filter functionality
+    const ratingFilter = document.getElementById('rating-filter');
+    if (ratingFilter) {
+        ratingFilter.addEventListener('change', function() {
+            filterReviews();
+        });
+    }
+    
+    // Sort filter functionality
+    const sortFilter = document.getElementById('sort-filter');
+    if (sortFilter) {
+        sortFilter.addEventListener('change', function() {
+            filterReviews();
+        });
+    }
+    
+    function filterReviews() {
+        const ratingValue = ratingFilter ? ratingFilter.value : 'all';
+        const sortValue = sortFilter ? sortFilter.value : 'newest';
+        
+        const reviewsContainer = document.getElementById('reviews-container');
+        const reviewItems = Array.from(reviewsContainer.querySelectorAll('.review-item'));
+        
+        // Filter by rating
+        let filteredReviews = reviewItems;
+        if (ratingValue !== 'all') {
+            filteredReviews = reviewItems.filter(item => 
+                parseInt(item.getAttribute('data-rating')) === parseInt(ratingValue)
+            );
+        }
+        
+        // Sort reviews
+        filteredReviews.sort((a, b) => {
+            const ratingA = parseInt(a.getAttribute('data-rating'));
+            const ratingB = parseInt(b.getAttribute('data-rating'));
+            const dateA = new Date(a.querySelector('.review-date').textContent.split('/').reverse().join('-'));
+            const dateB = new Date(b.querySelector('.review-date').textContent.split('/').reverse().join('-'));
+            
+            if (sortValue === 'newest') {
+                return dateB - dateA;
+            } else if (sortValue === 'oldest') {
+                return dateA - dateB;
+            } else if (sortValue === 'highest') {
+                return ratingB - ratingA;
+            } else if (sortValue === 'lowest') {
+                return ratingA - ratingB;
+            }
+            
+            return 0;
+        });
+        
+        // Clear container
+        reviewsContainer.innerHTML = '';
+        
+        // Add filtered and sorted reviews
+        if (filteredReviews.length === 0) {
+            reviewsContainer.innerHTML = `
+                <div class="empty-reviews">
+                    <i class="fas fa-comment-slash"></i>
+                    <p>Aucun avis ne correspond à vos critères de filtrage.</p>
+                </div>
+            `;
+        } else {
+            filteredReviews.forEach(review => {
+                reviewsContainer.appendChild(review);
+            });
+        }
+    }
 </script>
 @endpush
 @endsection
