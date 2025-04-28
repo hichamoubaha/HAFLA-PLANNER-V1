@@ -29,7 +29,7 @@
         }
         
         .logo {
-            margin-bottom: -8vh;
+            margin-bottom: -9vh;
         }
         
         .logo img {
@@ -68,6 +68,16 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             font-size: 14px;
+        }
+        
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: white;
+            cursor: pointer;
         }
         
         .button-primary {
@@ -208,6 +218,14 @@
                 <div class="form-group">
                     <label for="password_confirmation">CONFIRM PASSWORD</label>
                     <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirm your password" required>
+                </div>
+                <div class="form-group">
+                    <label for="role">ACCOUNT TYPE</label>
+                    <select name="role" id="role" class="form-control" required>
+                        <option value="user">Client</option>
+                        <option value="prestataire">Service Provider</option>
+                        <option value="organisateur">Event Organizer</option>
+                    </select>
                 </div>
                 <button type="submit" class="button-primary">S'inscrire</button>
             </form>
