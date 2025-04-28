@@ -18,9 +18,29 @@
         .booking-card {
             transition: transform 0.3s ease;
             margin-bottom: 20px;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
         }
         .booking-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .event-logo-container {
+            height: 200px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .event-logo {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
         }
         .status-badge {
             font-size: 0.9rem;
@@ -61,6 +81,13 @@
             @forelse($bookings as $booking)
                 <div class="col-md-6 col-lg-4">
                     <div class="card booking-card">
+                        <div class="event-logo-container">
+                            @if($booking->event->logo_path)
+                                <img src="{{ asset('storage/' . $booking->event->logo_path) }}" alt="Logo de l'événement" class="event-logo">
+                            @else
+                                <i class="fas fa-calendar-alt fa-4x text-white"></i>
+                            @endif
+                        </div>
                         <div class="card-body">
                             <h5 class="card-title">{{ $booking->event->title }}</h5>
                             <p class="card-text">{{ $booking->event->description }}</p>
