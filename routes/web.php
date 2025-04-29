@@ -20,6 +20,9 @@ use App\Http\Controllers\ServiceProviderController;
 
 use App\Http\Controllers\ReviewController;
 
+use App\Http\Controllers\ServiceProviderBookingController;
+
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
@@ -57,6 +60,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/service-providers/{provider}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
     Route::put('/reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
     Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+
+    // Service Provider Booking Routes
+    Route::post('/service-providers/{serviceProvider}/book', [ServiceProviderBookingController::class, 'store'])->name('service-provider-bookings.store');
+    Route::patch('/service-provider-bookings/{booking}/status', [ServiceProviderBookingController::class, 'updateStatus'])->name('service-provider-bookings.update-status');
 });
 
 
