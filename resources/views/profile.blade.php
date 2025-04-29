@@ -137,7 +137,7 @@
             <div class="flex items-start justify-between mb-8">
               <div class="flex items-center">
                 @if($user->profile_picture)
-                  <div class="relative group">
+                  <div class="relative group profile-image-container">
                     <img src="{{ Storage::url($user->profile_picture) }}" alt="Profile Picture" 
                       class="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg">
                     <div onclick="document.getElementById('profile_picture').click()" 
@@ -146,7 +146,7 @@
                     </div>
                   </div>
                 @else
-                  <div class="relative group">
+                  <div class="relative group profile-image-container">
                     <div class="w-24 h-24 rounded-full gradient-bg flex items-center justify-center shadow-lg border-4 border-white">
                       <i class="fas fa-user text-3xl text-white"></i>
                     </div>
@@ -171,7 +171,7 @@
               </div>
               <button type="button" onclick="document.getElementById('profile_picture').click()" 
                 class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg shadow transition-colors">
-                <i class="fas fa-camera mr-2"></i> Change Photo
+                <i class="fas fa-camera mr-2"></i> Change Profile Photo
               </button>
             </div>
 
@@ -180,7 +180,7 @@
               @method('PUT')
               
               <!-- Hidden file input for profile picture -->
-              <input type="file" id="profile_picture" name="profile_picture" class="hidden" accept="image/*">
+              <input type="file" id="profile_picture" name="profile_picture" class="hidden" accept="image/*" onchange="previewProfileImage(this)">
 
               <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                 <!-- Personal Information Section -->
@@ -363,6 +363,35 @@
     editProfileBtn.classList.toggle('hidden');
     cancelEditBtn.classList.toggle('hidden');
     saveProfileBtn.classList.toggle('hidden');
+  }
+  
+  function previewProfileImage(input) {
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      
+      reader.onload = function(e) {
+        // Find the profile image container
+        const profileImageContainer = document.querySelector('.profile-image-container');
+        
+        if (profileImageContainer) {
+          // If there's an existing image, update it
+          const existingImage = profileImageContainer.querySelector('img');
+          if (existingImage) {
+            existingImage.src = e.target.result;
+          } else {
+            // If there's no image yet, create one
+            const newImage = document.createElement('img');
+            newImage.src = e.target.result;
+            newImage.alt = 'Profile Picture';
+            newImage.className = 'w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg';
+            profileImageContainer.innerHTML = '';
+            profileImageContainer.appendChild(newImage);
+          }
+        }
+      };
+      
+      reader.readAsDataURL(input.files[0]);
+    }
   }
   </script>
 </body>
