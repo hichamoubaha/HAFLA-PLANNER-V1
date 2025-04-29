@@ -604,6 +604,282 @@ textarea.form-control:focus {
     background-color: #e5e7eb;
     color: #1f2937;
 }
+
+.booking-form {
+    background-color: #f9fafb;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    border: 1px solid #e5e7eb;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    margin-top: 0.25rem;
+    font-size: 1rem;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #4f6ef7;
+    box-shadow: 0 0 0 2px rgba(79, 110, 247, 0.2);
+}
+
+.is-invalid {
+    border-color: #ef4444;
+}
+
+.invalid-feedback {
+    color: #ef4444;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.btn-primary {
+    background-color: #4f6ef7;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #3b5fe4;
+}
+
+.btn-primary i {
+    margin-right: 0.5rem;
+}
+
+.alert {
+    padding: 1rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+}
+
+.alert-info {
+    background-color: #e0f2fe;
+    color: #075985;
+    border: 1px solid #bae6fd;
+}
+
+.alert-info a {
+    color: #0369a1;
+    text-decoration: underline;
+}
+
+.alert-info i {
+    margin-right: 0.5rem;
+}
+
+/* Reservations Styles */
+.reservations-container {
+    padding: 1rem 0;
+}
+
+.reservations-card {
+    background-color: #f9fafb;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    border: 1px solid #e5e7eb;
+}
+
+.reservations-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #2d3748;
+}
+
+.reservations-filter {
+    margin-bottom: 1.5rem;
+}
+
+.reservations-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.reservation-item {
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.reservation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.client-info {
+    display: flex;
+    align-items: center;
+}
+
+.client-name {
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 0.25rem;
+}
+
+.reservation-date {
+    font-size: 0.875rem;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+}
+
+.reservation-date i {
+    margin-right: 0.5rem;
+    color: #4f6ef7;
+}
+
+.reservation-status {
+    font-weight: 500;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.875rem;
+}
+
+.status-pending {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.status-confirmed {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.status-cancelled {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.status-completed {
+    background-color: #e0e7ff;
+    color: #4338ca;
+}
+
+.reservation-notes {
+    background-color: #f9fafb;
+    border-radius: 0.375rem;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+    color: #4b5563;
+}
+
+.reservation-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.btn-success {
+    background-color: #10b981;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #059669;
+}
+
+.btn-danger {
+    background-color: #ef4444;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #dc2626;
+}
+
+.empty-reservations {
+    background-color: #eff6ff;
+    border: 1px solid #dbeafe;
+    color: #1e40af;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.empty-reservations i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+/* Existing Booking Styles */
+.existing-booking {
+    margin-top: 1rem;
+}
+
+.booking-status-card {
+    background-color: #f9fafb;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border: 1px solid #e5e7eb;
+}
+
+.booking-status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.booking-status-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin: 0;
+}
+
+.booking-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.booking-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #4b5563;
+}
+
+.info-item i {
+    color: #4f6ef7;
+    width: 20px;
+}
+
+.booking-actions {
+    display: flex;
+    gap: 0.75rem;
+}
 </style>
 
 <div class="profile-container">
@@ -695,6 +971,9 @@ textarea.form-control:focus {
                 @if(auth()->id() === $provider->user_id)
                 <button class="tab-button" data-tab="analytics">
                     <i class="fas fa-chart-bar"></i> Statistiques
+                </button>
+                <button class="tab-button" data-tab="reservations">
+                    <i class="fas fa-calendar-check"></i> Réservations
                 </button>
                 @endif
             </div>
@@ -857,6 +1136,200 @@ textarea.form-control:focus {
                 </div>
             </div>
             @endif
+
+            <!-- Reservations Tab Content (for service provider only) -->
+            @if(auth()->id() === $provider->user_id)
+            <div class="tab-content" id="reservations-tab">
+                <div class="reservations-container">
+                    <div class="reservations-card">
+                        <h3 class="reservations-title">Gestion des réservations</h3>
+                        
+                        <div class="reservations-filter">
+                            <select id="status-filter" class="filter-select">
+                                <option value="all">Toutes les réservations</option>
+                                <option value="pending">En attente</option>
+                                <option value="confirmed">Confirmées</option>
+                                <option value="cancelled">Annulées</option>
+                                <option value="completed">Terminées</option>
+                            </select>
+                        </div>
+                        
+                        <div class="reservations-list" id="reservations-container">
+                            @forelse($provider->bookings as $booking)
+                                <div class="reservation-item" data-status="{{ $booking->status }}">
+                                    <div class="reservation-header">
+                                        <div class="client-info">
+                                            <div class="avatar">
+                                                @if($booking->user->profile_picture)
+                                                    <img src="{{ asset('storage/' . $booking->user->profile_picture) }}" 
+                                                        alt="{{ $booking->user->name }}" 
+                                                        class="avatar-image">
+                                                @else
+                                                    <i class="fas fa-user"></i>
+                                                @endif
+                                            </div>
+                                            <div>
+                                                <div class="client-name">{{ $booking->user->name }}</div>
+                                                <div class="reservation-date">
+                                                    <i class="fas fa-calendar-alt"></i>
+                                                    {{ $booking->booking_date->format('d/m/Y H:i') }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="reservation-status status-{{ $booking->status }}">
+                                            {{ ucfirst($booking->status) }}
+                                        </div>
+                                    </div>
+                                    
+                                    @if($booking->notes)
+                                        <div class="reservation-notes">
+                                            <strong>Notes:</strong> {{ $booking->notes }}
+                                        </div>
+                                    @endif
+                                    
+                                    @if($booking->status == 'pending')
+                                        <div class="reservation-actions">
+                                            <form action="{{ route('service-provider-bookings.update-status', $booking) }}" method="POST" class="inline-block">
+                                                @csrf
+                                                @method('PATCH')
+                                                <input type="hidden" name="status" value="confirmed">
+                                                <button type="submit" class="btn btn-success">
+                                                    <i class="fas fa-check"></i> Accepter
+                                                </button>
+                                            </form>
+                                            
+                                            <form action="{{ route('service-provider-bookings.update-status', $booking) }}" method="POST" class="inline-block">
+                                                @csrf
+                                                @method('PATCH')
+                                                <input type="hidden" name="status" value="cancelled">
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="fas fa-times"></i> Refuser
+                                                </button>
+                                            </form>
+                                        </div>
+                                    @elseif($booking->status == 'confirmed')
+                                        <div class="reservation-actions">
+                                            <form action="{{ route('service-provider-bookings.update-status', $booking) }}" method="POST" class="inline-block">
+                                                @csrf
+                                                @method('PATCH')
+                                                <input type="hidden" name="status" value="completed">
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="fas fa-check-double"></i> Marquer comme terminée
+                                                </button>
+                                            </form>
+                                        </div>
+                                    @endif
+                                </div>
+                            @empty
+                                <div class="empty-reservations">
+                                    <i class="fas fa-calendar-times"></i>
+                                    <p>Aucune réservation pour le moment.</p>
+                                </div>
+                            @endforelse
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">
+                <i class="fas fa-calendar-alt"></i>
+                Book This Service Provider
+            </h2>
+            
+            @auth
+                @if(Auth::id() !== $provider->user_id)
+                    @php
+                        $existingBooking = $provider->bookings()
+                            ->where('user_id', Auth::id())
+                            ->whereIn('status', ['pending', 'confirmed'])
+                            ->first();
+                    @endphp
+                    
+                    @if($existingBooking)
+                        <div class="existing-booking">
+                            <div class="booking-status-card">
+                                <div class="booking-status-header">
+                                    <h3>Your Existing Booking</h3>
+                                    <span class="booking-status status-{{ $existingBooking->status }}">
+                                        {{ ucfirst($existingBooking->status) }}
+                                    </span>
+                                </div>
+                                
+                                <div class="booking-details">
+                                    <div class="booking-info">
+                                        <div class="info-item">
+                                            <i class="fas fa-calendar"></i>
+                                            <span>Date: {{ $existingBooking->booking_date->format('d/m/Y H:i') }}</span>
+                                        </div>
+                                        @if($existingBooking->notes)
+                                            <div class="info-item">
+                                                <i class="fas fa-sticky-note"></i>
+                                                <span>Notes: {{ $existingBooking->notes }}</span>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    
+                                    @if($existingBooking->status == 'pending')
+                                        <div class="booking-actions">
+                                            <form action="{{ route('service-provider-bookings.update-status', $existingBooking) }}" method="POST" class="inline-block">
+                                                @csrf
+                                                @method('PATCH')
+                                                <input type="hidden" name="status" value="cancelled">
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="fas fa-times"></i> Cancel Booking
+                                                </button>
+                                            </form>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <div class="booking-form">
+                            <form action="{{ route('service-provider-bookings.store', $provider) }}" method="POST">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="booking_date" class="form-label">Preferred Date and Time</label>
+                                    <input type="datetime-local" 
+                                           id="booking_date" 
+                                           name="booking_date" 
+                                           class="form-control @error('booking_date') is-invalid @enderror"
+                                           required
+                                           min="{{ date('Y-m-d\TH:i') }}">
+                                    @error('booking_date')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="notes" class="form-label">Additional Notes</label>
+                                    <textarea id="notes" 
+                                              name="notes" 
+                                              class="form-control @error('notes') is-invalid @enderror"
+                                              rows="3"
+                                              placeholder="Any specific requirements or details you'd like to share..."></textarea>
+                                    @error('notes')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-calendar-check"></i>
+                                    Request Booking
+                                </button>
+                            </form>
+                        </div>
+                    @endif
+                @endif
+            @else
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    Please <a href="{{ route('login') }}">login</a> to book this service provider.
+                </div>
+            @endauth
         </div>
     </div>
 </div>
@@ -966,6 +1439,46 @@ textarea.form-control:focus {
         } else {
             filteredReviews.forEach(review => {
                 reviewsContainer.appendChild(review);
+            });
+        }
+    }
+    
+    // Reservation filter functionality
+    const statusFilter = document.getElementById('status-filter');
+    if (statusFilter) {
+        statusFilter.addEventListener('change', function() {
+            filterReservations();
+        });
+    }
+    
+    function filterReservations() {
+        const statusValue = statusFilter ? statusFilter.value : 'all';
+        
+        const reservationsContainer = document.getElementById('reservations-container');
+        const reservationItems = Array.from(reservationsContainer.querySelectorAll('.reservation-item'));
+        
+        // Filter by status
+        let filteredReservations = reservationItems;
+        if (statusValue !== 'all') {
+            filteredReservations = reservationItems.filter(item => 
+                item.getAttribute('data-status') === statusValue
+            );
+        }
+        
+        // Clear container
+        reservationsContainer.innerHTML = '';
+        
+        // Add filtered reservations
+        if (filteredReservations.length === 0) {
+            reservationsContainer.innerHTML = `
+                <div class="empty-reservations">
+                    <i class="fas fa-calendar-times"></i>
+                    <p>Aucune réservation ne correspond à vos critères de filtrage.</p>
+                </div>
+            `;
+        } else {
+            filteredReservations.forEach(reservation => {
+                reservationsContainer.appendChild(reservation);
             });
         }
     }
