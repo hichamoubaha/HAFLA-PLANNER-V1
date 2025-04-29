@@ -284,7 +284,7 @@
             margin-top: 10px;
         }
         
-        
+        /* Footer */
         footer {
             background-color: #ff6b6b;
             color: white;
@@ -357,8 +357,29 @@
                 </a>
             </div>
             <div class="auth-buttons">
-                <a href="{{ route('login') }}" class="login-btn">Login</a>
-                <a href="{{ url('/register') }}" class="signup-btn">Sign up</a>
+                @auth
+                    <div class="flex items-center gap-4">
+                        <div class="relative">
+                            <button id="profile-dropdown-toggle" class="focus:outline-none">
+                                <img src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : asset('images/default-avatar.png') }}" 
+                                     alt="Profile" 
+                                     class="w-10 h-10 rounded-full object-cover">
+                            </button>
+                            <div id="profile-dropdown-menu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden z-50">
+                                <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                        Logout
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <a href="{{ route('login') }}" class="login-btn">Login</a>
+                    <a href="{{ url('/register') }}" class="signup-btn">Sign up</a>
+                @endauth
             </div>
         </div>
     </header>
@@ -480,7 +501,7 @@
                 </div>
                 
                 <div class="copyright">
-                    Copyright © 2025 | Hafla Event Planner by Hicham Oubaha
+                    Copyright © 2024 | Hafla Event Planner by Hicham Oubaha
                 </div>
             </div>
         </div>
@@ -489,5 +510,30 @@
     <div class="chat-bubble">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButton = document.getElementById('profile-dropdown-toggle');
+            const dropdownMenu = document.getElementById('profile-dropdown-menu');
+            
+            if (toggleButton && dropdownMenu) {
+                toggleButton.addEventListener('click', function() {
+                    // Toggle the dropdown visibility
+                    if (dropdownMenu.classList.contains('hidden')) {
+                        dropdownMenu.classList.remove('hidden');
+                    } else {
+                        dropdownMenu.classList.add('hidden');
+                    }
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!toggleButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                        dropdownMenu.classList.add('hidden');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
