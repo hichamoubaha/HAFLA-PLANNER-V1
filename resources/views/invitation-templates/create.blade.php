@@ -1,0 +1,1 @@
+@extends('invitation-templates.form') 
