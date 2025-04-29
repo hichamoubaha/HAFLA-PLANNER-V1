@@ -44,7 +44,7 @@ class ServiceProviderController extends Controller
 
     public function show(ServiceProvider $provider)
     {
-        $provider->load(['user', 'reviews.user']);
+        $provider->load(['reviews.user', 'bookings.user']);
         return view('service-providers.show', compact('provider'));
     }
 
