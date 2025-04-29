@@ -22,6 +22,8 @@ use App\Http\Controllers\ReviewController;
 
 use App\Http\Controllers\ServiceProviderBookingController;
 
+use App\Http\Controllers\InvitationTemplateController;
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
@@ -64,6 +66,12 @@ Route::middleware(['auth'])->group(function () {
     // Service Provider Booking Routes
     Route::post('/service-providers/{serviceProvider}/book', [ServiceProviderBookingController::class, 'store'])->name('service-provider-bookings.store');
     Route::patch('/service-provider-bookings/{booking}/status', [ServiceProviderBookingController::class, 'updateStatus'])->name('service-provider-bookings.update-status');
+
+    // Invitation Templates Routes
+    Route::resource('invitation-templates', InvitationTemplateController::class);
+    Route::get('invitation-templates/{template}/preview', [InvitationTemplateController::class, 'preview'])->name('invitation-templates.preview');
+    Route::get('invitation-templates/{template}/customize', [InvitationTemplateController::class, 'customize'])->name('invitation-templates.customize');
+    Route::post('invitation-templates/{template}/save-customization', [InvitationTemplateController::class, 'saveCustomization'])->name('invitation-templates.save-customization');
 });
 
 
