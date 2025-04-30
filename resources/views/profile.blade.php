@@ -59,6 +59,10 @@
             <i class="fas fa-calendar text-lg w-6 text-gray-500"></i>
             <span class="ml-3">Bookings</span>
           </a>
+          <a href="{{ route('invitation-templates.my-invitations') }}" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+            <i class="fas fa-envelope-open-text text-lg w-6 text-gray-500"></i>
+            <span class="ml-3">My Invitations</span>
+          </a>
           @if($user->role === 'user' || $user->role === 'organisateur')
           <a href="{{ route('service-providers.index') }}" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
             <i class="fas fa-users-cog text-lg w-6 text-gray-500"></i>
@@ -104,6 +108,9 @@
             <button id="editProfileBtn" onclick="toggleEditMode()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg shadow transition-colors">
               <i class="fas fa-edit mr-2"></i> Edit Profile
             </button>
+            <a href="{{ route('invitation-templates.my-invitations') }}" class="px-5 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg shadow transition-colors">
+              <i class="fas fa-envelope-open-text mr-2"></i> My Invitations
+            </a>
           </div>
         </div>
 
