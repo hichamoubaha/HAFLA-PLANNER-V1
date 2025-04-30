@@ -28,9 +28,9 @@ class InvitationTemplateController extends Controller
      */
     public function create()
     {
-        // Allow both admin and organisateur roles to create templates
-        if (Auth::user()->role !== 'admin' && Auth::user()->role !== 'organisateur') {
-            return redirect()->route('invitation-templates.index')->with('error', 'Accès refusé.');
+        // Only allow organisateur role to create templates
+        if (Auth::user()->role !== 'organisateur') {
+            return redirect()->route('invitation-templates.index')->with('error', 'Accès refusé. Seuls les organisateurs peuvent créer des modèles.');
         }
         
         $templateTypes = InvitationTemplate::getTemplateTypes();
@@ -158,6 +158,11 @@ class InvitationTemplateController extends Controller
 
     public function customize(InvitationTemplate $template)
     {
+        // Only allow regular users to customize templates
+        if (Auth::user()->role !== 'user') {
+            return redirect()->route('invitation-templates.index')->with('error', 'Accès refusé. Seuls les utilisateurs peuvent personnaliser les modèles.');
+        }
+        
         return view('invitation-templates.customize', compact('template'));
     }
 
