@@ -43,6 +43,11 @@ class User extends Authenticatable
         return $this->hasMany(Review::class);
     }
 
+    public function customizedInvitations()
+    {
+        return $this->hasMany(CustomizedInvitation::class);
+    }
+
     public function isUser()
     {
         return $this->role === self::ROLE_USER;
