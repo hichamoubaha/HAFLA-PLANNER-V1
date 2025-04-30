@@ -6,6 +6,7 @@ use App\Models\InvitationTemplate;
 use App\Models\CustomizedInvitation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class InvitationTemplateController extends Controller
 {
@@ -27,6 +28,11 @@ class InvitationTemplateController extends Controller
      */
     public function create()
     {
+        // Allow both admin and organisateur roles to create templates
+        if (Auth::user()->role !== 'admin' && Auth::user()->role !== 'organisateur') {
+            return redirect()->route('invitation-templates.index')->with('error', 'Accès refusé.');
+        }
+        
         $templateTypes = InvitationTemplate::getTemplateTypes();
         return view('invitation-templates.create', compact('templateTypes'));
     }
