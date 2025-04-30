@@ -6,6 +6,9 @@
     <div class="content-wrapper">
         <div class="header">
             <div class="header-title">
+                <a href="{{ route('dashboard') }}" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Retour
+                </a>
                 <i class="fas fa-ticket-alt header-icon"></i>
                 <h1>Modèles d'invitations</h1>
             </div>
@@ -56,7 +59,7 @@
                         <form action="{{ route('invitation-templates.destroy', $template->id) }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="text-red-500 hover:text-red-700" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce modèle ?')">
+                            <button type="submit" class="delete-button" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce modèle ?')">
                                 <i class="fas fa-trash"></i> Supprimer
                             </button>
                         </form>
@@ -271,8 +274,31 @@
     .customize:hover { color: #38c95f; }
     .edit { color: #e0a800; }
     .edit:hover { color: #ffc107; }
-    .delete { color: #dc3545; background: none; border: none; cursor: pointer; }
-    .delete:hover { color: #ff4d5e; }
+
+    .delete-button {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        color: white;
+        background: #dc3545;
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .delete-button:hover {
+        background: #ff4d5e;
+        transform: scale(1.05);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .delete-button i {
+        font-size: 16px;
+    }
 
     .action-form {
         display: inline;
@@ -351,6 +377,26 @@
             flex-direction: column;
             align-items: flex-start;
         }
+    }
+
+    .back-button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #4a00e0;
+        text-decoration: none;
+        font-weight: 600;
+        margin-right: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+        color: #6a1bff;
+        transform: translateX(-5px);
+    }
+
+    .back-button i {
+        font-size: 16px;
     }
 </style>
 @endsection
