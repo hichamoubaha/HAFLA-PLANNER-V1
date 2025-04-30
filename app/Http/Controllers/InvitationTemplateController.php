@@ -218,4 +218,10 @@ class InvitationTemplateController extends Controller
         return redirect()->route('invitation-templates.show', $customizedInvitation)
             ->with('success', 'Invitation personnalisée créée avec succès!');
     }
+
+    public function myInvitations()
+    {
+        $invitations = auth()->user()->customizedInvitations()->with('template')->get();
+        return view('invitation-templates.my-invitations', compact('invitations'));
+    }
 }

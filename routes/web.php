@@ -72,6 +72,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('invitation-templates/{template}/preview', [InvitationTemplateController::class, 'preview'])->name('invitation-templates.preview');
     Route::get('invitation-templates/{template}/customize', [InvitationTemplateController::class, 'customize'])->name('invitation-templates.customize');
     Route::post('invitation-templates/{template}/save-customization', [InvitationTemplateController::class, 'saveCustomization'])->name('invitation-templates.save-customization');
+    Route::get('/invitation-templates/my-invitations', [InvitationTemplateController::class, 'myInvitations'])
+        ->name('invitation-templates.my-invitations')
+        ->middleware('auth');
+    Route::get('/my-invitations', [InvitationTemplateController::class, 'myInvitations'])->name('invitation-templates.my-invitations');
 });
 
 
