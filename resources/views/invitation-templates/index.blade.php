@@ -9,7 +9,7 @@
                 <i class="fas fa-ticket-alt header-icon"></i>
                 <h1>Modèles d'invitations</h1>
             </div>
-            @if(auth()->user()->role === 'admin' || auth()->user()->role === 'organisateur')
+            @if(auth()->user()->role === 'organisateur')
             <a href="{{ route('invitation-templates.create') }}" class="add-button">
                 <i class="fas fa-plus"></i> Ajouter un modèle
             </a>
@@ -44,10 +44,12 @@
                         <a href="{{ route('invitation-templates.preview', $template) }}" class="action-link preview">
                             <i class="fas fa-eye"></i> Aperçu
                         </a>
+                        @if(auth()->user()->role === 'user')
                         <a href="{{ route('invitation-templates.customize', $template) }}" class="action-link customize">
                             <i class="fas fa-edit"></i> Personnaliser
                         </a>
-                        @if(auth()->user()->is_admin)
+                        @endif
+                        @if(auth()->user()->role === 'organisateur')
                         <a href="{{ route('invitation-templates.edit', $template) }}" class="action-link edit">
                             <i class="fas fa-cog"></i> Modifier
                         </a>
