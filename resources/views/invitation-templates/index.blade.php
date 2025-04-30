@@ -50,13 +50,13 @@
                         </a>
                         @endif
                         @if(auth()->user()->role === 'organisateur')
-                        <a href="{{ route('invitation-templates.edit', $template) }}" class="action-link edit">
+                        <a href="{{ route('invitation-templates.edit', $template->id) }}" class="text-yellow-500 hover:text-yellow-700">
                             <i class="fas fa-cog"></i> Modifier
                         </a>
-                        <form action="{{ route('invitation-templates.destroy', $template) }}" method="POST" class="action-form">
+                        <form action="{{ route('invitation-templates.destroy', $template->id) }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="action-link delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce modèle ?')">
+                            <button type="submit" class="text-red-500 hover:text-red-700" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce modèle ?')">
                                 <i class="fas fa-trash"></i> Supprimer
                             </button>
                         </form>

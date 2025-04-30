@@ -152,8 +152,15 @@ class InvitationTemplateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(InvitationTemplate $template)
+    public function destroy($id)
     {
+        // Only allow organisateur role to delete templates
+        if (Auth::user()->role !== 'organisateur') {
+            return redirect()->route('invitation-templates.index')->with('error', 'Accès refusé. Seuls les organisateurs peuvent supprimer les modèles.');
+        }
+        
+        $template = InvitationTemplate::findOrFail($id);
+        
         if ($template->thumbnail_path) {
             Storage::disk('public')->delete($template->thumbnail_path);
         }
