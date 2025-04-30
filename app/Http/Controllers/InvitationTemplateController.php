@@ -92,8 +92,14 @@ class InvitationTemplateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(InvitationTemplate $template)
+    public function edit($id)
     {
+        // Only allow organisateur role to edit templates
+        if (Auth::user()->role !== 'organisateur') {
+            return redirect()->route('invitation-templates.index')->with('error', 'Accès refusé. Seuls les organisateurs peuvent modifier les modèles.');
+        }
+        
+        $template = InvitationTemplate::findOrFail($id);
         $templateTypes = InvitationTemplate::getTemplateTypes();
         return view('invitation-templates.edit', compact('template', 'templateTypes'));
     }
@@ -105,8 +111,15 @@ class InvitationTemplateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, InvitationTemplate $template)
+    public function update(Request $request, $id)
     {
+        // Only allow organisateur role to update templates
+        if (Auth::user()->role !== 'organisateur') {
+            return redirect()->route('invitation-templates.index')->with('error', 'Accès refusé. Seuls les organisateurs peuvent modifier les modèles.');
+        }
+        
+        $template = InvitationTemplate::findOrFail($id);
+        
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'type' => 'required|string|in:' . implode(',', InvitationTemplate::getTemplateTypes()),
