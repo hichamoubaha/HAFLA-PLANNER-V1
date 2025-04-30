@@ -76,6 +76,9 @@ Route::middleware(['auth'])->group(function () {
         ->name('invitation-templates.my-invitations')
         ->middleware('auth');
     Route::get('/my-invitations', [InvitationTemplateController::class, 'myInvitations'])->name('invitation-templates.my-invitations');
+    Route::delete('/invitation-templates/customized/{id}', [InvitationTemplateController::class, 'destroyCustomizedInvitation'])
+        ->name('invitation-templates.destroy-customized')
+        ->middleware('auth');
 });
 
 

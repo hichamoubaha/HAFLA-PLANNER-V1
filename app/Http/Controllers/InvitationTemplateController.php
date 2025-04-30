@@ -224,4 +224,25 @@ class InvitationTemplateController extends Controller
         $invitations = auth()->user()->customizedInvitations()->with('template')->get();
         return view('invitation-templates.my-invitations', compact('invitations'));
     }
+
+    public function destroyCustomizedInvitation($id)
+    {
+        $invitation = CustomizedInvitation::findOrFail($id);
+        
+        // Check if the user owns this invitation
+        if ($invitation->user_id !== auth()->id()) {
+            return redirect()->route('invitation-templates.my-invitations')
+                ->with('error', 'Vous n\'êtes pas autorisé à supprimer cette invitation.');
+        }
+        
+        // Delete the cover image if it exists
+        if ($invitation->cover_image_path) {
+            Storage::disk('public')->delete($invitation->cover_image_path);
+        }
+        
+        $invitation->delete();
+        
+        return redirect()->route('invitation-templates.my-invitations')
+            ->with('success', 'Invitation supprimée avec succès.');
+    }
 }
