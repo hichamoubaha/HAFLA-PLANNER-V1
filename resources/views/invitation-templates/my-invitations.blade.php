@@ -57,6 +57,9 @@
                                 <a href="{{ url('/invitation-templates/' . $invitation->id) }}" class="action-button view-button">
                                     <i class="fas fa-eye"></i> Voir
                                 </a>
+                                <a href="{{ route('invitation-templates.generate-pdf', $invitation->id) }}" class="action-button pdf-button" target="_blank">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
                                 <form action="{{ route('invitation-templates.destroy-customized', $invitation->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
@@ -227,7 +230,7 @@
     }
 
     .action-button {
-        display: flex;
+        display: inline-flex;
         align-items: center;
         gap: 8px;
         padding: 8px 16px;
@@ -236,6 +239,18 @@
         font-size: 14px;
         font-weight: 600;
         transition: all 0.3s ease;
+        margin-right: 8px;
+    }
+
+    .pdf-button {
+        background: #dc3545;
+        color: white;
+    }
+
+    .pdf-button:hover {
+        background: #c82333;
+        transform: translateY(-2px);
+        box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
     }
 
     .view-button {
