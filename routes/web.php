@@ -82,6 +82,11 @@ Route::middleware(['auth'])->group(function () {
         ->name('invitation-templates.destroy-customized')
         ->middleware('auth');
 
+    // PDF generation route
+    Route::get('/invitation-templates/{id}/pdf', [InvitationTemplateController::class, 'generatePdf'])
+        ->name('invitation-templates.generate-pdf')
+        ->middleware('auth');
+
     // Guest Management Routes
     Route::get('/guests/overview', [GuestController::class, 'overview'])->name('guests.overview');
     Route::resource('events.guests', GuestController::class)->except(['show']);
