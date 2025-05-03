@@ -24,6 +24,8 @@ use App\Http\Controllers\ServiceProviderBookingController;
 
 use App\Http\Controllers\InvitationTemplateController;
 
+use App\Http\Controllers\GuestController;
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
@@ -79,6 +81,11 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/invitation-templates/customized/{id}', [InvitationTemplateController::class, 'destroyCustomizedInvitation'])
         ->name('invitation-templates.destroy-customized')
         ->middleware('auth');
+
+    // Guest Management Routes
+    Route::resource('events.guests', GuestController::class)->except(['show']);
+    Route::get('guests/{guest}/rsvp', [GuestController::class, 'showRsvpForm'])->name('guests.rsvp');
+    Route::post('guests/{guest}/rsvp', [GuestController::class, 'processRsvp'])->name('guests.process-rsvp');
 });
 
 
