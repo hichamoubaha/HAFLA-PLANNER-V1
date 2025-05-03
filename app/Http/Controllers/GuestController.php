@@ -10,6 +10,16 @@ use App\Mail\InvitationEmail;
 
 class GuestController extends Controller
 {
+    public function overview()
+    {
+        $events = Event::where('user_id', auth()->id())
+            ->withCount('guests')
+            ->latest()
+            ->get();
+            
+        return view('guests.overview', compact('events'));
+    }
+
     public function index(Event $event)
     {
         $guests = $event->guests()->with('user')->get();
