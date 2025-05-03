@@ -45,6 +45,12 @@ use Carbon\Carbon;
                     </li>
                     @if(Auth::user()->role === 'organisateur')
                     <li>
+                        <a href="{{ route('guests.overview') }}" class="flex items-center p-3 text-gray-700 hover:bg-blue-50 rounded-lg">
+                            <i class="fas fa-user-friends mr-3"></i>
+                            Gérer les invités
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('bookings.index') }}" class="flex items-center p-3 text-gray-700 hover:bg-blue-50 rounded-lg">
                             <i class="fas fa-ticket-alt mr-3"></i>
                             Gérer les réservations
