@@ -83,6 +83,7 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('auth');
 
     // Guest Management Routes
+    Route::get('/guests/overview', [GuestController::class, 'overview'])->name('guests.overview');
     Route::resource('events.guests', GuestController::class)->except(['show']);
     Route::get('guests/{guest}/rsvp', [GuestController::class, 'showRsvpForm'])->name('guests.rsvp');
     Route::post('guests/{guest}/rsvp', [GuestController::class, 'processRsvp'])->name('guests.process-rsvp');
