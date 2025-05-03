@@ -86,6 +86,30 @@ class InvitationTemplateController extends Controller
         return view('invitation-templates.preview', compact('template'));
     }
 
+    public function generatePdf($id)
+    {
+        $invitation = CustomizedInvitation::findOrFail($id);
+        
+        // Check if the user owns this invitation
+        if ($invitation->user_id !== auth()->id()) {
+            abort(403, 'Vous n\'êtes pas autorisé à accéder à ce fichier.');
+        }
+
+        // Get the full path to the cover image if it exists
+        $coverImagePath = null;
+        if ($invitation->cover_image_path) {
+            $coverImagePath = Storage::disk('public')->path($invitation->cover_image_path);
+        }
+
+        // Generate PDF using DomPDF
+        $pdf = \PDF::loadView('invitation-templates.pdf', [
+            'invitation' => $invitation,
+            'coverImagePath' => $coverImagePath
+        ]);
+        
+        return $pdf->download('invitation-' . $invitation->title . '.pdf');
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
