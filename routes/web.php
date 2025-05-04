@@ -19,6 +19,7 @@ use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\ServiceProviderController;
 
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\PaymentController;
 
 use App\Http\Controllers\ServiceProviderBookingController;
 
@@ -42,6 +43,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
     Route::post('/events/{event}/book', [BookingController::class, 'store'])->name('bookings.store');
     Route::post('/bookings/{booking}/cancel', [BookingController::class, 'cancel'])->name('bookings.cancel');
+    
+    // Payment routes
+    Route::get('/bookings/{booking}/payment', [PaymentController::class, 'showPaymentForm'])->name('payment.form');
+    Route::post('/bookings/{booking}/payment', [PaymentController::class, 'processPayment'])->name('payment.process');
+    Route::post('/bookings/{booking}/payment/cancel', [PaymentController::class, 'cancelPayment'])->name('payment.cancel');
     
     // Organiser booking management
     Route::get('/events/{event}/bookings', [BookingController::class, 'eventBookings'])->name('bookings.event');
