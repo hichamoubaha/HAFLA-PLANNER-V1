@@ -12,7 +12,16 @@ class Booking extends Model
     protected $fillable = [
         'user_id',
         'event_id',
-        'status'
+        'status',
+        'payment_status',
+        'amount',
+        'payment_method',
+        'transaction_id',
+        'paid_at'
+    ];
+
+    protected $casts = [
+        'paid_at' => 'datetime'
     ];
 
     public function user()
