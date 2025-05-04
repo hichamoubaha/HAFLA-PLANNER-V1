@@ -275,6 +275,23 @@ textarea.form-control:focus {
   background-color: #3b5fe4;
 }
 
+.btn-profile {
+  background-color: #f3f4f6;
+  color: #4b5563;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.btn-profile:hover {
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
 .review-list {
   display: flex;
   flex-direction: column;
@@ -556,7 +573,7 @@ textarea.form-control:focus {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -583,26 +600,9 @@ textarea.form-control:focus {
 
 .form-actions {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     margin-top: 1rem;
-}
-
-.btn-dashboard {
-    background-color: #f3f4f6;
-    color: #4b5563;
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
-    font-weight: 500;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    transition: all 0.2s ease;
-}
-
-.btn-dashboard:hover {
-    background-color: #e5e7eb;
-    color: #1f2937;
 }
 
 .booking-form {
@@ -885,6 +885,9 @@ textarea.form-control:focus {
 <div class="profile-container">
     @if(auth()->id() === $provider->user_id)
     <div class="top-nav">
+        <a href="{{ route('profile') }}" class="btn-profile">
+            <i class="fas fa-arrow-left mr-2"></i>Retour au profil
+        </a>
         <form action="{{ route('logout') }}" method="POST">
             @csrf
             <button type="submit" class="logout-btn">
@@ -892,6 +895,12 @@ textarea.form-control:focus {
                 Déconnexion
             </button>
         </form>
+    </div>
+    @else
+    <div class="top-nav">
+        <a href="{{ route('profile') }}" class="btn-profile">
+            <i class="fas fa-arrow-left mr-2"></i>Retour au profil
+        </a>
     </div>
     @endif
 
@@ -1032,9 +1041,6 @@ textarea.form-control:focus {
                                 <button type="submit" class="btn-submit">
                                     Publier l'avis
                                 </button>
-                                <a href="{{ route('dashboard') }}" class="btn-dashboard">
-                                    <i class="fas fa-arrow-left mr-2"></i>Retour au tableau de bord
-                                </a>
                             </div>
                         </form>
                     </div>

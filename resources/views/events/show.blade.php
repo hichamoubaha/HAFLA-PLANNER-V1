@@ -6,6 +6,8 @@
     <title>Détails de l'événement</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tailwind CSS for Navigation Bar -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts -->
@@ -303,6 +305,55 @@
             color: white; 
         }
 
+        /* Custom Navigation Bar Styles */
+        .custom-nav {
+            background: linear-gradient(135deg, #6c5ce7 0%, #a363d5 100%);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .custom-nav a, .custom-nav button, .custom-nav span {
+            font-family: 'Poppins', sans-serif;
+            color: white !important;
+            transition: all 0.3s ease;
+        }
+
+        .custom-nav a:hover, .custom-nav button:hover {
+            color: #f1f3f5 !important;
+        }
+
+        .custom-nav .active-nav {
+            border-color: white !important;
+            color: white !important;
+        }
+
+        .custom-nav .mobile-menu a, .custom-nav .mobile-menu button {
+            color: white !important;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 0 10px;
+        }
+
+        .custom-nav .mobile-menu a:hover, .custom-nav .mobile-menu button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .custom-nav .dropdown-menu {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .custom-nav .dropdown-menu a, .custom-nav .dropdown-menu button {
+            color: #2d3436 !important;
+        }
+
+        .custom-nav .dropdown-menu a:hover, .custom-nav .dropdown-menu button:hover {
+            background: #f8f9fa;
+            color: #6c5ce7 !important;
+        }
+
         @media (max-width: 768px) {
             .event-title {
                 font-size: 2rem;
@@ -333,6 +384,62 @@
     </style>
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav class="custom-nav">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="{{ route('events.index') }}" class="text-2xl font-bold text-white">Événements</a>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="{{ route('events.index') }}" class="active-nav text-white inline-flex items-center px-1 pt-1 border-b-2 border-white text-sm font-medium">Événements</a>
+                        <a href="{{ route('bookings.index') }}" class="text-white hover:text-gray-200 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">Mes Réservations</a>
+                        <a href="{{ route('invitation-templates.my-invitations') }}" class="text-white hover:text-gray-200 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">Mes Invitations</a>
+                        <a href="{{ route('service-providers.index') }}" class="text-white hover:text-gray-200 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">Prestataires</a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <div class="ml-3 relative">
+                        <button id="profileDropdown" class="flex items-center text-white hover:text-gray-200 focus:outline-none">
+                            <i class="fas fa-user-circle text-xl mr-2"></i>
+                            <span>{{ Auth::user()->name }}</span>
+                            <i class="fas fa-chevron-down ml-2"></i>
+                        </button>
+                        <div id="profileDropdownMenu" class="dropdown-menu origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 hidden">
+                            <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-indigo-600">Mon Profil</a>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-indigo-600">Déconnexion</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="-mr-2 flex items-center sm:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-gray-200 hover:bg-gray-100/20 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="sm:hidden mobile-menu" id="mobile-menu">
+            <div class="pt-2 pb-3 space-y-1">
+                <a href="{{ route('events.index') }}" class="bg-white/10 text-white block pl-3 pr-4 py-2 border-l-4 border-white text-base font-medium">Événements</a>
+                <a href="{{ route('bookings.index') }}" class="text-white hover:bg-white/20 block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium">Mes Réservations</a>
+                <a href="{{ route('invitation-templates.my-invitations') }}" class="text-white hover:bg-white/20 block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium">Mes Invitations</a>
+                <a href="{{ route('service-providers.index') }}" class="text-white hover:bg-white/20 block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium">Prestataires</a>
+                <a href="{{ route('profile') }}" class="text-white hover:bg-white/20 block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium">Mon Profil</a>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="text-white hover:bg-white/20 block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium w-full text-left">Déconnexion</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
         <div class="event-header">
             @if($event->logo_path)
@@ -527,5 +634,20 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Toggle profile dropdown
+        document.getElementById('profileDropdown').addEventListener('click', function () {
+            document.getElementById('profileDropdownMenu').classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function (event) {
+            const dropdown = document.getElementById('profileDropdownMenu');
+            const button = document.getElementById('profileDropdown');
+            if (!dropdown.contains(event.target) && !button.contains(event.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
-</html> 
+</html>

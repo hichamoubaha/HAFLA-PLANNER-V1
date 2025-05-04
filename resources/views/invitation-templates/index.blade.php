@@ -6,7 +6,7 @@
     <div class="content-wrapper">
         <div class="header">
             <div class="header-title">
-                <a href="{{ route('dashboard') }}" class="back-button">
+                <a href="javascript:history.back()" class="back-button">
                     <i class="fas fa-arrow-left"></i> Retour
                 </a>
                 <i class="fas fa-ticket-alt header-icon"></i>
