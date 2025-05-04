@@ -29,7 +29,8 @@ class Event extends Model
         'special_requirements',
         'contact_email',
         'contact_phone',
-        'status'
+        'status',
+        'price'
     ];
 
     protected $casts = [
@@ -38,7 +39,8 @@ class Event extends Model
         'media_gallery' => 'array',
         'budget_breakdown' => 'array',
         'amenities' => 'array',
-        'budget' => 'decimal:2'
+        'budget' => 'decimal:2',
+        'price' => 'decimal:2'
     ];
 
     /**

@@ -346,6 +346,30 @@
         </div>
 
         <div class="event-section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i>Informations de l'événement</h2>
+            <div class="event-info">
+                <div class="info-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>{{ $event->date }}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <span>{{ $event->time }}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>{{ $event->location }}</span>
+                </div>
+                @if($event->price)
+                <div class="info-item">
+                    <i class="fas fa-euro-sign"></i>
+                    <span>{{ number_format($event->price, 2) }}€</span>
+                </div>
+                @endif
+            </div>
+        </div>
+
+        <div class="event-section">
             <h2 class="section-title"><i class="fas fa-info-circle"></i>Informations de base</h2>
             <div class="info-grid">
                 <div class="info-item">

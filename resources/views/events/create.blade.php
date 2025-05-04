@@ -208,6 +208,33 @@
 
         <!-- Customization Section -->
         <div class="form-section">
+            <h3>Détails de l'événement</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="title" class="block text-gray-700 mb-2">Titre de l'événement</label>
+                    <input type="text" id="title" name="title" required class="w-full p-2 border rounded">
+                </div>
+                <div>
+                    <label for="date" class="block text-gray-700 mb-2">Date</label>
+                    <input type="date" id="date" name="date" required class="w-full p-2 border rounded">
+                </div>
+                <div>
+                    <label for="time" class="block text-gray-700 mb-2">Heure</label>
+                    <input type="time" id="time" name="time" required class="w-full p-2 border rounded">
+                </div>
+                <div>
+                    <label for="location" class="block text-gray-700 mb-2">Lieu</label>
+                    <input type="text" id="location" name="location" required class="w-full p-2 border rounded">
+                </div>
+                <div>
+                    <label for="price" class="block text-gray-700 mb-2">Prix (€)</label>
+                    <input type="number" id="price" name="price" step="0.01" min="0" class="w-full p-2 border rounded">
+                </div>
+            </div>
+        </div>
+
+        <!-- Customization Section -->
+        <div class="form-section">
             <h3>Personnalisation</h3>
             <div class="color-picker">
                 <label>Couleurs du thème:</label>
