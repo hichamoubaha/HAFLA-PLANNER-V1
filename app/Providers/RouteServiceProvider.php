@@ -36,6 +36,9 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });
+
+        // Register controllers
+        $this->app->make('App\Http\Controllers\PaymentController');
     }
 
     /**
