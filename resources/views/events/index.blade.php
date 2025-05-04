@@ -220,7 +220,7 @@
     </div>
 
     <div class="container">
-        @if(Auth::user()->role === 'admin' || Auth::user()->role === 'organisateur')
+        @if(Auth::user()->role === 'organisateur')
         <div class="row mb-4">
             <div class="col-12 text-end">
                 <a href="{{ route('events.create') }}" class="btn btn-primary btn-create">
