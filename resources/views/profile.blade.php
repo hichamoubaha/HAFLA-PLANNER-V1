@@ -64,6 +64,10 @@
             <span class="ml-3">My Invitations</span>
           </a>
           @if($user->role === 'user' || $user->role === 'organisateur')
+          <a href="{{ route('guests.overview') }}" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+            <i class="fas fa-user-friends text-lg w-6 text-gray-500"></i>
+            <span class="ml-3">Gérer les invités</span>
+          </a>
           <a href="{{ route('service-providers.index') }}" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
             <i class="fas fa-users-cog text-lg w-6 text-gray-500"></i>
             <span class="ml-3">Service Providers</span>
