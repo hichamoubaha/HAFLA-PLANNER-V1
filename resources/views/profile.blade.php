@@ -55,9 +55,9 @@
             <i class="fas fa-user text-lg w-6"></i>
             <span class="ml-3 font-medium">My Profile</span>
           </a>
-          <a href="{{ route('events.index') }}" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
-            <i class="fas fa-calendar text-lg w-6 text-gray-500"></i>
-            <span class="ml-3">Bookings</span>
+          <a href="{{ route('bookings.index') }}" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+            <i class="fas fa-ticket-alt text-lg w-6 text-gray-500"></i>
+            <span class="ml-3">My Reservations</span>
           </a>
           <a href="{{ route('invitation-templates.my-invitations') }}" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
             <i class="fas fa-envelope-open-text text-lg w-6 text-gray-500"></i>
