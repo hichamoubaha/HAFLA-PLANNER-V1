@@ -11,6 +11,11 @@ class PaymentController extends Controller
 {
     public function showPaymentForm(Booking $booking)
     {
+        // Check if user has permission to make payments
+        if (!in_array(Auth::user()->role, ['user', 'client'])) {
+            return redirect()->route('bookings.index')->with('error', 'You do not have permission to make payments.');
+        }
+
         if ($booking->payment_status === 'paid') {
             return redirect()->route('bookings.index')->with('error', 'This booking has already been paid.');
         }
@@ -20,6 +25,11 @@ class PaymentController extends Controller
 
     public function processPayment(Request $request, Booking $booking)
     {
+        // Check if user has permission to make payments
+        if (!in_array(Auth::user()->role, ['user', 'client'])) {
+            return redirect()->route('bookings.index')->with('error', 'You do not have permission to make payments.');
+        }
+
         $request->validate([
             'payment_method' => 'required|in:credit_card,paypal,bank_transfer',
             'amount' => 'required|numeric|min:0',

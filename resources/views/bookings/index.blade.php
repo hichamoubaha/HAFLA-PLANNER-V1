@@ -158,7 +158,7 @@
                                     {{ ucfirst($booking->payment_status) }}
                                 </span>
                             </p>
-                            @if($booking->payment_status === 'pending')
+                            @if($booking->payment_status === 'pending' && in_array(Auth::user()->role, ['user', 'client']))
                                 <div class="mt-3">
                                     <a href="{{ route('payment.form', $booking) }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
                                         <i class="fas fa-credit-card mr-2"></i>Payer maintenant
