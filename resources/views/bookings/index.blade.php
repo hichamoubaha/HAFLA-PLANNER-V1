@@ -99,6 +99,25 @@
                                 <i class="fas fa-map-marker-alt me-2"></i>{{ $booking->event->location }}
                             </p>
                             
+                            <div class="mt-3">
+                                <p class="text-muted">
+                                    <i class="fas fa-euro-sign me-2"></i>Price: {{ $booking->event->price }}€
+                                </p>
+                                <p>
+                                    <span class="badge bg-{{ $booking->payment_status === 'paid' ? 'success' : ($booking->payment_status === 'failed' ? 'danger' : 'warning') }}">
+                                        {{ ucfirst($booking->payment_status) }}
+                                    </span>
+                                </p>
+                                
+                                @if($booking->payment_status === 'pending')
+                                    <div class="mt-3">
+                                        <a href="{{ route('payment.form', $booking) }}" class="btn btn-primary btn-sm">
+                                            <i class="fas fa-credit-card me-2"></i>Pay Now
+                                        </a>
+                                    </div>
+                                @endif
+                            </div>
+                            
                             @if(Auth::user()->role === 'organisateur')
                                 <p class="text-muted">
                                     <i class="fas fa-user me-2"></i>{{ $booking->user->name }}
