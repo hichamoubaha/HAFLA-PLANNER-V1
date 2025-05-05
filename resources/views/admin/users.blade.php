@@ -28,7 +28,7 @@
                     Liste des Utilisateurs
                 </h2>
                 <div class="flex items-center space-x-3">
-                    <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md flex items-center">
+                    <button id="addUserBtn" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md flex items-center">
                         <i class="fas fa-plus mr-2"></i>
                         Ajouter Utilisateur
                     </button>
@@ -103,6 +103,45 @@
                 </div>
             </div>
 
+            <!-- Add User Modal -->
+            <div id="addUserModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+                <div class="bg-white p-8 rounded-lg w-96">
+                    <h3 class="text-xl font-bold mb-4 flex items-center justify-between">
+                        <span>Ajouter Utilisateur</span>
+                        <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </h3>
+                    <form action="{{ route('admin.users.store') }}" method="POST" class="space-y-4">
+                        @csrf
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700">Nom</label>
+                            <input type="text" name="name" id="name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                            <input type="email" name="email" id="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
+                            <input type="password" name="password" id="password" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="role" class="block text-sm font-medium text-gray-700">Rôle</label>
+                            <select name="role" id="role" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                <option value="user">Utilisateur</option>
+                                <option value="organisateur">Organisateur</option>
+                                <option value="admin">Administrateur</option>
+                            </select>
+                        </div>
+                        <div class="flex justify-end space-x-3">
+                            <button type="button" id="closeModal" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">Annuler</button>
+                            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Créer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
             <div class="bg-gray-50 px-6 py-4 flex justify-between items-center">
                 <a href="/dashboard" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md flex items-center">
                     <i class="fas fa-arrow-left mr-2"></i>
@@ -114,5 +153,28 @@
             </div>
         </div>
     </div>
+    <script>
+        // Modal functionality
+        const addUserBtn = document.getElementById('addUserBtn');
+        const closeModalBtns = document.querySelectorAll('#closeModal');
+        const modal = document.getElementById('addUserModal');
+
+        addUserBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
+
+        closeModalBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                modal.classList.add('hidden');
+            });
+        });
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 </html>

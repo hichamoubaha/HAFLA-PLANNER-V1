@@ -29,24 +29,104 @@
         }
         
         .logo {
-            margin-bottom: -9vh;
+            margin-bottom: 2vh;
+            text-align: center;
         }
         
         .logo img {
             width: 100px;
             height: auto;
+            margin: 0 auto;
+            display: block;
         }
         
         .form-container {
             width: 100%;
             max-width: 450px;
             padding: 1vh 0;
+            margin-top: 2vh;
         }
         
         h1 {
             font-size: 30px;
             font-weight: bold;
             margin-bottom: 4vh;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .login-section, .image-section {
+                width: 100%;
+            }
+            
+            .image-section {
+                display: none;
+            }
+            
+            .login-section {
+                padding: 2.5vh 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .logo img {
+                width: 80px;
+                margin-bottom: 1.5vh;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .login-section {
+                padding: 2.5vh 15px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+            
+            .form-container {
+                max-width: 100%;
+                padding: 1vh 0;
+            }
+            
+            .logo {
+                margin-bottom: 1.5vh;
+            }
+            
+            .logo img {
+                width: 70px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-section {
+                padding: 2.5vh 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            .logo img {
+                width: 60px;
+                margin-bottom: 1vh;
+            }
+            
+            .logo {
+                margin-bottom: 1vh;
+            }
+            
+            input, select {
+                padding: 10px;
+                font-size: 12px;
+            }
+            
+            label {
+                font-size: 12px;
+            }
         }
         
         .form-group {
@@ -174,6 +254,80 @@
         .login-link a {
             color: #666;
             text-decoration: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .login-section, .image-section {
+                width: 100%;
+            }
+            
+            .image-section {
+                display: none;
+            }
+            
+            .login-section {
+                padding: 2.5vh 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .logo img {
+                width: 80px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .login-section {
+                padding: 2.5vh 15px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+            
+            .form-container {
+                max-width: 100%;
+                padding: 1vh 0;
+            }
+            
+            .overlay h2 {
+                font-size: 28px;
+            }
+            
+            .overlay p {
+                font-size: 14px;
+            }
+            
+            .button-primary, .google-button {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-section {
+                padding: 2.5vh 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            .logo img {
+                width: 60px;
+            }
+            
+            input, select {
+                padding: 10px;
+                font-size: 12px;
+            }
+            
+            label {
+                font-size: 12px;
+            }
         }
 
         
