@@ -62,6 +62,13 @@ class InvitationTemplateController extends Controller
 
         $template = InvitationTemplate::create($validated);
 
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Template créé avec succès.'
+            ]);
+        }
+
         return redirect()->route('invitation-templates.index')
             ->with('success', 'Template créé avec succès.');
     }
