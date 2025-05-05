@@ -13,17 +13,122 @@ use Carbon\Carbon;
     <title>Tableau de bord</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Responsive Layout */
+        @media (max-width: 1024px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                position: static;
+                margin-bottom: 2rem;
+            }
+            
+            .main-content {
+                width: 100%;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-card {
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .header-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .header-buttons button {
+                width: 100%;
+                margin: 0.5rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar {
+                padding: 1rem;
+            }
+            
+            .sidebar-logo {
+                margin-bottom: 1rem;
+            }
+            
+            .sidebar-logo img {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .sidebar-logo h1 {
+                font-size: 1rem;
+                margin-top: 0.5rem;
+            }
+            
+            .sidebar-nav {
+                padding: 0.5rem;
+            }
+            
+            .sidebar-nav ul {
+                padding: 0;
+            }
+            
+            .sidebar-nav li {
+                margin-bottom: 0.5rem;
+            }
+            
+            .sidebar-nav a {
+                padding: 0.75rem;
+                font-size: 0.9rem;
+            }
+            
+            .header {
+                padding: 1rem;
+            }
+            
+            .header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .stats-card {
+                padding: 0.75rem;
+            }
+            
+            .stats-card h3 {
+                font-size: 0.9rem;
+            }
+            
+            .stats-card p {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body class="bg-gray-100 font-sans">
-    <div class="flex min-h-screen">
+    <div class="dashboard-container flex min-h-screen">
         <!-- Sidebar -->
-        <div class="w-64 bg-white shadow-md">
-            <div class="p-6 border-b">
-            <img src="{{ asset('images/hafla_logo.png') }}" alt="Logo" class="mx-auto h-20 w-20 rounded-full">
+        <div class="sidebar w-64 bg-white shadow-md">
+            <div class="sidebar-logo p-6 border-b">
+                <img src="{{ asset('images/hafla_logo.png') }}" alt="Logo" class="mx-auto h-20 w-20 rounded-full">
                 <h1 class="text-center text-xl font-bold mt-4">Event Hive</h1>
             </div>
             
-            <nav class="p-4">
+            <nav class="sidebar-nav p-4">
                 <ul class="space-y-2">
                     <li>
                         <a href="{{ route('profile') }}" class="flex items-center p-3 text-gray-700 hover:bg-blue-50 rounded-lg">
@@ -76,13 +181,13 @@ use Carbon\Carbon;
         </div>
 
         <!-- Main Content -->
-        <div class="flex-1 bg-gray-100">
+        <div class="main-content flex-1 bg-gray-100">
             <!-- Header -->
-            <header class="bg-white shadow-md p-6 flex justify-between items-center">
+            <header class="bg-white shadow-md p-6 header flex justify-between items-center">
                 <div class="flex items-center">
                     <h2 class="text-2xl font-bold">Bienvenue, {{ Auth::user()->name }}</h2>
                 </div>
-                <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-4 header-buttons">
                     <span class="text-gray-600">
                         <i class="fas fa-user-tag mr-2"></i>
                         Rôle : {{ Auth::user()->role }}
@@ -102,9 +207,9 @@ use Carbon\Carbon;
 
             <!-- Dashboard Content -->
             <main class="p-8">
-                <div class="grid grid-cols-3 gap-6">
+                <div class="stats-grid grid grid-cols-3 gap-6">
                     <!-- Quick Stats Cards -->
-                    <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="stats-card bg-white p-6 rounded-lg shadow-md">
                         <div class="flex justify-between items-center">
                             <div>
                                 <h3 class="text-gray-500 uppercase text-sm">Total Événements</h3>
@@ -114,7 +219,7 @@ use Carbon\Carbon;
                         </div>
                     </div>
 
-                    <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="stats-card bg-white p-6 rounded-lg shadow-md">
                         <div class="flex justify-between items-center">
                             <div>
                                 <h3 class="text-gray-500 uppercase text-sm">Participants</h3>
@@ -124,7 +229,7 @@ use Carbon\Carbon;
                         </div>
                     </div>
 
-                    <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="stats-card bg-white p-6 rounded-lg shadow-md">
                         <div class="flex justify-between items-center">
                             <div>
                                 <h3 class="text-gray-500 uppercase text-sm">Réservations</h3>
@@ -151,45 +256,47 @@ use Carbon\Carbon;
                 <!-- Recent Activity -->
                 <div class="mt-8 bg-white rounded-lg shadow-md p-6">
                     <h3 class="text-xl font-bold mb-4">Activité Récente</h3>
-                    <table class="w-full">
-                        <thead>
-                            <tr class="bg-gray-100 text-gray-600">
-                                <th class="p-3 text-left">Événement</th>
-                                <th class="p-3 text-left">Date</th>
-                                <th class="p-3 text-left">Statut</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse($recentEvents as $event)
-                                <tr class="border-b">
-                                    <td class="p-3">{{ $event->title }}</td>
-                                    <td class="p-3">{{ $event->date->format('d/m/Y') }}</td>
-                                    <td class="p-3">
-                                        @php
-                                            $now = Carbon::now();
-                                            $eventDate = Carbon::parse($event->date);
-                                            
-                                            if ($eventDate->isPast()) {
-                                                $status = 'Terminé';
-                                                $class = 'bg-secondary';
-                                            } elseif ($eventDate->isToday()) {
-                                                $status = 'En cours';
-                                                $class = 'bg-success';
-                                            } else {
-                                                $status = 'À venir';
-                                                $class = 'bg-primary';
-                                            }
-                                        @endphp
-                                        <span class="badge {{ $class }}">{{ $status }}</span>
-                                    </td>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="bg-gray-100 text-gray-600">
+                                    <th class="p-3 text-left">Événement</th>
+                                    <th class="p-3 text-left">Date</th>
+                                    <th class="p-3 text-left">Statut</th>
                                 </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="3" class="p-3 text-center">Aucun événement trouvé</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @forelse($recentEvents as $event)
+                                    <tr class="border-b">
+                                        <td class="p-3">{{ $event->title }}</td>
+                                        <td class="p-3">{{ $event->date->format('d/m/Y') }}</td>
+                                        <td class="p-3">
+                                            @php
+                                                $now = Carbon::now();
+                                                $eventDate = Carbon::parse($event->date);
+                                                
+                                                if ($eventDate->isPast()) {
+                                                    $status = 'Terminé';
+                                                    $class = 'bg-secondary';
+                                                } elseif ($eventDate->isToday()) {
+                                                    $status = 'En cours';
+                                                    $class = 'bg-success';
+                                                } else {
+                                                    $status = 'À venir';
+                                                    $class = 'bg-primary';
+                                                }
+                                            @endphp
+                                            <span class="badge {{ $class }}">{{ $status }}</span>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="3" class="p-3 text-center">Aucun événement trouvé</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </main>
         </div>
