@@ -160,6 +160,7 @@
             background-size: cover;
             background-position: center;
             margin-bottom: 20px;
+            text-decoration: none;
         }
         
         .category-card::before {
@@ -233,6 +234,7 @@
             border-radius: 10px;
             overflow: hidden;
             border: 1px solid #eee;
+            text-decoration: none;
         }
         
         .package-img {
@@ -322,6 +324,10 @@
             text-decoration: none;
             transition: all 0.3s ease;
         }
+
+        .package-card a {
+            text-decoration: none;
+        }
         
         .footer-social a:hover {
             transform: translateY(-3px);
@@ -350,10 +356,10 @@
             <nav>
                 <ul>
                     <li><a href="#">Home</a></li>
-                    
-                    <li><a href="{{ url('/contact') }}">Contact Us</a></li>
-                    <li><a href="{{ url('/login') }}">Login</a></li>
-                    <li><a href="{{ url('/register') }}">Register</a></li>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Register</a></li>
                 </ul>
             </nav>
             <a href="#" class="plan-btn">Plan Your Event</a>
@@ -372,24 +378,24 @@
         
         <h2 class="section-title">Our <span>Category</span></h2>
         <div class="category-grid">
-            <div class="category-card" style="background-image: url('{{ asset('images/wedd.png') }}');">
+            <a href="{{ route('events.index') }}" class="category-card" style="background-image: url('{{ asset('images/wedding.png') }}');">
                 <div class="category-name">Weddings</div>
-            </div>
-            <div class="category-card" style="background-image: url('{{ asset('images/birth.png') }}');">
+            </a>
+            <a href="{{ route('events.index') }}" class="category-card" style="background-image: url('{{ asset('images/birthday.png') }}');">
                 <div class="category-name">Birthdays</div>
-            </div>
-            <div class="category-card" style="background-image: url('{{ asset('images/toghe.png') }}');">
+            </a>
+            <a href="{{ route('events.index') }}" class="category-card" style="background-image: url('{{ asset('images/together.png') }}');">
                 <div class="category-name">Get Together</div>
-            </div>
-            <div class="category-card" style="background-image: url('{{ asset('images/promotion.png') }}');">
+            </a>
+            <a href="{{ route('events.index') }}" class="category-card" style="background-image: url('{{ asset('images/promotion.png') }}');">
                 <div class="category-name">Promotion</div>
-            </div>
-            <div class="category-card" style="background-image: url('{{ asset('images/graduation.png') }}');">
+            </a>
+            <a href="{{ route('events.index') }}" class="category-card" style="background-image: url('{{ asset('images/graduation.png') }}');">
                 <div class="category-name">Graduation Party</div>
-            </div>
-            <div class="category-card" style="background-image: url('{{ asset('images/anniv.png') }}');">
+            </a>
+            <a href="{{ route('events.index') }}" class="category-card" style="background-image: url('{{ asset('images/anniv.png') }}');">
                 <div class="category-name">Anniversary</div>
-            </div>
+            </a>
         </div>
         
         <div class="social-section">
@@ -408,24 +414,24 @@
             <a href="#" class="see-all">See All</a>
         </div>
         <div class="packages-grid">
-            <div class="package-card">
+            <a href="{{ route('events.index') }}" class="package-card">
                 <div class="package-img" style="background-image: url('{{ asset('images/b-card.png') }}');">
                     <div class="package-badge">Premium</div>
                 </div>
                 <div class="package-name">Birthday Parties</div>
-            </div>
-            <div class="package-card">
+            </a>
+            <a href="{{ route('events.index') }}" class="package-card">
                 <div class="package-img" style="background-image: url('{{ asset('images/b-card-2.png') }}');">
                     <div class="package-badge">Premium</div>
                 </div>
                 <div class="package-name">Birthday Parties</div>
-            </div>
-            <div class="package-card">
+            </a>
+            <a href="{{ route('events.index') }}" class="package-card">
                 <div class="package-img" style="background-image: url('{{ asset('images/b-card-3.png') }}');">
                     <div class="package-badge">Premium</div>
                 </div>
                 <div class="package-name">Birthday Parties</div>
-            </div>
+            </a>
         </div>
     </div>
     
@@ -442,15 +448,15 @@
                 </div>
                 
                 <div class="footer-social">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
                 </div>
                 
                 <div class="copyright">
-                    Non Copyrighted © 2025 Upbold by hicham oubaha
+                    Non Copyrighted © 2023 Upbold by hicham oubaha
                 </div>
             </div>
         </div>
