@@ -2,6 +2,9 @@
 
 @php
 use App\Models\InvitationTemplate;
+
+// Get template types directly
+$templateTypes = InvitationTemplate::getTemplateTypes();
 @endphp
 
 @section('content')
@@ -128,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                             name="type"
                                             required>
                                         <option value="">Sélectionnez un type</option>
-                                        @foreach(InvitationTemplate::getTemplateTypes() as $type)
+                                        @foreach($templateTypes as $type)
                                             <option value="{{ $type }}">
                                                 {{ ucfirst($type) }}
                                             </option>
