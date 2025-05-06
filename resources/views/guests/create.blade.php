@@ -351,7 +351,7 @@
     </div>
 </nav>
 
-<!-- Add New Guest Form -->
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -448,7 +448,7 @@
 </div>
 
 <script>
-    // Toggle profile dropdown
+    
     const profileButton = document.getElementById('profileDropdown');
     const profileDropdown = document.getElementById('profileDropdownMenu');
 
@@ -457,14 +457,14 @@
         profileDropdown.classList.toggle('active');
     });
 
-    // Close dropdown when clicking outside
+    
     document.addEventListener('click', function (event) {
         if (!profileDropdown.contains(event.target) && !profileButton.contains(event.target)) {
             profileDropdown.classList.remove('active');
         }
     });
 
-    // Toggle mobile menu
+    
     const mobileMenuButton = document.querySelector('.mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
 
@@ -473,7 +473,7 @@
         mobileMenu.classList.toggle('active');
     });
 
-    // Close mobile menu when clicking outside
+    
     document.addEventListener('click', function (event) {
         if (!mobileMenu.contains(event.target) && !mobileMenuButton.contains(event.target)) {
             mobileMenu.classList.remove('active');

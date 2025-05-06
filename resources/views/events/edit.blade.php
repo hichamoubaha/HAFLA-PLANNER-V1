@@ -146,7 +146,7 @@
         @csrf
         @method('PUT')
 
-        <!-- Basic Information Section -->
+        
         <div class="form-section">
             <h3>Informations de base</h3>
             <input type="text" name="title" placeholder="Titre" value="{{ $event->title }}" required>
@@ -156,7 +156,7 @@
             <input type="text" name="location" placeholder="Lieu" value="{{ $event->location }}" required>
         </div>
 
-        <!-- Event Type Section -->
+        
         <div class="form-section">
             <h3>Type d'événement</h3>
             <select name="event_type" required>
@@ -169,7 +169,7 @@
             <input type="text" name="category" placeholder="Catégorie" value="{{ $event->category }}">
         </div>
 
-        <!-- Customization Section -->
+        
         <div class="form-section">
             <h3>Personnalisation</h3>
             <div class="color-picker">
@@ -192,7 +192,7 @@
             <textarea name="custom_message" placeholder="Message personnalisé">{{ $event->custom_message }}</textarea>
         </div>
 
-        <!-- Media Gallery Section -->
+        
         <div class="form-section">
             <h3>Galerie média</h3>
             <div class="file-upload">
@@ -208,14 +208,14 @@
             @endif
         </div>
 
-        <!-- Budget Section -->
+        
         <div class="form-section">
             <h3>Budget</h3>
             <input type="number" name="budget" placeholder="Budget" value="{{ $event->budget }}" step="0.01">
             <textarea name="budget_breakdown" placeholder="Détails du budget">{{ is_array($event->budget_breakdown) ? json_encode($event->budget_breakdown) : $event->budget_breakdown }}</textarea>
         </div>
 
-        <!-- Additional Details Section -->
+        
         <div class="form-section">
             <h3>Détails supplémentaires</h3>
             <input type="number" name="max_participants" placeholder="Nombre maximum de participants" value="{{ $event->max_participants }}">
@@ -223,14 +223,14 @@
             <textarea name="special_requirements" placeholder="Exigences particulières">{{ $event->special_requirements }}</textarea>
         </div>
 
-        <!-- Contact Information Section -->
+        
         <div class="form-section">
             <h3>Informations de contact</h3>
             <input type="email" name="contact_email" placeholder="Email de contact" value="{{ $event->contact_email }}">
             <input type="text" name="contact_phone" placeholder="Téléphone de contact" value="{{ $event->contact_phone }}">
         </div>
 
-        <!-- Status Section -->
+        
         <div class="form-section">
             <h3>Statut</h3>
             <select name="status" class="status-select" required>
@@ -244,7 +244,7 @@
     </form>
 
     <script>
-        // Color selection
+        
         document.querySelectorAll('.color-option').forEach(option => {
             option.addEventListener('click', function() {
                 document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
@@ -255,7 +255,7 @@
             });
         });
 
-        // File upload preview
+        
         document.querySelector('input[name="logo"]').addEventListener('change', function(e) {
             if (e.target.files && e.target.files[0]) {
                 const reader = new FileReader();

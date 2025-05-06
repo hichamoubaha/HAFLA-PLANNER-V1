@@ -9,18 +9,18 @@
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            background-color: #f8f9fa;
-            color: #2d3436;
+            background-color: #f6f8fc;
+            color: #1a1a2e;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -29,33 +29,37 @@
         /* Header Styles */
         .main-header {
             background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
             z-index: 1000;
         }
 
         .navbar-brand {
             font-weight: 700;
-            font-size: 1.5rem;
-            color: #6c5ce7;
+            font-size: 1.6rem;
+            color: #4f46e5;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .nav-link {
-            color: #2d3436;
+            color: #1a1a2e;
             font-weight: 500;
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
             transition: all 0.3s ease;
         }
 
         .nav-link:hover {
-            color: #6c5ce7;
+            background-color: #f0f2f5;
+            color: #4f46e5;
         }
 
         .nav-link.active {
-            color: #6c5ce7;
+            color: #4f46e5;
+            background-color: #e0e7ff;
         }
 
         .user-menu {
@@ -65,27 +69,45 @@
         }
 
         .user-avatar {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #6c5ce7 0%, #a363d5 100%);
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            padding: 0.75rem;
+        }
+
+        .dropdown-item {
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            margin: 0.25rem 0;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f0f2f5;
         }
 
         /* Main Content Styles */
         .main-content {
-            margin-top: 76px;
             flex: 1;
+            padding-top: 2rem;
         }
 
         .page-header {
-            background: linear-gradient(135deg, #6c5ce7 0%, #a363d5 100%);
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
             color: white;
-            padding: 4rem 0;
+            padding: 3.5rem 0;
             margin-bottom: 3rem;
             position: relative;
             overflow: hidden;
@@ -98,56 +120,55 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover;
-            opacity: 0.1;
-            z-index: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2), transparent 70%);
+            opacity: 0.3;
         }
 
         .page-header .container {
             position: relative;
-            z-index: 1;
         }
 
         .page-header h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 700;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.025em;
         }
 
         .page-header p {
             font-size: 1.1rem;
+            font-weight: 400;
             opacity: 0.9;
         }
 
         .participant-card {
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-radius: 16px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.06);
             transition: all 0.3s ease;
-            margin-bottom: 25px;
+            margin-bottom: 2rem;
             border: none;
             overflow: hidden;
         }
 
         .participant-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.1);
         }
 
         .participant-avatar {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #6c5ce7 0%, #a363d5 100%);
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 600;
-            margin: 0 auto 1rem;
-            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.2);
+            margin: 0 auto 1.25rem;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
         }
 
         .card-body {
@@ -155,10 +176,10 @@
         }
 
         .card-title {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             font-weight: 600;
-            color: #2d3436;
-            margin-bottom: 1rem;
+            color: #1a1a2e;
+            margin-bottom: 1.25rem;
             text-align: center;
         }
 
@@ -170,33 +191,35 @@
             display: flex;
             align-items: center;
             margin-bottom: 0.75rem;
-            color: #636e72;
+            color: #4b5563;
+            font-size: 0.95rem;
         }
 
         .info-item i {
-            width: 25px;
-            color: #6c5ce7;
-            margin-right: 10px;
+            width: 24px;
+            color: #4f46e5;
+            margin-right: 12px;
         }
 
         .booking-count {
-            background: #f8f9fa;
+            background: #eef2ff;
             padding: 0.5rem 1rem;
-            border-radius: 25px;
+            border-radius: 20px;
             font-size: 0.9rem;
-            color: #6c5ce7;
+            color: #4f46e5;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             margin-bottom: 1.5rem;
+            font-weight: 500;
         }
 
         .btn-view-details {
-            background: #6c5ce7;
+            background: #4f46e5;
             color: white;
             border: none;
             padding: 0.75rem 1.5rem;
-            border-radius: 25px;
+            border-radius: 12px;
             font-weight: 500;
             transition: all 0.3s ease;
             width: 100%;
@@ -207,67 +230,66 @@
         }
 
         .btn-view-details:hover {
-            background: #5b4bc4;
-            color: white;
+            background: #4338ca;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.2);
+            box-shadow: 0 6px 16px rgba(79, 70, 229, 0.3);
         }
 
         .btn-back {
-            background: #636e72;
+            background: #6b7280;
             color: white;
             border: none;
             padding: 0.75rem 1.5rem;
-            border-radius: 25px;
+            border-radius: 12px;
             font-weight: 500;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            margin-bottom: 2rem;
         }
 
         .btn-back:hover {
-            background: #4d5656;
-            color: white;
+            background: #4b5563;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
         }
 
         .alert {
-            border-radius: 15px;
+            border-radius: 12px;
             border: none;
             padding: 1rem 1.5rem;
             margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
         }
 
         .alert-success {
-            background: #00b894;
+            background: #10b981;
             color: white;
         }
 
         .alert-danger {
-            background: #d63031;
+            background: #ef4444;
             color: white;
         }
 
         .empty-state {
             text-align: center;
-            padding: 3rem;
+            padding: 3.5rem;
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-radius: 16px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.06);
         }
 
         .empty-state i {
-            font-size: 3rem;
-            color: #6c5ce7;
+            font-size: 2.5rem;
+            color: #4f46e5;
             margin-bottom: 1rem;
         }
 
         .empty-state p {
-            color: #636e72;
+            color: #4b5563;
             font-size: 1.1rem;
+            font-weight: 500;
         }
 
         @media (max-width: 768px) {
@@ -276,20 +298,11 @@
             }
             
             .main-content {
-                margin-top: 0;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .social-links {
-                justify-content: center;
+                padding-top: 1rem;
             }
 
             .page-header {
-                padding: 3rem 0;
+                padding: 2.5rem 0;
             }
 
             .page-header h1 {
@@ -297,7 +310,7 @@
             }
 
             .participant-card {
-                margin-bottom: 20px;
+                margin-bottom: 1.5rem;
             }
 
             .card-body {
@@ -307,22 +320,23 @@
 
         /* Footer Styles */
         .main-footer {
-            background: #2d3436;
-            color: white;
+            background: #1a1a2e;
+            color: #d1d5db;
             padding: 3rem 0;
             margin-top: 4rem;
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 2rem;
         }
 
         .footer-section h5 {
-            color: #6c5ce7;
+            color: #4f46e5;
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
+            font-size: 1.1rem;
         }
 
         .footer-links {
@@ -331,18 +345,19 @@
         }
 
         .footer-links li {
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
 
         .footer-links a {
-            color: #dfe6e9;
+            color: #d1d5db;
             text-decoration: none;
             transition: all 0.3s ease;
+            font-size: 0.95rem;
         }
 
         .footer-links a:hover {
-            color: #6c5ce7;
-            padding-left: 5px;
+            color: #4f46e5;
+            padding-left: 4px;
         }
 
         .footer-bottom {
@@ -350,6 +365,7 @@
             padding-top: 2rem;
             margin-top: 2rem;
             border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
         }
 
         .social-links {
@@ -357,16 +373,17 @@
             gap: 1rem;
             margin-top: 1rem;
         }
+        
 
         .social-links a {
-            color: white;
-            font-size: 1.25rem;
+            color: #d1d5db;
+            font-size: 1.2rem;
             transition: all 0.3s ease;
         }
 
         .social-links a:hover {
-            color: #6c5ce7;
-            transform: translateY(-3px);
+            color: #4f46e5;
+            transform: translateY(-2px);
         }
     </style>
 </head>
@@ -376,7 +393,7 @@
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('dashboard') }}">
-                    <i class="fas fa-glass-cheers me-2"></i>Fiesta
+                    <i class="fas fa-glass-cheers me-2"></i>Hafla planner
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
@@ -432,7 +449,7 @@
         <div class="page-header text-center">
             <div class="container">
                 <h1>Participants</h1>
-                <p>Liste des participants aux événements</p>
+                <p>Gérez et suivez les participants de vos événements</p>
             </div>
         </div>
 
@@ -535,11 +552,11 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; {{ date('Y') }} Fiesta. Tous droits réservés.</p>
+                <p>© {{ date('Y') }} Fiesta. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
-</html> 
+</html>

@@ -288,7 +288,7 @@
     <div class="navbar-container">
         <div class="navbar-flex">
             <div class="navbar-left">
-                <a href="{{ route('events.index') }}" class="navbar-brand">Événements</a>
+                <a href="{{ route('events.index') }}" class="navbar-brand">Hafla Planner</a>
                 <div class="navbar-links hidden sm:flex">
                     <a href="{{ route('events.index') }}" class="active">Événements</a>
                     <a href="{{ route('bookings.index') }}">Mes Réservations</a>

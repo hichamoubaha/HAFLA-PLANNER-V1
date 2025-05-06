@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="page-container">
-    <!-- Content Wrapper -->
+    
     <div class="content-wrapper">
-        <!-- Header Section -->
+        
         <div class="header">
             <div class="header-title">
                 <i class="fas fa-edit header-icon"></i>
@@ -15,9 +15,9 @@
             </a>
         </div>
 
-        <!-- Main Content -->
+        
         <div class="content-grid">
-            <!-- Customization Form -->
+            
             <div class="form-card">
                 <form id="customizationForm" action="{{ route('invitation-templates.save-customization', $template) }}" method="POST" enctype="multipart/form-data" class="form-container">
                     @csrf
@@ -40,7 +40,7 @@
                         </div>
                     @endforeach
 
-                    <!-- Colors -->
+                    
                     <div class="form-group">
                         <label class="form-label">Couleurs</label>
                         <div class="colors-grid">
@@ -63,7 +63,7 @@
                         </div>
                     </div>
 
-                    <!-- Cover Image -->
+                    
                     <div class="form-group">
                         <label for="cover_image" class="form-label">Image de couverture</label>
                         <input type="file"
@@ -73,14 +73,14 @@
                                class="form-input">
                     </div>
 
-                    <!-- Submit Button -->
+                    
                     <button type="submit" class="submit-button">
                         <i class="fas fa-save"></i> Générer l'invitation
                     </button>
                 </form>
             </div>
 
-            <!-- Live Preview -->
+            
             <div class="preview-card">
                 <h2 class="preview-title">Aperçu</h2>
                 <div id="preview" class="preview-container">
@@ -108,34 +108,34 @@ document.addEventListener('DOMContentLoaded', function() {
     const colorInputs = document.querySelectorAll('input[type="color"]');
     const coverImageInput = document.getElementById('cover_image');
 
-    // Function to update the preview
+    
     function updatePreview() {
         const formData = new FormData(form);
         
-        // Update text
+        
         document.getElementById('previewTitle').textContent = formData.get('title') || 'Titre de l\'événement';
         document.getElementById('previewDate').textContent = formData.get('date') || 'Date de l\'événement';
         document.getElementById('previewLocation').textContent = formData.get('location') || 'Lieu de l\'événement';
         document.getElementById('previewDescription').textContent = formData.get('description') || 'Description de l\'événement';
 
-        // Update colors
+        
         const primaryColor = formData.get('primary_color');
         const secondaryColor = formData.get('secondary_color');
         preview.style.setProperty('--primary-color', primaryColor);
         preview.style.setProperty('--secondary-color', secondaryColor);
     }
 
-    // Event listeners for form inputs
+    
     inputs.forEach(input => {
         input.addEventListener('input', updatePreview);
     });
 
-    // Event listeners for color inputs
+    
     colorInputs.forEach(input => {
         input.addEventListener('input', updatePreview);
     });
 
-    // Event listener for cover image
+    
     coverImageInput.addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (file) {
@@ -147,21 +147,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Initialize preview
+    
     updatePreview();
 });
 </script>
 @endpush
 
 <style>
-    /* General Reset */
+    
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
 
-    /* Page Container */
+    
     .page-container {
         min-height: 100vh;
         background: linear-gradient(135deg, #e6f0ff 0%, #fff5f9 100%);
@@ -169,13 +169,13 @@ document.addEventListener('DOMContentLoaded', function() {
         font-family: 'Arial', sans-serif;
     }
 
-    /* Content Wrapper */
+    
     .content-wrapper {
         max-width: 1200px;
         margin: 0 auto;
     }
 
-    /* Header */
+    
     .header {
         display: flex;
         justify-content: space-between;
@@ -223,14 +223,14 @@ document.addEventListener('DOMContentLoaded', function() {
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
-    /* Content Grid */
+    
     .content-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 32px;
     }
 
-    /* Form Card */
+    
     .form-card {
         background: white;
         border-radius: 16px;

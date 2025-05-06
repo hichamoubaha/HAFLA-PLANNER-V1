@@ -282,7 +282,7 @@
     <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         
-        <!-- Basic Information Section -->
+        
         <div class="form-section">
             <h3>Informations de base</h3>
             <input type="text" name="title" placeholder="Titre de l'événement" required>
@@ -293,7 +293,7 @@
             <input type="number" name="max_participants" placeholder="Nombre maximum de participants" required>
         </div>
 
-        <!-- Event Type Section -->
+        
         <div class="form-section">
             <h3>Type d'événement</h3>
             <select name="event_type" required>
@@ -311,7 +311,7 @@
             </select>
         </div>
 
-        <!-- Customization Section -->
+        
         <div class="form-section">
             <h3>Détails de l'événement</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -338,7 +338,7 @@
             </div>
         </div>
 
-        <!-- Customization Section -->
+        
         <div class="form-section">
             <h3>Personnalisation</h3>
             <div class="color-picker">
@@ -357,7 +357,7 @@
             <textarea name="custom_message" placeholder="Message personnalisé"></textarea>
         </div>
 
-        <!-- Media Gallery Section -->
+        
         <div class="form-section">
             <h3>Galerie média</h3>
             <p class="text-muted mb-2">Ajoutez jusqu'à 5 photos ou vidéos</p>
@@ -368,28 +368,28 @@
             <div class="media-preview" id="media-preview"></div>
         </div>
 
-        <!-- Budget Section -->
+        
         <div class="form-section">
             <h3>Budget</h3>
             <input type="number" name="budget" placeholder="Budget" step="0.01">
             <textarea name="budget_breakdown" placeholder="Détails du budget"></textarea>
         </div>
 
-        <!-- Additional Details Section -->
+        
         <div class="form-section">
             <h3>Détails supplémentaires</h3>
             <textarea name="amenities" placeholder="Équipements et services"></textarea>
             <textarea name="special_requirements" placeholder="Exigences particulières"></textarea>
         </div>
 
-        <!-- Contact Information Section -->
+        
         <div class="form-section">
             <h3>Informations de contact</h3>
             <input type="email" name="contact_email" placeholder="Email de contact">
             <input type="text" name="contact_phone" placeholder="Téléphone de contact">
         </div>
 
-        <!-- Status Section -->
+        
         <div class="form-section">
             <h3>Statut</h3>
             <select name="status" class="status-select" required>
@@ -403,13 +403,13 @@
     </form>
 
     <script>
-        // Color selection
+        
         document.querySelectorAll('.color-option').forEach(option => {
             option.addEventListener('click', function() {
                 document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
                 this.classList.add('selected');
                 
-                // Get current colors or initialize empty array
+                
                 let colors = [];
                 const themeColorsInput = document.querySelector('input[name="theme_colors"]');
                 if (themeColorsInput.value) {
@@ -420,15 +420,15 @@
                     }
                 }
                 
-                // Add the new color
+                
                 colors.push(this.dataset.color);
                 
-                // Update the input
+                
                 themeColorsInput.value = JSON.stringify(colors);
             });
         });
 
-        // File upload preview
+        
         document.querySelector('input[name="logo"]').addEventListener('change', function(e) {
             if (e.target.files && e.target.files[0]) {
                 const reader = new FileReader();
@@ -447,7 +447,7 @@
             }
         });
 
-        // Media gallery handling
+    
         const mediaInput = document.getElementById('media-gallery-input');
         const mediaPreview = document.getElementById('media-preview');
         const mediaError = document.getElementById('media-error');
@@ -457,18 +457,18 @@
         mediaInput.addEventListener('change', function(e) {
             const files = Array.from(e.target.files);
             
-            // Check if adding these files would exceed the limit
+            
             if (currentFiles.length + files.length > maxFiles) {
                 mediaError.textContent = `Vous ne pouvez pas ajouter plus de ${maxFiles} fichiers au total.`;
                 mediaError.style.display = 'block';
                 return;
             }
 
-            // Validate file types and sizes
+            
             const invalidFiles = files.filter(file => {
                 const isImage = file.type.startsWith('image/');
                 const isVideo = file.type.startsWith('video/');
-                const isUnderSize = file.size <= 10 * 1024 * 1024; // 10MB limit
+                const isUnderSize = file.size <= 10 * 1024 * 1024; 
                 return !(isImage || isVideo) || !isUnderSize;
             });
 
@@ -509,12 +509,12 @@
                 mediaPreview.appendChild(mediaItem);
             });
 
-            // Update file input
+            
             const dataTransfer = new DataTransfer();
             currentFiles.forEach(file => dataTransfer.items.add(file));
             mediaInput.files = dataTransfer.files;
 
-            // Disable/enable file input based on current count
+            
             if (currentFiles.length >= maxFiles) {
                 mediaInput.parentElement.classList.add('disabled');
                 mediaInput.disabled = true;

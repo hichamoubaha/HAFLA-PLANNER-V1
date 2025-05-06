@@ -55,7 +55,7 @@
             <div class="flex justify-between h-16">
                 <div class="flex">
                     <div class="flex-shrink-0 flex items-center">
-                        <a href="{{ route('events.index') }}" class="text-2xl font-bold text-indigo-600">Événements</a>
+                        <a href="{{ route('events.index') }}" class="text-2xl font-bold text-indigo-600">Hafla Planner</a>
                     </div>
                     <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
                         <a href="{{ route('events.index') }}" class="text-gray-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">Événements</a>
@@ -216,12 +216,12 @@
     </div>
 
     <script>
-        // Toggle profile dropdown
+        
         document.getElementById('profileDropdown').addEventListener('click', function () {
             document.getElementById('profileDropdownMenu').classList.toggle('hidden');
         });
 
-        // Close dropdown when clicking outside
+        
         document.addEventListener('click', function (event) {
             const dropdown = document.getElementById('profileDropdownMenu');
             const button = document.getElementById('profileDropdown');

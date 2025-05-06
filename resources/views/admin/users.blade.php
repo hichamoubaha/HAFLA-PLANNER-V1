@@ -154,7 +154,7 @@
         </div>
     </div>
     <script>
-        // Modal functionality
+        
         const addUserBtn = document.getElementById('addUserBtn');
         const closeModalBtns = document.querySelectorAll('#closeModal');
         const modal = document.getElementById('addUserModal');
@@ -169,7 +169,7 @@
             });
         });
 
-        // Close modal when clicking outside
+        
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 modal.classList.add('hidden');

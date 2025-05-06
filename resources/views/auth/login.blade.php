@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion - Event Hive</title>
+    <title>Connexion - hafla planner</title>
     <style>
     * {
         margin: 0;
@@ -16,7 +16,7 @@
         display: flex;
         height: 100vh;
         max-height: 100vh;
-        overflow: auto; /* was hidden */
+        overflow: auto; 
     }
 
     .image-section {
@@ -50,7 +50,7 @@
     }
 
     .overlay h2 {
-        font-size: 32px; /* slightly smaller */
+        font-size: 32px; 
         margin-bottom: 15px;
     }
 
