@@ -592,7 +592,7 @@
                 </div>
                 
                 <div class="copyright">
-                    Non Copyrighted © 2023 Upbold by hicham oubaha
+                    Non Copyrighted © 2025 Upbold by hicham oubaha
                 </div>
             </div>
         </div>
