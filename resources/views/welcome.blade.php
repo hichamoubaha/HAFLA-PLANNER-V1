@@ -481,23 +481,23 @@
             <nav>
                 <ul>
                     <li><a href="#">Home</a></li>
-                    <li><a href="#">Categories</a></li>
-                    <li><a href="#">Packages</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="{{ route('events.index') }}">Categories</></li>
+                    <li><a href="{{ route('events.index') }}">Packages</a></li>
+                    <li><a href="{{ url('/contact') }}">Contact</a></li>
                 </ul>
             </nav>
-            <a href="#" class="plan-btn">Plan Your Event</a>
+            <a href="{{ route('login') }}" class="plan-btn">Login</a>
             <div class="mobile-menu" onclick="toggleMobileMenu()">
                 <i class="fas fa-bars"></i>
             </div>
             <div class="mobile-nav">
                 <ul>
                     <li><a href="#">Home</a></li>
-                    <li><a href="#">Categories</a></li>
+                    <li><a href="{{ route('events.index') }}">Categories</></li>
                     <li><a href="#">Packages</a></li>
                     <li><a href="#">Contact</a></li>
                 </ul>
-                <a href="#" class="plan-btn">Plan Your Event</a>
+                <a href="{{ route('login') }}" class="plan-btn">Login</a>
             </div>
         </header>
         
@@ -514,13 +514,13 @@
         
         <h2 class="section-title">Our <span>Category</span></h2>
         <div class="category-grid">
-            <a href="{{ route('events.index') }}" class="category-card" style="background-image: url('{{ asset('images/wedding.png') }}');">
+            <a href="{{ route('events.index') }}" class="category-card" style="background-image: url('{{ asset('images/wedd.png') }}');">
                 <div class="category-name">Weddings</div>
             </a>
-            <a href="{{ route('events.index') }}" class="category-card" style="background-image: url('{{ asset('images/birthday.png') }}');">
+            <a href="{{ route('events.index') }}" class="category-card" style="background-image: url('{{ asset('images/birth.png') }}');">
                 <div class="category-name">Birthdays</div>
             </a>
-            <a href="{{ route('events.index') }}" class="category-card" style="background-image: url('{{ asset('images/together.png') }}');">
+            <a href="{{ route('events.index') }}" class="category-card" style="background-image: url('{{ asset('images/toghe.png') }}');">
                 <div class="category-name">Get Together</div>
             </a>
             <a href="{{ route('events.index') }}" class="category-card" style="background-image: url('{{ asset('images/promotion.png') }}');">

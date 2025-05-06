@@ -62,6 +62,9 @@
             position: relative;
             z-index: 1;
             transition: transform 0.3s ease;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .event-logo:hover {

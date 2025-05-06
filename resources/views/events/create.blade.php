@@ -10,165 +10,270 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
-        
+
         body {
-            background-color: #f9f9f9;
-            max-width: 1200px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f0 100%);
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 20px;
+            min-height: 100vh;
         }
-        
+
         h2 {
             text-align: center;
-            font-size: 28px;
-            margin: 40px 0;
-            color: #333;
+            font-size: 36px;
+            font-weight: 700;
+            margin: 50px 0;
+            color: #1a1a1a;
+            background: linear-gradient(to right, #4f46e5, #7c3aed);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         h3 {
-            font-size: 20px;
-            margin: 20px 0;
-            color: #444;
+            font-size: 24px;
+            font-weight: 600;
+            margin: 30px 0 20px;
+            color: #2d2d2d;
         }
-        
+
         form {
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 30px;
         }
 
         .form-section {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
         }
-        
+
         input, textarea, select {
             width: 100%;
-            padding: 12px;
-            font-size: 14px;
-            border: 1px solid #e0e0e0;
-            border-radius: 5px;
-            margin-bottom: 10px;
+            padding: 16px;
+            font-size: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            background: #fafafa;
+            transition: all 0.3s ease;
         }
-        
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #4f46e5;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+        }
+
         textarea {
-            min-height: 120px;
+            min-height: 150px;
             resize: vertical;
         }
 
         select {
-            background-color: white;
+            background: #fafafa;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232d2d2d'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.5em;
         }
-        
+
         button {
-            background-color: #4CAF50;
+            background: linear-gradient(45deg, #4f46e5, #7c3aed);
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 5px;
-            font-weight: bold;
+            padding: 18px 36px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
             cursor: pointer;
-            margin-top: 20px;
-            transition: background-color 0.3s;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
         button:hover {
-            background-color: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
         }
-        
+
+        button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        button:hover::after {
+            left: 100%;
+        }
+
         input::placeholder, textarea::placeholder {
-            color: #aaa;
+            color: #9ca3af;
+            font-style: italic;
         }
 
         .file-upload {
-            border: 2px dashed #e0e0e0;
-            padding: 20px;
+            border: 2px dashed #d1d5db;
+            padding: 30px;
             text-align: center;
-            border-radius: 5px;
+            border-radius: 12px;
             cursor: pointer;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            background: #f8fafc;
         }
 
         .file-upload:hover {
-            border-color: #4CAF50;
+            border-color: #4f46e5;
+            background: #f0f5ff;
         }
 
         .media-preview {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 10px;
-            margin: 10px 0;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
         }
 
         .media-preview img, .media-preview video {
             width: 100%;
-            height: 150px;
+            height: 180px;
             object-fit: cover;
-            border-radius: 5px;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .media-preview img:hover, .media-preview video:hover {
+            transform: scale(1.03);
         }
 
         .media-item {
             position: relative;
+            overflow: hidden;
         }
 
         .remove-media {
             position: absolute;
-            top: 5px;
-            right: 5px;
-            background: rgba(255, 0, 0, 0.7);
+            top: 10px;
+            right: 10px;
+            background: rgba(239, 68, 68, 0.9);
             color: white;
             border: none;
             border-radius: 50%;
-            width: 25px;
-            height: 25px;
+            width: 30px;
+            height: 30px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 16px;
+            transition: all 0.3s ease;
         }
 
         .remove-media:hover {
-            background: rgba(255, 0, 0, 0.9);
+            background: #ef4444;
+            transform: scale(1.1);
         }
 
         .media-error {
-            color: #dc3545;
+            color: #dc2626;
             font-size: 14px;
-            margin-top: 5px;
+            margin-top: 8px;
             display: none;
+            font-weight: 500;
         }
 
         .file-upload.disabled {
-            opacity: 0.5;
+            opacity: 0.6;
             cursor: not-allowed;
+            background: #f3f4f6;
         }
 
         .color-picker {
             display: flex;
-            gap: 10px;
-            margin: 10px 0;
+            align-items: center;
+            gap: 15px;
+            margin: 15px 0;
         }
 
         .color-option {
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             cursor: pointer;
-            border: 2px solid transparent;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
         }
 
         .color-option.selected {
-            border-color: #333;
+            border-color: #1f2937;
+            box-shadow: 0 0 0 4px rgba(31, 41, 55, 0.1);
+        }
+
+        .color-option::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .color-option.selected::after {
+            opacity: 1;
         }
 
         .status-select {
             margin-top: 20px;
+        }
+
+        .grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .grid-cols-1 {
+                grid-template-columns: 1fr;
+            }
+            .md\:grid-cols-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        label {
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 8px;
+            display: block;
         }
     </style>
 </head>
