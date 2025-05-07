@@ -53,7 +53,7 @@ class GuestController extends Controller
             'status' => 'pending'
         ]);
 
-        // Send invitation email
+        
         Mail::to($guest->email)->send(new InvitationEmail($guest, $event));
 
         return redirect()->route('events.guests.index', $event)

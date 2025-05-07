@@ -14,17 +14,17 @@ class ServiceProviderController extends Controller
     {
         $query = ServiceProvider::with(['user', 'reviews']);
 
-        // Filter by location
+        
         if ($request->filled('location')) {
             $query->where('location', 'like', '%' . $request->location . '%');
         }
 
-        // Filter by service type
+        
         if ($request->filled('service_type')) {
             $query->where('service_type', $request->service_type);
         }
 
-        // Filter by budget range
+        
         if ($request->filled('min_budget')) {
             $query->where('min_budget', '>=', (float)$request->min_budget);
         }
@@ -32,7 +32,7 @@ class ServiceProviderController extends Controller
             $query->where('max_budget', '<=', (float)$request->max_budget);
         }
 
-        // Sort by rating
+        
         if ($request->filled('sort') && $request->sort === 'rating') {
             $query->orderBy('rating', 'desc');
         }
@@ -63,7 +63,7 @@ class ServiceProviderController extends Controller
             'min_budget' => 'required|numeric|min:0',
             'max_budget' => 'required|numeric|min:0|gte:min_budget',
             'availability' => 'nullable|array',
-            'profile_picture' => 'nullable|image|max:2048' // Max 2MB
+            'profile_picture' => 'nullable|image|max:2048' 
         ]);
 
         if ($request->hasFile('profile_picture')) {
@@ -97,11 +97,11 @@ class ServiceProviderController extends Controller
             'min_budget' => 'required|numeric|min:0',
             'max_budget' => 'required|numeric|min:0|gte:min_budget',
             'availability' => 'nullable|array',
-            'profile_picture' => 'nullable|image|max:2048' // Max 2MB
+            'profile_picture' => 'nullable|image|max:2048' 
         ]);
 
         if ($request->hasFile('profile_picture')) {
-            // Delete old profile picture if exists
+            
             if ($provider->profile_picture) {
                 Storage::disk('public')->delete($provider->profile_picture);
             }
@@ -119,7 +119,7 @@ class ServiceProviderController extends Controller
     {
         $this->authorize('delete', $provider);
         
-        // Delete profile picture if exists
+        
         if ($provider->profile_picture) {
             Storage::disk('public')->delete($provider->profile_picture);
         }

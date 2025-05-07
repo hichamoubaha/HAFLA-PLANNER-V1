@@ -11,14 +11,14 @@ class BookingController extends Controller
 {
     public function index()
     {
-        // If the user is an organiser, show all bookings for their events
+        
         if (Auth::user()->role === 'organisateur') {
             $events = Event::where('user_id', Auth::id())->pluck('id');
             $bookings = Booking::with(['event', 'user'])
                 ->whereIn('event_id', $events)
                 ->get();
         } else {
-            // For regular users, show only their bookings
+            
             $bookings = Booking::with('event')
                 ->where('user_id', Auth::id())
                 ->get();
@@ -29,7 +29,7 @@ class BookingController extends Controller
 
     public function store(Request $request, Event $event)
     {
-        // Check if user already has a booking for this event
+        
         $existingBooking = Booking::where('user_id', Auth::id())
             ->where('event_id', $event->id)
             ->first();
@@ -38,7 +38,7 @@ class BookingController extends Controller
             return back()->with('error', 'You have already booked this event.');
         }
 
-        // Create new booking
+        
         Booking::create([
             'user_id' => Auth::id(),
             'event_id' => $event->id,
@@ -60,7 +60,7 @@ class BookingController extends Controller
     
     public function eventBookings(Event $event)
     {
-        // Check if the user is the organiser of this event
+        
         if (Auth::id() !== $event->user_id || Auth::user()->role !== 'organisateur') {
             return back()->with('error', 'Unauthorized action.');
         }
@@ -74,7 +74,7 @@ class BookingController extends Controller
     
     public function updateStatus(Request $request, Booking $booking)
     {
-        // Check if the user is the organiser of the event
+        
         if (Auth::id() !== $booking->event->user_id || Auth::user()->role !== 'organisateur') {
             return back()->with('error', 'Unauthorized action.');
         }

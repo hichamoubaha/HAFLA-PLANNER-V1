@@ -16,7 +16,7 @@ class ServiceProviderBookingController extends Controller
             'notes' => 'nullable|string|max:500'
         ]);
 
-        // Check if user already has a pending or confirmed booking with this service provider
+        
         $existingBooking = ServiceProviderBooking::where('user_id', Auth::id())
             ->where('service_provider_id', $serviceProvider->id)
             ->whereIn('status', ['pending', 'confirmed'])
@@ -26,7 +26,7 @@ class ServiceProviderBookingController extends Controller
             return back()->with('error', 'You already have an active booking with this service provider.');
         }
 
-        // Create new booking
+        
         ServiceProviderBooking::create([
             'user_id' => Auth::id(),
             'service_provider_id' => $serviceProvider->id,
@@ -44,13 +44,13 @@ class ServiceProviderBookingController extends Controller
             'status' => 'required|in:confirmed,cancelled,completed'
         ]);
 
-        // If user is the service provider, they can update to any status
+        
         if (Auth::id() === $booking->serviceProvider->user_id) {
             $booking->update(['status' => $request->status]);
             return back()->with('success', 'Booking status updated successfully.');
         }
 
-        // If user is the customer, they can only cancel pending bookings
+        
         if ($request->status === 'cancelled') {
             if ($booking->status !== 'pending') {
                 return back()->with('error', 'Only pending bookings can be cancelled.');

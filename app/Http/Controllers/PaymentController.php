@@ -11,7 +11,7 @@ class PaymentController extends Controller
 {
     public function showPaymentForm(Booking $booking)
     {
-        // Check if user has permission to make payments
+        
         if (!in_array(Auth::user()->role, ['user', 'client'])) {
             return redirect()->route('bookings.index')->with('error', 'You do not have permission to make payments.');
         }
@@ -25,7 +25,7 @@ class PaymentController extends Controller
 
     public function processPayment(Request $request, Booking $booking)
     {
-        // Check if user has permission to make payments
+        
         if (!in_array(Auth::user()->role, ['user', 'client'])) {
             return redirect()->route('bookings.index')->with('error', 'You do not have permission to make payments.');
         }
@@ -38,11 +38,11 @@ class PaymentController extends Controller
         try {
             DB::beginTransaction();
 
-            // Here you would integrate with your payment gateway (e.g., Stripe, PayPal)
-            // For now, we'll simulate the payment
+        
+        
             $transactionId = 'TXN-' . time() . '-' . rand(1000, 9999);
 
-            // Update booking with payment details
+            
             $booking->update([
                 'payment_status' => 'paid',
                 'amount' => $request->amount,

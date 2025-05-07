@@ -22,7 +22,7 @@ class ReviewController extends Controller
         $review->service_provider_id = $provider->id;
         $review->save();
 
-        // Update provider's average rating
+        
         $provider->rating = $provider->reviews()->avg('rating');
         $provider->total_reviews = $provider->reviews()->count();
         $provider->save();
@@ -41,7 +41,7 @@ class ReviewController extends Controller
 
         $review->update($validated);
 
-        // Update provider's average rating
+        
         $provider = $review->serviceProvider;
         $provider->rating = $provider->reviews()->avg('rating');
         $provider->save();
@@ -56,9 +56,9 @@ class ReviewController extends Controller
         $provider = $review->serviceProvider;
         $review->delete();
 
-        // Update provider's average rating
+        
         $avgRating = $provider->reviews()->avg('rating');
-        $provider->rating = $avgRating ?? 0; // Set to 0 if NULL
+        $provider->rating = $avgRating ?? 0; 
         $provider->total_reviews = $provider->reviews()->count();
         $provider->save();
 

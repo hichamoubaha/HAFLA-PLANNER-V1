@@ -81,14 +81,14 @@ class InvitationTemplateController extends Controller
      */
     public function show($id)
     {
-        // Check if this is a customized invitation ID
+        
         $customizedInvitation = CustomizedInvitation::find($id);
         
         if ($customizedInvitation) {
             return view('invitation-templates.show', compact('customizedInvitation'));
         }
         
-        // If not a customized invitation, treat as a template ID
+        
         $template = InvitationTemplate::findOrFail($id);
         return view('invitation-templates.preview', compact('template'));
     }
@@ -97,18 +97,18 @@ class InvitationTemplateController extends Controller
     {
         $invitation = CustomizedInvitation::findOrFail($id);
         
-        // Check if the user owns this invitation
+        
         if ($invitation->user_id !== auth()->id()) {
             abort(403, 'Vous n\'êtes pas autorisé à accéder à ce fichier.');
         }
 
-        // Get the full path to the cover image if it exists
+        
         $coverImagePath = null;
         if ($invitation->cover_image_path) {
             $coverImagePath = Storage::disk('public')->path($invitation->cover_image_path);
         }
 
-        // Generate PDF using DomPDF
+        
         $pdf = \PDF::loadView('invitation-templates.pdf', [
             'invitation' => $invitation,
             'coverImagePath' => $coverImagePath
@@ -125,7 +125,7 @@ class InvitationTemplateController extends Controller
      */
     public function edit($id)
     {
-        // Only allow organisateur role to edit templates
+        
         if (Auth::user()->role !== 'organisateur') {
             return redirect()->route('invitation-templates.index')->with('error', 'Accès refusé. Seuls les organisateurs peuvent modifier les modèles.');
         }
@@ -144,7 +144,7 @@ class InvitationTemplateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Only allow organisateur role to update templates
+        
         if (Auth::user()->role !== 'organisateur') {
             return redirect()->route('invitation-templates.index')->with('error', 'Accès refusé. Seuls les organisateurs peuvent modifier les modèles.');
         }
@@ -163,7 +163,7 @@ class InvitationTemplateController extends Controller
         ]);
 
         if ($request->hasFile('thumbnail')) {
-            // Delete old thumbnail
+            
             if ($template->thumbnail_path) {
                 Storage::disk('public')->delete($template->thumbnail_path);
             }
@@ -185,7 +185,7 @@ class InvitationTemplateController extends Controller
      */
     public function destroy($id)
     {
-        // Only allow organisateur role to delete templates
+        
         if (Auth::user()->role !== 'organisateur') {
             return redirect()->route('invitation-templates.index')->with('error', 'Accès refusé. Seuls les organisateurs peuvent supprimer les modèles.');
         }
@@ -209,7 +209,7 @@ class InvitationTemplateController extends Controller
 
     public function customize(InvitationTemplate $template)
     {
-        // Only allow regular users to customize templates
+        
         if (Auth::user()->role !== 'user') {
             return redirect()->route('invitation-templates.index')->with('error', 'Accès refusé. Seuls les utilisateurs peuvent personnaliser les modèles.');
         }
@@ -260,13 +260,13 @@ class InvitationTemplateController extends Controller
     {
         $invitation = CustomizedInvitation::findOrFail($id);
         
-        // Check if the user owns this invitation
+        
         if ($invitation->user_id !== auth()->id()) {
             return redirect()->route('invitation-templates.my-invitations')
                 ->with('error', 'Vous n\'êtes pas autorisé à supprimer cette invitation.');
         }
         
-        // Delete the cover image if it exists
+        
         if ($invitation->cover_image_path) {
             Storage::disk('public')->delete($invitation->cover_image_path);
         }

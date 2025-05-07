@@ -22,7 +22,7 @@ class EventController extends Controller
 
     public function create()
     {
-        // Only allow organisateur role to create events
+        
         if (Auth::user()->role !== 'organisateur') {
             return redirect()->route('events.index')->with('error', 'Seuls les organisateurs peuvent créer des événements.');
         }
@@ -35,7 +35,7 @@ class EventController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'date' => 'required|date',
+            'date' => 'required|date|after:today',
             'time' => 'required',
             'location' => 'required|string|max:255',
             'event_type' => 'required|string|max:50',
@@ -52,30 +52,32 @@ class EventController extends Controller
             'contact_email' => 'nullable|email|max:255',
             'contact_phone' => 'nullable|string|max:20',
             'status' => 'required|in:draft,published,cancelled'
+        ], [
+            'date.after' => 'La date de l\'événement doit être dans le futur.',
         ]);
 
         $data = $request->all();
         $data['user_id'] = Auth::id();
 
-        // Handle logo upload
+        
         if ($request->hasFile('logo')) {
             $logoPath = $request->file('logo')->store('event-logos', 'public');
             $data['logo_path'] = $logoPath;
         }
 
-        // Handle media gallery uploads
+        
         if ($request->hasFile('media_gallery')) {
             $mediaPaths = [];
             foreach ($request->file('media_gallery') as $media) {
                 $path = $media->store('event-media', 'public');
                 $mediaPaths[] = $path;
             }
-            $data['media_gallery'] = $mediaPaths; // Store as array, model will handle JSON conversion
+            $data['media_gallery'] = $mediaPaths; 
         } else {
-            $data['media_gallery'] = []; // Empty array if no files uploaded
+            $data['media_gallery'] = []; 
         }
 
-        // Handle JSON fields - store as arrays, model will handle JSON conversion
+        
         if (isset($data['theme_colors'])) {
             $data['theme_colors'] = json_decode($data['theme_colors'], true) ?: [];
         } else {
@@ -120,7 +122,7 @@ class EventController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'date' => 'required|date',
+            'date' => 'required|date|after:today',
             'time' => 'required',
             'location' => 'required|string|max:255',
             'event_type' => 'required|string|max:50',
@@ -137,13 +139,15 @@ class EventController extends Controller
             'contact_email' => 'nullable|email|max:255',
             'contact_phone' => 'nullable|string|max:20',
             'status' => 'required|in:draft,published,cancelled'
+        ], [
+            'date.after' => 'La date de l\'événement doit être dans le futur.',
         ]);
 
         $data = $request->all();
 
-        // Handle logo upload
+        
         if ($request->hasFile('logo')) {
-            // Delete old logo if exists
+            
             if ($event->logo_path) {
                 Storage::disk('public')->delete($event->logo_path);
             }
@@ -151,9 +155,9 @@ class EventController extends Controller
             $data['logo_path'] = $logoPath;
         }
 
-        // Handle media gallery uploads
+        
         if ($request->hasFile('media_gallery')) {
-            // Delete old media files if they exist
+            
             if ($event->media_gallery && is_array($event->media_gallery)) {
                 foreach ($event->media_gallery as $oldMediaPath) {
                     Storage::disk('public')->delete($oldMediaPath);
@@ -165,10 +169,10 @@ class EventController extends Controller
                 $path = $media->store('event-media', 'public');
                 $mediaPaths[] = $path;
             }
-            $data['media_gallery'] = $mediaPaths; // Store as array, model will handle JSON conversion
+            $data['media_gallery'] = $mediaPaths; 
         }
 
-        // Handle JSON fields - store as arrays, model will handle JSON conversion
+        
         if (isset($data['theme_colors'])) {
             $data['theme_colors'] = json_decode($data['theme_colors'], true) ?: [];
         }
@@ -195,12 +199,12 @@ class EventController extends Controller
             return redirect()->route('events.index')->with('error', 'Accès refusé.');
         }
 
-        // Delete associated files
+        
         if ($event->logo_path) {
             Storage::disk('public')->delete($event->logo_path);
         }
         
-        // media_gallery is already cast to array by the model
+    
         if ($event->media_gallery && is_array($event->media_gallery)) {
             foreach ($event->media_gallery as $mediaPath) {
                 Storage::disk('public')->delete($mediaPath);
@@ -213,4 +217,3 @@ class EventController extends Controller
 }
 
 
-//event

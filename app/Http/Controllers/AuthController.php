@@ -10,13 +10,13 @@ use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
-    // Afficher le formulaire d'inscription
+    
     public function showRegisterForm()
     {
         return view('auth.register');
     }
 
-    // Traitement de l'inscription.
+    
     public function register(Request $request)
     {
         $request->validate([
@@ -36,13 +36,13 @@ class AuthController extends Controller
         return redirect('/login')->with('success', 'Inscription réussie. Connectez-vous !');
     }
 
-    // Afficher le formulaire de connexion
+    
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
-    // Traitement de la connexion
+    
     public function login(Request $request)
     {
         $credentials = $request->validate([
